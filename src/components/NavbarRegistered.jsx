@@ -23,7 +23,7 @@ export default function NavbarRegistered() {
 
       {/* Account */}
       <button type="button" class="flex text-sm bg-green-800 rounded-full md:me-0 focus:ring-4 focus:ring-green-300">
-        <img class="w-8 h-8 rounded-full" src="src/images/profile.jpg" />
+        <img class="w-8 h-8 rounded-full" src="src/assets/profile.jpg" />
       </button>
 
     </div>
