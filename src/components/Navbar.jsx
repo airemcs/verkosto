@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Navbar() {
   return (
   <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-200">
@@ -5,10 +7,10 @@ export default function Navbar() {
 
       {/* Logo */}
       <div>
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="src/assets/logo.png" className="h-8" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap">Verkosto</span>
-        </a>
+        </Link>
       </div>
 
       {/* Search Bar */}
@@ -22,7 +24,7 @@ export default function Navbar() {
       </div>
 
       {/* Sign Up */}
-      <button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</button>
+      <Link to="/signup" type="button" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
 
     </div>
   </nav>

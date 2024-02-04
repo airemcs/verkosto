@@ -6,7 +6,7 @@ export default function NavbarRegistered() {
       {/* Logo */}
       <div>
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="src/images/logo.png" className="h-8" />
+        <img src="src/assets/logo.png" className="h-8" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap">Verkosto</span>
         </a>
       </div>

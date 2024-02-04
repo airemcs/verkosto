@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 
-
-export default function Register() {
+export default function Signup() {
   return (
   <section className="bg-gray-50">
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -51,7 +51,7 @@ export default function Register() {
           </div>
         </div>
 
-        <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Create Account</button>
+        <Link to="/navbar-reg" type="submit" className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
         
         <p className="text-sm font-light text-gray-500">Do you already have an account? <a href="#" className="font-medium text-primary-600 hover:underline">Login Here</a>
         </p>
