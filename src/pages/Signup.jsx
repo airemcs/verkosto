@@ -6,56 +6,66 @@ export default function Signup() {
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
     {/* Logo */}
-    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-    <img className="w-8 h-8 mr-2" src="src/assets/logo.png" alt="logo" />Verkosto</a>
+    <Link to="/login" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+    <img className="w-8 h-8 mr-2" src="src/assets/logo.png" alt="logo" />Verkosto</Link>
 
     <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Register a New Account</h1>
 
-      <form className="space-y-4 md:space-y-6" action="#">
+      <form className="max-w-md mx-auto">
 
-        <div>
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Your Full Name</label>
-          <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Airelle Loumel Maagma" required="" />
+        {/* Full Name */}
+        <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-0 w-full mb-5 group">
+            <input type="text" name="firstName" id="firstName" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <label htmlFor="firstName" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name</label>
+          </div>
+          <div className="relative z-0 w-full mb-5 group">
+            <input type="text" name="lastName" id="lastName" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <label htmlFor="lastName" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name</label>
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Your Username</label>
-          <input type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="AirelleM" required="" />
+        {/* Email Address */}
+        <div className="relative z-0 w-full mb-5 group">
+            <input type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">DLSU Email Address</label>
         </div>
 
-        <div>
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
-          <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="airelle_maagma@dlsu.edu.ph" required="" />
+        {/* Password */}
+        <div className="relative z-0 w-full mb-5 group">
+            <input type="password" name="password" id="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <label htmlFor="password" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
         </div>
 
-        <div>
-          <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-          <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="" />
+        {/* Confirm Password */}
+        <div className="relative z-0 w-full mb-5 group">
+            <input type="password" name="confirmation" id="confirmation" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <label htmlFor="confirmation" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
         </div>
 
-        <div>
-          <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Confirm Password</label>
-          <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="" />
-        </div>
-
+        {/* Terms and Conditions */}
         <div className="flex items-start">
           <div className="flex items-center h-5">
-          <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="" />
+          <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300" required="" />
           </div>
 
           <div className="ml-3 text-sm">
-          <label htmlFor="terms" className="font-light text-gray-500">I accept the <a className="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a></label>
+          <label htmlFor="terms" className="font-light text-gray-500">I accept the <a className="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a>.</label>
           </div>
         </div>
 
-        <Link to="/navbar-reg" type="submit" className="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
-        
-        <p className="text-sm font-light text-gray-500">Do you already have an account? <a href="#" className="font-medium text-primary-600 hover:underline">Login Here</a>
-        </p>
+        {/* Sign Up */}
+        <div className="w-full mt-5 mb-5">
+        <Link to="/" type="submit" className="block w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
+        </div>
 
+        {/* Login */}
+        <p className="text-sm font-light text-gray-500">Do you already have an account? <a href="#" className="font-medium text-primary-600 hover:underline">Login Here</a>!
+        </p>
+      
       </form>
 
     </div>

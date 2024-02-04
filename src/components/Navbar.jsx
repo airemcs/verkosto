@@ -2,19 +2,11 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   return (
-  <nav className="fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <nav className="fixed w-full z-20 top-0 start-0 border-b bg-gray-50">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-      {/* Logo */}
-      <div>
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="src/assets/logo.png" className="h-8" />
-        <span className="self-center text-2xl font-semibold whitespace-nowrap">Verkosto</span>
-        </Link>
-      </div>
-
       {/* Search Bar */}
-      <div className="basis-1/2 relative hidden md:block">
+      <div className="basis-3/4 relative hidden md:block">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg className="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
