@@ -3,6 +3,7 @@ import NavbarRegistered from './components/NavbarRegistered.jsx'
 import Navbar from './components/Navbar.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import Signup from './pages/Signup.jsx'
+import CreatePost from './components/CreatePost.jsx'
 import { Route, Routes } from 'react-router-dom'
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/navbar-reg" element={<NavbarRegistered />} />
+        <Route path="/create-post" element={<CreatePost />} />
       </Routes>
     </>
   )
