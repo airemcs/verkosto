@@ -14,6 +14,7 @@ export default function CreatePost() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Create a Post</h1>
               </div>
 
+              <a href="#" class="text-sm font-bold text-primary-600 hover:underline text-green-600">DRAFTS</a>
               
             </div>
           <form className="max-w-md mx-auto">
@@ -58,7 +59,8 @@ export default function CreatePost() {
             <div className="w-full mt-5 mb-5">
               <Link to="/" type="submit" className="flex-1 mr-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
               >Post</Link>
-              
+              <Link to="/" type="submit" className="flex-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+              > Save Draft</Link>
             </div>
 
         
