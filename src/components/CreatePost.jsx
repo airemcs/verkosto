@@ -63,7 +63,6 @@ export default function CreatePost() {
               > Save Draft</Link>
             </div>
 
-        
           </form>
         </div>
         </div>

@@ -15,6 +15,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/navbar-reg" element={<NavbarRegistered />} />
         <Route path="/create-post" element={<CreatePost />} />
+        
       </Routes>
     </>
   )
