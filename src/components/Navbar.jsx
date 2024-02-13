@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
   <nav className="fixed w-full z-20 top-0 start-0 border-b bg-gray-50">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-
+      
       {/* Search Bar */}
       <div className="basis-3/4 relative hidden md:block">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
