@@ -57,11 +57,11 @@ export default function Sidebar() {
         {/* <span className="ms-2 text-xl font-bold">Sources</span> */}
 
         <li>
-          <Link to="./create-post" className="flex items-center p-2 text-gray-900 rounded-lg group">
+          <Link to="./extendedpost" className="flex items-center p-2 text-gray-900 rounded-lg group">
           <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
           <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
           </svg>
-          <span className="ms-3">Create Post</span>
+          <span className="ms-3">Extended Post</span>
           </Link>
         </li>
 

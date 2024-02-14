@@ -5,14 +5,14 @@ import PostContent from './PostContent.jsx'
 export default function ExtendedPost() {
   return (
   <>
-  <div className="mx-5 my-10">
+  <div className=" w-full mx-5 my-10">
 
-  <div className="max-w-4xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
+  <div className=" max-w-7xl mx-auto  my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     <PostHeader />
     <PostContent />
   </div>
 
-  <div className="max-w-4xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
+  <div className=" max-w-7xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
   <section>
 
     <div class="flex justify-between items-center mb-5">

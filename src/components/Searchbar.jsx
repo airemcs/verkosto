@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Searchbar() {
   return (
-    <nav className="sticky top-0 bg-white border-b border-gray-200">
+    <nav className="sticky top-0 bg-white border-gray-200">
       <div className="flex items-center justify-center py-2 px-4">
         <div className="relative flex items-center w-full max-w-3xl">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
