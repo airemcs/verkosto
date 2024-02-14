@@ -5,7 +5,7 @@ import PostContent from './PostContent.jsx'
 export default function ExtendedPost() {
   return (
   <>
-  <div className=" w-full mx-5 my-10">
+  <div className="w-full mx-5 my-10">
 
   <div className=" max-w-7xl mx-auto  my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     <PostHeader />
