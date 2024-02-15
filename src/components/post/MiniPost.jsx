@@ -3,7 +3,7 @@ import PostHeader from './PostHeader.jsx'
 
 export default function MiniPost() {
   return (
-    <div className="max-w-4xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
       {/* header and date */}
       <div className="flex justify-between items-center mb-2">
