@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import PostHeader from './PostHeader.jsx'
 
-export default function MiniPost() {
+export default function MiniPost(props) {
   return (
     <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
       {/* header and date */}
       <div className="flex justify-between items-center mb-2">
         <div className="w-10/12">
-          <PostHeader />
+          <PostHeader name={props.name} position={props.position}/>
         </div>
         <span className="h-8 bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
           <svg className="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

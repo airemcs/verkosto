@@ -11,7 +11,7 @@ export default function HomePage() {
   <Searchbar />
 
   <div className="sm:ml-64">
-    <MiniPost />
+    <MiniPost name="Airelle Maagma" position="Yes" />
     <MiniPost />
     <MiniPost />
     <MiniPost />
