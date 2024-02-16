@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Comment from './Comment.jsx'
 import CommentNest from './CommentNest.jsx'
 import PostHeader from './PostHeader.jsx'
-import PostContent from './PostContent.jsx'
+import PostContentEdit from './PostContentEdit.jsx'
 
 // Parameters: Name, Position
 // Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
-export default function ExtendedPost(props) {
+export default function ExtendedPostEditTemporary(props) {
   return (
   <>
   <div className="w-full mx-5 my-10">
@@ -16,16 +16,12 @@ export default function ExtendedPost(props) {
     
     <div className="flex items-center">
       <PostHeader name={props.name} position={props.position} />
-      {props.isAccount == 1 ?
-      <Link to="/edit/006">
-        <svg className="w-6 h-6 text-gray-800 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
-        </svg>
+      <Link to="/post/006" type="button" class="inline-flex items-center mx-2 px-4 py-0.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save
       </Link>
-      : null}
     </div>
 
-    <PostContent title={props.title} day={props.days} tag1={props.tag1} tag2={props.tag2} tag3={props.tag3} content={props.content} />
+    <PostContentEdit title={props.title} day={props.days} tag1={props.tag1} tag2={props.tag2} tag3={props.tag3} content={props.content} />
     
     <div className="flex items-center mb-1 mt-2">
       <button className="h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">

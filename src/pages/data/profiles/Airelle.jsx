@@ -15,11 +15,10 @@ export default function Airelle() {
     <Profile name="Airelle Maagma" bio="President at DLSU Microsoft Student Community" org="Microsoft Student Community" banner="city"
     location="Las Pinas City, Philippines" facebook="/airelleloumel" linkedin="airellemaagma" isAccount = "1" />
 
-    <div className="flex justify-center mt-12">
-      <Link to="/create" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">You have no posts yet..</h5>
-        <p class="font-normal text-gray-700">You can click me to make your first one!</p>
-      </Link>
+    <div className="flex justify-center mt-2">
+      <MiniPost id="006" name="Airelle Maagma" position="President" title="Join Our Data Science Community!" 
+      days="7" content="Are you passionate about leveraging data to drive innovation and solve complex challenges? Look no further! The Data Science Community is seeking talented individuals like you to join our dynamic team.    "
+      likes="24" dislikes="0" comments="2" tag1="Microsoft Student Community" tag2="Recruitment" tag3="Limited Time" />
     </div>
 
     </div>

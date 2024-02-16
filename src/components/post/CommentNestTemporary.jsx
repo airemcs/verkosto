@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 // Parameters: Name, Date, Content
-export default function CommentNest(props) {
-
+export default function Comment(props) {
+  
   const firstName = (props.name.split(' ')[0]).toLowerCase();
   const imagePath = `../src/assets/${firstName}.jpg`;
 
@@ -17,15 +17,14 @@ export default function CommentNest(props) {
           <Link to={`/user/${firstName}`}>{props.name}</Link>
         </p>
         <p class="text-sm text-gray-600">
-        <time>{props.date}</time>
+          <time>{props.date}</time>
         </p>
       </div>
 
     </footer>
 
-    <p class="text-gray-500">
-    {props.content}
-    </p>
+    <textarea className="rounded-lg mt-4 w-full text-sm text-gray-700 py-2 pl-4 border border-gray-300 shadow resize-none" rows="1" type="textarea" placeholder={props.content} >
+    </textarea>
 
     <div class="flex items-center mt-4 space-x-4">
       <button type="button"
@@ -35,13 +34,9 @@ export default function CommentNest(props) {
         </svg>
         Reply
       </button>
-      {props.isAccount == 1 ?
-      <Link to="/comment/006">
-        <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
-        </svg>
+      <Link to="/post/006" type="button" class="inline-flex items-center mx-2 px-4 py-0.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Save
       </Link>
-      : null}
     </div>
 
   </article>

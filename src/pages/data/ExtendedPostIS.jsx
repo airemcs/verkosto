@@ -46,7 +46,6 @@ export default function ExtendedPostIS() {
 
       <Comment name="Ethan Johnson" date="February 12, 2024" content="Do I need to submit any resumes?" />
       <CommentNest name="Olivia Martinez" date="February 13, 2024" content="No need Ethan! Just make sure to answer the application form and we'll head to the interview!" />
-      <hr />
         
     </section>
     </div>

@@ -7,8 +7,6 @@ export default function Profile(props) {
   const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
   const orgAbbreviation = props.org.match(/\b([A-Z])/g).join('').toLowerCase();
 
-  console.log(orgAbbreviation);
-
   return (
   <>
   {/* <div className="sm:ml-64"> */}

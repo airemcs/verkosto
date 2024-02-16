@@ -14,6 +14,8 @@ import ExtendedPostMSC from './pages/data/ExtendedPostMSC.jsx'
 import ExtendedPostCSG from './pages/data/ExtendedPostCSG.jsx'
 import ExtendedPostGDSC from './pages/data/ExtendedPostGDSC.jsx'
 import ExtendedPostIS from './pages/data/ExtendedPostIS.jsx'
+import ExtendedPostDSC from './pages/data/ExtendedPostDSC.jsx'
+import ExtendedPostDSCEdit from './pages/data/ExtendedPostDSCEdit.jsx'
 
 import Topics from './pages/Topics.jsx'
 import Events from './pages/data/Events.jsx'
@@ -35,6 +37,7 @@ import Isabella from './pages/data/profiles/Isabella.jsx'
 import Jeff from './pages/data/profiles/Jeff.jsx'
 import Maya from './pages/data/profiles/Maya.jsx'
 import Olivia from './pages/data/profiles/Olivia.jsx'
+import ExtendedPostDSCEditComment from './pages/data/ExtendedPostDSCEditComment.jsx'
 
 export default function App() {
   return (
@@ -67,6 +70,9 @@ export default function App() {
         <Route path="post/003" element={<ExtendedPostCSG />} />
         <Route path="post/004" element={<ExtendedPostGDSC />} />
         <Route path="post/005" element={<ExtendedPostIS />} />
+        <Route path="post/006" element={<ExtendedPostDSC />} />
+        <Route path="edit/006" element={<ExtendedPostDSCEdit />} />
+        <Route path="comment/006" element={<ExtendedPostDSCEditComment />} />
 
         <Route path="/user/aiden" element={<Aiden />} />
         <Route path="/user/dylan" element={<Dylan />} />

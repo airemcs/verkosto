@@ -19,6 +19,10 @@ export default function Recruitment() {
     days="7" tag1="Microsoft Student Community" tag2="Recruitment" tag3="Event" content="Get ready to unleash your creativity with DLSU Microsoft Student Community! From coding workshops to AI hackathons, we're here to help you harness the power of Microsoft technologies and bring your ideas to life. Applications are open for aspiring tech enthusiasts who want to dive into the world of innovation. Join us and let's build the future together, one line of code at a time!" 
     likes="11" dislikes="0" comments="1" />
 
+    <MiniPost id="006" name="Airelle Maagma" position="President" title="Join Our Data Science Community!" 
+    days="7" content="Are you passionate about leveraging data to drive innovation and solve complex challenges? Look no further! The Data Science Community is seeking talented individuals like you to join our dynamic team.    "
+    likes="24" dislikes="0" comments="2" tag1="Microsoft Student Community" tag2="Recruitment" tag3="Limited Time" />
+
     <MiniPost id="003" name="Dylan Taylor" position="Research Assistant" title="Shape the Future: Apply to CCS Today!" 
     days="14" tag1="College of Computer Studies" tag2="Recruitment" tag3="Excellence" content="Dreaming of a career in tech? Make it a reality with the College of Computer Studies at DLSU! Our cutting-edge programs and world-class faculty provide the perfect environment for aspiring computer scientists and engineers to thrive. Applications are open for students eager to explore the endless possibilities of technology and innovation. Join us and let's shape the future of computing together!" 
     likes="301" dislikes="1" comments="0" />
