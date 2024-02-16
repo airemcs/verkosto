@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
+import Recent from './pages/Recent.jsx'
 import Signup from './pages/Signup.jsx'
 
 import ExtendedPostLSCS from './pages/data/ExtendedPostLSCS.jsx'
@@ -14,9 +15,10 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/recent" element={<Recent />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
         <Route path="post/001" element={<ExtendedPostLSCS />} />
         <Route path="post/002" element={<ExtendedPostMSC />} />
         <Route path="post/003" element={<ExtendedPostCSG />} />

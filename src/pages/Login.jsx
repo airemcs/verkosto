@@ -12,7 +12,7 @@ export default function Signup() {
     <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Login New Account</h1>
+      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Login Account</h1>
 
       <form className="max-w-md mx-auto">
 
@@ -50,7 +50,7 @@ export default function Signup() {
         </div>
 
         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don't Have an Account Yet? <a href="#" class="font-medium text-primary-600 hover:underline">Sign Up</a>!
+        Don't Have an Account Yet? <a href="/signup" class="font-medium text-primary-600 hover:underline">Sign Up</a>!
         </p>
       
       </form>

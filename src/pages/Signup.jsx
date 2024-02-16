@@ -59,11 +59,11 @@ export default function Signup() {
 
         {/* Sign Up */}
         <div className="w-full mt-5 mb-5">
-        <Link to="/" type="submit" className="block w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
+        <Link to="/login" type="submit" className="block w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Sign Up</Link>
         </div>
 
         {/* Login */}
-        <p className="text-sm font-light text-gray-500">Do you already have an account? <a href="#" className="font-medium text-primary-600 hover:underline">Login Here</a>!
+        <p className="text-sm font-light text-gray-500">Do you already have an account? <a href="/login" className="font-medium text-primary-600 hover:underline">Login Here</a>!
         </p>
       
       </form>
