@@ -4,6 +4,8 @@ import Home from './pages/Home.jsx'
 import Recent from './pages/Recent.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
+import Airelle from './pages/data/profiles/Airelle.jsx'
+import EditProfile from './pages/EditProfile.jsx'
 import Create from './pages/Create.jsx'
 import Communities from './pages/Communities.jsx'
 
@@ -34,6 +36,8 @@ export default function App() {
         <Route path="/recent" element={<Recent />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/user/airelle" element={<Airelle />} />
+        <Route path="/edit" element={<EditProfile />} />
         <Route path="/create" element={<Create />} />
         
         <Route path="/topics" element={<Topics />} />
