@@ -3,7 +3,12 @@ import PostHeader from './PostHeader.jsx'
 
 // Parameters: Name, Position
 // Parameters: Title, Days, Tag, Content
+// Parameeters: Likes, Dislikes, Comments
 export default function MiniPost(props) {
+
+  const firstName = (props.name.split(' ')[0]).toLowerCase();
+  const imagePath = `../src/assets/${firstName}.jpg`;
+
   return (
     <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
@@ -21,7 +26,7 @@ export default function MiniPost(props) {
       </div>
 
       {/* title */}
-      <Link to="/extended-post" className="flex justify-between items-center mb-2">
+      <Link to={`/post/${props.id}`} className="flex justify-between items-center mb-2">
           <h5 className="py-2 text-4xl font-semibold text-gray-900">{props.title}</h5>
       </Link>
 
@@ -37,7 +42,7 @@ export default function MiniPost(props) {
       <p className="text-gray-600 line-clamp-1 text-base">
           {props.content}
       </p>
-      <Link to="/extended-post" className="text-base font-semibold text-gray-500 hover:underline">Read More</Link>
+      <Link to={`/post/${props.id}`} className="text-base font-semibold text-gray-500 hover:underline">Read More</Link>
       </div>
 
 
@@ -57,10 +62,10 @@ export default function MiniPost(props) {
         <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
         </svg>
-        <Link to="extended-post/comment" className="hover:underline">
+        <Link to={`/post/${props.id}`} className="hover:underline">
           <p className="text-sm text-gray-600">{props.comments} Comments</p>
         </Link>
       </div>
     </div>
   )
-        }
+}

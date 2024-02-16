@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 import Comment from './Comment.jsx'
 import CommentNest from './CommentNest.jsx'
 import PostHeader from './PostHeader.jsx'
 import PostContent from './PostContent.jsx'
 
 // Parameters: Name, Position
-// Parameters: Title, Day Age, Tag, Content
+// Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
 export default function ExtendedPost(props) {
   return (
   <>
@@ -12,45 +14,28 @@ export default function ExtendedPost(props) {
 
   <div className=" max-w-7xl mx-auto  my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     <PostHeader name={props.name} position={props.position} />
-    <PostContent title={props.title} day={props.day} tag={props.tag} content={props.content} />
-  </div>
+    <PostContent title={props.title} day={props.days} tag1={props.tag1} tag2={props.tag2} tag3={props.tag3} content={props.content} />
+    
+    <div className="flex items-center mb-1 mt-2">
+      <button className="h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
+        <svg className="w-6 h-4 mr-0.5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625zM15 12h-1v8h-4v-8H6.081L12 4.601L17.919 12z"/>
+        </svg><p className="text-sm">{props.likes}</p>
+      </button>
+      <button className="h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 hover:text-blue-400 hover:border-blue-300 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
+        <svg className="w-6 h-4 mr-0.5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059M12 19.399L6.081 12H10V4h4v8h3.919z"/>
+        </svg><p className="text-sm">{props.dislikes}</p>
+      </button>
 
-  <div className=" max-w-7xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
-  <section>
-
-    <div class="flex justify-between items-center mb-5">
-      <h2 class="text-lg lg:text-2xl font-bold text-gray-900">Discussion (4)</h2>
+      <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+      </svg>
+      <p className="text-sm text-gray-600">{props.comments} Comments</p>
     </div>
 
-    <form>
-      <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-gray-200">
-        <label for="comment" class="sr-only">Your Comment</label>
-        <textarea class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-        id="comment" rows="2"
-        placeholder="What's on your mind..?" required></textarea>
-      </div>
-      <button type="submit"
-        class="inline-flex items-end py-2.5 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
-        Post Comment
-      </button>
-    </form>
-
-    <Comment name="" date="" content=""/>
-    <CommentNest name="" date="" content="" />
-    <CommentNest name="" date="" content="" />
-    <hr />
-
-    <Comment name="" date="" content=""/>
-    <hr />
-    
-    <Comment name="" date="" content=""/>
-    <hr />
-
-    <Comment name="" date="" content=""/>
-    <hr />
-
-  </section>
   </div>
+  
   </div>
   </>
   )

@@ -15,8 +15,8 @@ export default function Sidebar() {
     
       {/* Logo */}
       <div>
-        <Link to="/" className="flex items-center ps-2.5 mb-5">
-        <img src="src/assets/logo.png" className="h-8 mr-2" />
+        <Link to="/" replace className="flex items-center ps-2.5 mb-5">
+        <img src="../src/assets/logo.png" className="h-8 mr-2" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap"> Verkosto</span>
         </Link>
       </div>
@@ -54,17 +54,6 @@ export default function Sidebar() {
 
       <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200">
 
-        {/* <span className="ms-2 text-xl font-bold">Sources</span> */}
-
-        <li>
-          <Link to="./extendedpost" className="flex items-center p-2 text-gray-900 rounded-lg group">
-          <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-          </svg>
-          <span className="ms-3">Extended Post</span>
-          </Link>
-        </li>
-
         <li>
           <Link to="#" className="flex items-center p-2 text-gray-900 rounded-lg group">
           <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
@@ -90,7 +79,7 @@ export default function Sidebar() {
         {/* <span className="ms-2 text-xl font-bold">Account</span> */}
 
         <li>
-          <Link to="./login" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+          <Link to="/login" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
           <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
           </svg>
@@ -99,7 +88,7 @@ export default function Sidebar() {
          </li>
 
         <li>
-          <Link to="./signup" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+          <Link to="/signup" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
           <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
           <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
           <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>

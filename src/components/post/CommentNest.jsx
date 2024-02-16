@@ -1,5 +1,9 @@
 // Parameters: Name, Date, Content
-export default function Comment(props) {
+export default function CommentNest(props) {
+
+  const firstName = (props.name.split(' ')[0]).toLowerCase();
+  const imagePath = `../src/assets/${firstName}.jpg`;
+
   return (
   <article class="p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg">
 
@@ -8,11 +12,11 @@ export default function Comment(props) {
       <div class="flex items-center">
         <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
           <img  class="mr-2 w-6 h-6 rounded-full"
-          src="src/assets/profile.jpg" />
+          src={imagePath} />
           {props.name}
         </p>
         <p class="text-sm text-gray-600">
-          <time pubdate datetime="2024-02-08"title="February 8th, 2024">{props.date}</time>
+        <time>{props.date}</time>
         </p>
       </div>
 
