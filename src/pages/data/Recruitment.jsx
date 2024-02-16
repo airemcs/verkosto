@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import MiniPost from '../components/post/MiniPost.jsx'
-import Searchbar from '../components/Searchbar.jsx'
-import Sidebar from '../components/Sidebar.jsx'
+import MiniPost from '../../components/post/MiniPost.jsx'
+import Searchbar from '../../components/Searchbar.jsx'
+import Sidebar from '../../components/Sidebar.jsx'
 
-export default function Home() {
+export default function Recruitment() {
   return (
   <>
 

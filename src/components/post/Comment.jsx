@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 // Parameters: Name, Date, Content
 export default function Comment(props) {
   
@@ -11,9 +13,8 @@ export default function Comment(props) {
 
       <div class="flex items-center">
         <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-          <img  class="mr-2 w-6 h-6 rounded-full"
-          src={imagePath} />
-          {props.name}
+          <Link to={`/user/${firstName}`}><img  class="mr-2 w-6 h-6 rounded-full" src={imagePath} /></Link>
+          <Link to={`/user/${firstName}`}>{props.name}</Link>
         </p>
         <p class="text-sm text-gray-600">
           <time>{props.date}</time>

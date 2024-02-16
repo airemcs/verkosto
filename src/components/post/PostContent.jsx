@@ -6,7 +6,7 @@ export default function PostContent(props) {
   <>
 
   {/* Title */}
-  <Link to="/lets-go-archers">
+  <Link to="">
     <h5 className="py-2 text-4xl font-semibold text-gray-900">{props.title}</h5>
   </Link>
 
