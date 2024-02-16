@@ -28,6 +28,14 @@ import CSG from './pages/data/CSG.jsx'
 import IS from './pages/data/IS.jsx'
 import LSCS from './pages/data/LSCS.jsx'
 
+import Aiden from './pages/data/profiles/Aiden.jsx'
+import Dylan from './pages/data/profiles/Dylan.jsx'
+import Ethan from './pages/data/profiles/Ethan.jsx'
+import Isabella from './pages/data/profiles/Isabella.jsx'
+import Jeff from './pages/data/profiles/Jeff.jsx'
+import Maya from './pages/data/profiles/Maya.jsx'
+import Olivia from './pages/data/profiles/Olivia.jsx'
+
 export default function App() {
   return (
     <>
@@ -59,6 +67,14 @@ export default function App() {
         <Route path="post/003" element={<ExtendedPostCSG />} />
         <Route path="post/004" element={<ExtendedPostGDSC />} />
         <Route path="post/005" element={<ExtendedPostIS />} />
+
+        <Route path="/user/aiden" element={<Aiden />} />
+        <Route path="/user/dylan" element={<Dylan />} />
+        <Route path="/user/ethan" element={<Ethan />} />
+        <Route path="/user/isabella" element={<Isabella />} />
+        <Route path="/user/jeff" element={<Jeff />} />
+        <Route path="/user/maya" element={<Maya />} />
+        <Route path="/user/olivia" element={<Olivia />} />
       </Routes>
     </>
   )
