@@ -52,7 +52,7 @@ export default function App() {
         <Route path="/create" element={<Create />} />
         
         <Route path="/topics" element={<Topics />} />
-        <Route path="/topics/events" element={<Events />} />
+        <Route path="/topics/event" element={<Events />} />
         <Route path="/topics/excellence" element={<Excellence />} />
         <Route path="/topics/financial-independence" element={<FinancialIndependency />} />
         <Route path="/topics/limited-time" element={<LimitedTime />} />
