@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag, Organization } from './models/Models.js';
+import { Tag, Organization, Position } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -186,6 +186,30 @@ app.delete('/communities/:id', async (req, res) => {
 
     return res.status(200).json({ message: 'The delete was successful.' });
     
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// Use this for data population.
+app.post('/positions', async (req, res) => {
+  try {
+    
+    if (!req.body.title || !req.body.description) {
+      return res.status(400).send({
+        message: 'Please send all the required fields: title, description.'
+      });
+    }
+
+    const newPosition = {
+      title: req.body.title,
+      description: req.body.description
+    };
+
+    const position = await Position.create(newPosition);
+    return res.status(201).send(position);
+
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });

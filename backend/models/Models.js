@@ -51,6 +51,7 @@ const organizationSchema = mongoose.Schema({
 
 const positionSchema = mongoose.Schema({
   // organizationID: Number,
+  title: String,
   description: String,
 });
 

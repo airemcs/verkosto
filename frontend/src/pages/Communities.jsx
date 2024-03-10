@@ -6,6 +6,7 @@ import Searchbar from '../components/Searchbar.jsx'
 import Sidebar from '../components/Sidebar.jsx'
 
 export default function Communities() {
+
   const [communities, setCommunities] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -22,11 +23,6 @@ export default function Communities() {
         setLoading(false);
       });
   }, []);
-
-  // const firstName = (props.name.split(' ')[0]).toLowerCase();
-  // const imagePath = `../src/assets/${firstName}.jpg`;
-  // const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
-  // const orgAbbreviation = props.org.match(/\b([A-Z])/g).join('').toLowerCase();
 
   return (
   <>
