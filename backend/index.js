@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   return res.status(234).send('Hello World!');
 });
 
-app.post('/create-tag', async (req, res) => {
+app.post('/topics', async (req, res) => {
   try {
     
     if (!req.body.title || !req.body.description) {
@@ -34,15 +34,72 @@ app.post('/create-tag', async (req, res) => {
   }
 });
 
-app.get('/get-tags', async (req, res) => {
+app.get('/topics', async (req, res) => {
   try {
     const tags = await Tag.find({});
-    return res.status(200).json(tags);
+    return res.status(200).json({
+      count: tags.length,
+      data: tags
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
   }
 });
+
+app.get('/topics/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const tag = await Tag.findById(id);
+    return res.status(200).json(tag);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/topics/:id', async (req, res) => {
+  try {
+
+    if (!req.body.title || !req.body.description) {
+      return res.status(400).send({
+        message: 'Please send all the required fields: title, description.'
+      });
+    }
+
+    const { id } = req.params;
+    const result = await Tag.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// TODO: Kindly test this.
+app.delete('/topics/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Tag.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).json({ message: 'The delete was successful.' });
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+})
 
 mongoose
   .connect(mongoDBURL)
