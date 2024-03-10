@@ -61,7 +61,7 @@ export default function App() {
         <Route path="/communities" element={<Communities />} />
         <Route path="/communities/msc" element={<MSC />} />
         <Route path="/communities/gdsc" element={<GDSC />} />
-        <Route path="/communities/csg" element={<CSG />} />
+        <Route path="/communities/ccs" element={<CSG />} />
         <Route path="/communities/is" element={<IS />} />
         <Route path="/communities/lscs" element={<LSCS />} />
 
