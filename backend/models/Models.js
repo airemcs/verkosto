@@ -45,6 +45,7 @@ const commentSchema = mongoose.Schema({
 
 const organizationSchema = mongoose.Schema({
   // organizationID: Number,
+  title: String,
   description: String,
 });
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag } from './models/Models.js';
+import { Tag, Organization } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -101,7 +101,96 @@ app.delete('/topics/:id', async (req, res) => {
     console.log(error.message);
     res.status(500).send({ message: error.message });
   }
-})
+});
+
+app.post('/communities', async (req, res) => {
+  try {
+    
+    if (!req.body.title || !req.body.description) {
+      return res.status(400).send({
+        message: 'Please send all the required fields: title, description.'
+      });
+    }
+
+    const newOrganization = {
+      title: req.body.title,
+      description: req.body.description
+    };
+
+    const organization = await Organization.create(newOrganization);
+    return res.status(201).send(organization);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/communities', async (req, res) => {
+  try {
+    const organization = await Organization.find({});
+    return res.status(200).json({
+      count: organization.length,
+      data: organization
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/communities/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const organization = await Organization.findById(id);
+    return res.status(200).json(organization);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/communities/:id', async (req, res) => {
+  try {
+
+    if (!req.body.title || !req.body.description) {
+      return res.status(400).send({
+        message: 'Please send all the required fields: title, description.'
+      });
+    }
+
+    const { id } = req.params;
+    const result = await Organization.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.delete('/communities/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Organization.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).json({ message: 'The delete was successful.' });
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
 
 mongoose
   .connect(mongoDBURL)
