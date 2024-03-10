@@ -26,20 +26,17 @@ export default function Account() {
         console.log(error);
         setLoading(false);
       });
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
+      
     axios
-      .get(`http://localhost:5555/communities/${user.organizationIDs}`)
-      .then((res) => {
-        setOrganization(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    .get(`http://localhost:5555/communities/${user.organizationIDs}`)
+    .then((res) => {
+      setOrganization(res.data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
   }, []);
 
   // TODO: If the organization ID is undefined, we should still be able to use the Profile component with a missing "org" parameter.
