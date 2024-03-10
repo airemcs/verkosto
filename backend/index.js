@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag, Organization, Position } from './models/Models.js';
+import { Tag, Organization, Position, User } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -209,6 +209,70 @@ app.post('/positions', async (req, res) => {
 
     const position = await Position.create(newPosition);
     return res.status(201).send(position);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.post('/users', async (req, res) => {
+  try {
+
+    const newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      bio: req.body.bio,
+      country: req.body.country,
+      city: req.body.city,
+      facebook: req.body.facebook,
+      linkedin: req.body.linkedin
+    };
+
+    const user = await User.create(newUser);
+    return res.status(201).send(user);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find({});
+    return res.status(200).json({
+      count: users.length,
+      data: users
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/users/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await User.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
 
   } catch (error) {
     console.log(error.message);
