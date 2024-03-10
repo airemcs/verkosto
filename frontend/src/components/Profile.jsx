@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
 export default function Profile(props) {
-  
+
   const firstName = (props.name.split(' ')[0]).toLowerCase();
-  const imagePath = `../src/assets/${firstName}.jpg`;
+  const imagePath = `../src/assets/${props.id}.jpg`;
   const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
   const orgAbbreviation = props.org.match(/\b([A-Z])/g).join('').toLowerCase();
 
@@ -60,10 +60,16 @@ export default function Profile(props) {
         </Link>
       </div>
 
+      { props.org != ' ' ? (
+
       <div className="flex my-2">
         <Link to={`/communities/${orgAbbreviation}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
         {props.org}</Link>
       </div>
+
+      ) : (
+      hello
+      )}
 
     </div>
 

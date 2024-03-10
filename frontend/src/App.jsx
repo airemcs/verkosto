@@ -30,6 +30,7 @@ import CSG from './pages/data/CSG.jsx'
 import IS from './pages/data/IS.jsx'
 import LSCS from './pages/data/LSCS.jsx'
 
+import Account from './pages/Account.jsx'
 import Aiden from './pages/data/profiles/Aiden.jsx'
 import Dylan from './pages/data/profiles/Dylan.jsx'
 import Ethan from './pages/data/profiles/Ethan.jsx'
@@ -73,6 +74,9 @@ export default function App() {
         <Route path="post/006" element={<ExtendedPostDSC />} />
         <Route path="edit/006" element={<ExtendedPostDSCEdit />} />
         <Route path="comment/006" element={<ExtendedPostDSCEditComment />} />
+
+        {/*  */}
+        <Route path="/users/:id" element={<Account />} />
 
         <Route path="/user/aiden" element={<Aiden />} />
         <Route path="/user/dylan" element={<Dylan />} />
