@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   return res.status(234).send('Hello World!');
 });
 
-app.post('/tag', async (req, res) => {
+app.post('/create-tag', async (req, res) => {
   try {
     
     if (!req.body.title || !req.body.description) {
@@ -28,6 +28,16 @@ app.post('/tag', async (req, res) => {
     const tag = await Tag.create(newTag);
     return res.status(201).send(tag);
 
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/get-tags', async (req, res) => {
+  try {
+    const tags = await Tag.find({});
+    return res.status(200).json(tags);
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
