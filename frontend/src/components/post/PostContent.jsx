@@ -1,7 +1,55 @@
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
 
 // Parameters: Title, Day Age, Tag, Content
 export default function PostContent(props) {
+
+  const [tag1, setTag1] = useState([]);
+  const [tag2, setTag2] = useState([]);
+  const [tag3, setTag3] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    // axios
+    // .get(`http://localhost:5555/topics/${props.tag1}`)
+    // .then((res) => {
+    //   setTag1(res.data);
+    //   setLoading(false);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   setLoading(false);
+    // });
+
+    // axios
+    // .get(`http://localhost:5555/topics/${props.tag2}`)
+    // .then((res) => {
+    //   setTag2(res.data);
+    //   setLoading(false);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   setLoading(false);
+    // });
+
+    // axios
+    // .get(`http://localhost:5555/topics/${props.tag3}`)
+    // .then((res) => {
+    //   setTag3(res.data);
+    //   setLoading(false);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   setLoading(false);
+    // });
+
+  }, []);
+
+  const imagePath = `../src/assets/${props.userID}.jpg`;
+
   return (
   <>
 
@@ -21,9 +69,21 @@ export default function PostContent(props) {
     </span>
 
     {/* Badges */}
-    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag1}</span>
+    {/* { tag1.title != undefined ? (
+      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag1}</span>
+    ) : null }
+
+    { props.tag2 != undefined ? (
+      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag2}</span>
+    ) : null }
+
+    { props.tag3 != undefined ? (
+      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag3}</span>
+    ) : null } */}
+
+    {/* <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag1}</span>
     <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag2}</span>
-    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag3}</span>
+    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag3}</span> */}
   
   </div>
   

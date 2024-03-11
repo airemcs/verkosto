@@ -84,7 +84,7 @@ export default function MiniPost(props) {
       </div>
 
       {/* title */}
-      <Link to={`/post/${props.id}`} className="flex justify-between items-center mb-2">
+      <Link to={`/posts/${props.id}`} className="flex justify-between items-center mb-2">
           <h5 className="py-2 text-4xl font-semibold text-gray-900">{props.title}</h5>
       </Link>
 
@@ -110,7 +110,7 @@ export default function MiniPost(props) {
       <p className="text-gray-600 line-clamp-1 text-base">
           {props.content}
       </p>
-      <Link to={`/post/${props.id}`} className="text-base font-semibold text-gray-500 hover:underline">Read More</Link>
+      <Link to={`/posts/${props.id}`} className="text-base font-semibold text-gray-500 hover:underline">Read More</Link>
       </div>
 
 
@@ -127,10 +127,10 @@ export default function MiniPost(props) {
           </svg><p className="text-sm">{props.dislikes}</p>
         </button>
 
-        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+        <svg className="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
         </svg>
-        <Link to={`/post/${props.id}`} className="hover:underline">
+        <Link to={`/posts/${props.id}`} className="hover:underline">
           <p className="text-sm text-gray-600">{props.comments} Comments</p>
         </Link>
       </div>

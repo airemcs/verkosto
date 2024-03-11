@@ -9,6 +9,7 @@ import EditProfile from './pages/EditProfile.jsx'
 import Create from './pages/Create.jsx'
 import Communities from './pages/Communities.jsx'
 
+import ExtendedPostPage from './pages/ExtendedPostPage.jsx'
 import ExtendedPostLSCS from './pages/data/ExtendedPostLSCS.jsx'
 import ExtendedPostMSC from './pages/data/ExtendedPostMSC.jsx'
 import ExtendedPostCSG from './pages/data/ExtendedPostCSG.jsx'
@@ -65,6 +66,9 @@ export default function App() {
         <Route path="/communities/ccs" element={<CSG />} />
         <Route path="/communities/is" element={<IS />} />
         <Route path="/communities/lscs" element={<LSCS />} />
+
+        {/*  */}
+        <Route path="/posts/:id" element={<ExtendedPostPage />} />
 
         <Route path="post/001" element={<ExtendedPostLSCS />} />
         <Route path="post/002" element={<ExtendedPostMSC />} />

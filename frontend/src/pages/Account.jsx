@@ -15,7 +15,9 @@ export default function Account() {
   const { id } = useParams();
 
   useEffect(() => {
+
     setLoading(true);
+
     axios
       .get(`http://localhost:5555/users/${id}`)
       .then((res) => {
@@ -26,17 +28,18 @@ export default function Account() {
         console.log(error);
         setLoading(false);
       });
-      
+    
     axios
-    .get(`http://localhost:5555/communities/${user.organizationIDs}`)
-    .then((res) => {
-      setOrganization(res.data);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.log(error);
-      setLoading(false);
-    });
+      .get(`http://localhost:5555/communities/${user.organizationIDs}`)
+      .then((res) => {
+        setOrganization(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+    
   }, []);
 
   return (
@@ -48,6 +51,12 @@ export default function Account() {
     
     <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
     location={user.city + `, ` + user.country} facebook={`/` + user.facebook} linkedin={`/` + user.linkedin} />
+
+    {/* { user.map((users, index) => (
+      <div key={post._id}>
+        <h1>Hello</h1>
+      </div>
+    ))} */}
 
     </div>
     </>
