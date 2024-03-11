@@ -1,16 +1,58 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+
 import { Link } from 'react-router-dom'
 import MiniPost from '../components/post/MiniPost.jsx'
 import Searchbar from '../components/Searchbar.jsx'
 import Sidebar from '../components/Sidebar.jsx'
 
 export default function Home() {
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get('http://localhost:5555/posts/')
+      .then((res) => {
+        setPosts(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
+
+  function calculateDays(datePosted) {
+    let current = new Date();
+    let posted = new Date(datePosted);
+    return Math.floor((current - posted) / (1000 * 3600 * 24));
+  }
+
   return (
   <>
 
   <Sidebar />
   <Searchbar />
-
   <div className="sm:ml-64">
+
+  {posts.map((post, index) => (
+    <div key={post._id}>
+      
+      <MiniPost id={post._id} name="Olivia Martinez" position="Investment Analyst" 
+      title={post.title} days={calculateDays(post.datePosted)} tag1={post.tags[0]} tag2={post.tags[1]} tag3={post.tags[2]} content={post.content}
+      likes={post.upvotes} dislikes={post.downvotes} comments={post.commentIDs.length} />
+
+    </div>
+  ))}
+
+  <MiniPost id="002" name="Jeff Kim" position="Program Manager" title="Empower Innovation: Apply to DLSU MSC!" 
+    days="7" tag1="Microsoft Student Community" tag2="Recruitment" tag3="Event" content="Get ready to unleash your creativity with DLSU Microsoft Student Community! From coding workshops to AI hackathons, we're here to help you harness the power of Microsoft technologies and bring your ideas to life. Applications are open for aspiring tech enthusiasts who want to dive into the world of innovation. Join us and let's build the future together, one line of code at a time!" 
+    likes="11" dislikes="0" comments="1" />
+
+  {/* <div className="sm:ml-64">
     <MiniPost id="005" name="Olivia Martinez" position="Investment Analyst" title="Invest in Your Future: Apply Today!" 
     days="4" tag1="Investors' Society" tag2="Recruitment" tag3="Financial Independency" content="Invest in your future with DLSU Investors' Society! Whether you're a seasoned trader or just starting to explore the world of finance, we've got the resources and support you need to succeed. Applications are now open for students eager to learn, grow, and make smart investment decisions. Join us and embark on a journey to financial literacy and prosperity!" 
     likes="127" dislikes="2" comments="4" />
@@ -34,6 +76,8 @@ export default function Home() {
     <MiniPost id="006" name="Airelle Maagma" position="President" title="Join Our Data Science Community!" 
     days="7" content="Are you passionate about leveraging data to drive innovation and solve complex challenges? Look no further! The Data Science Community is seeking talented individuals like you to join our dynamic team.    "
     likes="24" dislikes="0" comments="2" tag1="Microsoft Student Community" tag2="Recruitment" tag3="Limited Time" />
+  </div> */}
+
   </div>
 
   </>

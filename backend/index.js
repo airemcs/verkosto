@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag, Organization, Position, User } from './models/Models.js';
+import { Tag, Organization, Position, User, Post } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   return res.status(234).send('Hello World!');
 });
 
+// CRUD: Topics
 app.post('/topics', async (req, res) => {
   try {
     
@@ -103,6 +104,7 @@ app.delete('/topics/:id', async (req, res) => {
   }
 });
 
+// CRUD: Communities
 app.post('/communities', async (req, res) => {
   try {
     
@@ -192,7 +194,7 @@ app.delete('/communities/:id', async (req, res) => {
   }
 });
 
-// Use this for data population.
+// CRUD: Population - Use this for data population.
 app.post('/positions', async (req, res) => {
   try {
     
@@ -216,6 +218,7 @@ app.post('/positions', async (req, res) => {
   }
 });
 
+// CRUD: Users
 app.post('/users', async (req, res) => {
   try {
 
@@ -267,6 +270,71 @@ app.put('/users/:id', async (req, res) => {
 
     const { id } = req.params;
     const result = await User.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD: Post
+app.post('/posts', async (req, res) => {
+  try {
+
+    const newPost = {
+      userID: req.body.userID,
+      title: req.body.title,
+      datePosted: req.body.datePosted,
+      content: req.body.content,
+      upvotes: req.body.upvotes,
+      downvotes: req.body.downvotes,
+      tags: req.body.tags
+    };
+
+    const post = await Post.create(newPost);
+    return res.status(201).send(post);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/posts', async (req, res) => {
+  try {
+    const posts = await Post.find({});
+    return res.status(200).json({
+      count: posts.length,
+      data: posts
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/posts/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    return res.status(200).json(post);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/posts/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Post.findByIdAndUpdate(id, req.body);
 
     if (!result) {
       return res.status(404).json({ message: 'The tag is not found.' });

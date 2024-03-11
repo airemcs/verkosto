@@ -1,10 +1,57 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import PostHeader from './PostHeader.jsx'
 
 // Parameters: Name, Position
 // Parameters: Title, Days, Tag, Content
 // Parameeters: Likes, Dislikes, Comments
+
 export default function MiniPost(props) {
+
+  const [tag1, setTag1] = useState([]);
+  const [tag2, setTag2] = useState([]);
+  const [tag3, setTag3] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios
+    .get(`http://localhost:5555/topics/${props.tag1}`)
+    .then((res) => {
+      setTag1(res.data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
+
+    axios
+    .get(`http://localhost:5555/topics/${props.tag2}`)
+    .then((res) => {
+      setTag2(res.data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
+
+    axios
+    .get(`http://localhost:5555/topics/${props.tag3}`)
+    .then((res) => {
+      setTag3(res.data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
+
+  }, []);
 
   const firstName = (props.name.split(' ')[0]).toLowerCase();
   const imagePath = `../src/assets/${firstName}.jpg`;
@@ -32,9 +79,19 @@ export default function MiniPost(props) {
 
       {/* tags */}
       <div className="flex flex-wrap mb-2">
-        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{props.tag1}</span>
-        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-emerald-400/30 text-slate rounded">{props.tag2}</span>
-        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{props.tag3}</span>
+
+        { tag1.title != undefined ? (
+          <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag1.title}</span>
+        ) : null }
+
+        { tag2.title != undefined ? (
+          <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag2.title}</span>
+        ) : null }
+
+        { tag3.title != undefined ? (
+          <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag3.title}</span>
+        ) : null }
+        
       </div>
 
       {/* short text*/}
