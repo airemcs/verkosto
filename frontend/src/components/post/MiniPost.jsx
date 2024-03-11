@@ -10,6 +10,7 @@ import PostHeader from './PostHeader.jsx'
 
 export default function MiniPost(props) {
 
+  const [user, setUser] = useState([]);
   const [tag1, setTag1] = useState([]);
   const [tag2, setTag2] = useState([]);
   const [tag3, setTag3] = useState([]);
@@ -17,6 +18,17 @@ export default function MiniPost(props) {
 
   useEffect(() => {
     setLoading(true);
+
+    axios
+      .get(`http://localhost:5555/users/${props.userID}`)
+      .then((res) => {
+        setUser(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
 
     axios
     .get(`http://localhost:5555/topics/${props.tag1}`)
@@ -53,8 +65,7 @@ export default function MiniPost(props) {
 
   }, []);
 
-  const firstName = (props.name.split(' ')[0]).toLowerCase();
-  const imagePath = `../src/assets/${firstName}.jpg`;
+  const imagePath = `../src/assets/${props.userID}.jpg`;
 
   return (
     <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
@@ -62,7 +73,7 @@ export default function MiniPost(props) {
       {/* header and date */}
       <div className="flex justify-between items-center mb-2">
         <div className="w-10/12">
-          <PostHeader name={props.name} position={props.position}/>
+          <PostHeader userID={props.userID} positionID={user.positionID} firstName={user.firstName} lastName={user.lastName} />
         </div>
         <span className="h-8 bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
           <svg className="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
