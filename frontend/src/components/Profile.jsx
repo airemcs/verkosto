@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 export default function Profile(props) {
@@ -5,17 +7,32 @@ export default function Profile(props) {
   const firstName = (props.name.split(' ')[0]).toLowerCase();
   const imagePath = `../src/assets/${props.id}.jpg`;
   const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
-  const orgAbbreviation = props.org.match(/\b([A-Z])/g).join('').toLowerCase();
+
+  const [tag, setTag] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5555/communities/${props.org}`)
+      .then((res) => {
+        setTag(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
   <>
-  {/* <div className="sm:ml-64"> */}
 
   <div className="h-2/4 sm:h-64 overflow-hidden">
     <img className="w-full rounded-t object-none object-bottom" src={bannerPath} />
   </div>
 
-  <div className="flex justify-start px-5 -mt-12 bg-stone-100">
+  <div className="flex justify-start pb-1 px-5 -mt-14 bg-stone-100">
 
     <span clspanss="block relative h-32 w-32">
     <img className="mx-auto object-cover rounded-full h-56 w-56 bg-white p-1" src={imagePath} />
@@ -24,7 +41,7 @@ export default function Profile(props) {
     <div className="mt-16 px-8 mb-8">
 
       <div className="flex items-center">
-        <h2 className="text-3xl font-bold mr-2">{props.name}</h2>
+        <h2 className="text-3xl font-bold mt-2 mr-2">{props.name}</h2>
         {props.isAccount == 1 ?
         <Link to="/edit">
           <svg className="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -60,16 +77,12 @@ export default function Profile(props) {
         </Link>
       </div>
 
-      { props.org != ' ' ? (
-
+      { tag.title != undefined ? (
       <div className="flex my-2">
-        <Link to={`/communities/${orgAbbreviation}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
-        {props.org}</Link>
+        <Link to={`/communities/${tag.title.match(/\b([A-Z])/g).join('').toLowerCase()}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
+        {tag.title}</Link>
       </div>
-
-      ) : (
-      hello
-      )}
+      ) : null }
 
     </div>
 
@@ -77,7 +90,6 @@ export default function Profile(props) {
 
   <hr />
 
-  {/* </div> */}
   </>
   )
 }

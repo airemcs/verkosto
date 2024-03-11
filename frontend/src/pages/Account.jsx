@@ -39,11 +39,6 @@ export default function Account() {
     });
   }, []);
 
-  // TODO: If the organization ID is undefined, we should still be able to use the Profile component with a missing "org" parameter.
-  if (organization.title === undefined) {
-    organization.title = "Investors' Society";
-  };
-
   return (
     <>
     <div className="sm:ml-64">
@@ -51,7 +46,7 @@ export default function Account() {
     <Sidebar />
     <Searchbar />
     
-    <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={organization.title} banner="water" 
+    <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
     location={user.city + `, ` + user.country} facebook={`/` + user.facebook} linkedin={`/` + user.linkedin} />
 
     </div>
