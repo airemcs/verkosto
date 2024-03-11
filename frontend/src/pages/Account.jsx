@@ -10,37 +10,21 @@ import MiniPost from '../components/post/MiniPost.jsx'
 export default function Account() {
 
   const [user, setUser] = useState({});
-  const [organization, setOrganization] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-
-    setLoading(true);
-
-    axios
-      .get(`http://localhost:5555/users/${id}`)
-      .then((res) => {
-        setUser(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const userDataResponse = await axios.get(`http://localhost:5555/users/${id}`);
+        setUser(userDataResponse.data);
+        setDataLoaded(true);
+      } catch (error) {
         console.log(error);
-        setLoading(false);
-      });
-    
-    axios
-      .get(`http://localhost:5555/communities/${user.organizationIDs}`)
-      .then((res) => {
-        setOrganization(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-    
-  }, []);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   return (
     <>
@@ -48,10 +32,12 @@ export default function Account() {
 
     <Sidebar />
     <Searchbar />
-    
-    <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
-    location={user.city + `, ` + user.country} facebook={`/` + user.facebook} linkedin={`/` + user.linkedin} />
 
+    { dataLoaded && (
+      <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
+      location={user.city + `, ` + user.country} facebook={`/` + user.facebook} linkedin={`/` + user.linkedin} />
+    )}
+    
     {/* { user.map((users, index) => (
       <div key={post._id}>
         <h1>Hello</h1>
