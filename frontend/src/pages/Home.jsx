@@ -8,22 +8,16 @@ import Sidebar from '../components/Sidebar.jsx'
 
 export default function Home() {
 
-  const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-
     axios
       .get('http://localhost:5555/posts/')
       .then((res) => {
         setPosts(res.data.data);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
       });
   }, []);
 
@@ -42,10 +36,28 @@ export default function Home() {
 
   {posts.map((post, index) => (
     <div key={post._id}>
+
+      {/* CONFIRMED: There are no missing values. */}
+      {/* {console.log(post._id, post.userID)} */}
+      {/* {console.log(post.tags[0])} */}
+      {/* {console.log(post.tags[1])} */}
+      {/* {console.log(post.tags[2])} */}
+      {/* {console.log(post.title, calculateDays(post.datePosted), post.tags[0], post.tags[1], post.tags[2], post.upvotes, post.downvotes, post.commentIDs.length)} */}
+      {/* {console.log(post.tags[0] ? post.tags[0] : null)} */}
+      {/* {console.log(post.tags[1] ? post.tags[1] : null)} */}
+      {/* {console.log(post.tags[2] ? post.tags[2] : null)} */}
       
-      <MiniPost id={post._id} userID={post.userID}
-      title={post.title} days={calculateDays(post.datePosted)} tag1={post.tags[0]} tag2={post.tags[1]} tag3={post.tags[2]} content={post.content}
-      likes={post.upvotes} dislikes={post.downvotes} comments={post.commentIDs.length} />
+      <MiniPost id={post._id} 
+                userID={post.userID}
+                title={post.title} 
+                days={calculateDays(post.datePosted)} 
+                content={post.content}
+                tag1={post.tags[0] ? post.tags[0] : null} 
+                tag2={post.tags[1] ? post.tags[1] : null} 
+                tag3={post.tags[2] ? post.tags[2] : null} 
+                likes={post.upvotes} 
+                dislikes={post.downvotes} 
+                comments={post.commentIDs.length} />
 
     </div>
   ))}
