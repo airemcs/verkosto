@@ -4,25 +4,32 @@ import { Link } from 'react-router-dom'
 
 export default function Profile(props) {
 
-  const firstName = (props.name.split(' ')[0]).toLowerCase();
   const imagePath = `../src/assets/${props.id}.jpg`;
   const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
 
-  const [tag, setTag] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [position, setPosition] = useState([]);
+  const [organization, setOrganization] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
+
     axios
       .get(`http://localhost:5555/communities/${props.org}`)
       .then((res) => {
-        setTag(res.data);
-        setLoading(false);
+        setOrganization(res.data);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
       });
+
+    axios
+      .get(`http://localhost:5555/positions/${props.positionID}`)
+      .then((res) => {
+        setPosition(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
   }, []);
 
   return (
@@ -40,15 +47,21 @@ export default function Profile(props) {
 
     <div className="mt-16 px-8 mb-8">
 
-      <div className="flex items-center">
+      <div className="flex items-center content-center">
+        
         <h2 className="text-3xl font-bold mt-2 mr-2">{props.name}</h2>
-        {props.isAccount == 1 ?
+
+        { props.positionID != undefined ? (
+          <span className="text-lg mx-2 font-semibold text-purple-800 text-xs font-medium mt-2.5 px-2.5 py-0.5 rounded border border-purple-400">{position.title}</span>
+        ) : null }
+
+        { props.isAccount == 1 ?
         <Link to="/edit">
           <svg className="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
           </svg>
         </Link>
-        : null}
+        : null }
       </div>
 
       <p className="text-gray-400 my-2">{props.bio}</p>
@@ -77,10 +90,10 @@ export default function Profile(props) {
         </Link>
       </div>
 
-      { tag.title != undefined ? (
+      { organization.title != undefined ? (
       <div className="flex my-2">
-        <Link to={`/communities/${tag.title.match(/\b([A-Z])/g).join('').toLowerCase()}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
-        {tag.title}</Link>
+        <Link to={`/communities/${organization.title.match(/\b([A-Z])/g).join('').toLowerCase()}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
+        {organization.title}</Link>
       </div>
       ) : null }
 

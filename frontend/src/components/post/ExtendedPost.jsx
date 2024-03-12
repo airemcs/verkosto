@@ -14,36 +14,23 @@ export default function ExtendedPost(props) {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-
-    setLoading(true);
-
-    axios
-      .get(`http://localhost:5555/posts/${id}`)
-      .then((res) => {
-        setPost(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const postData = await axios.get(`http://localhost:5555/posts/${id}`);
+        const userData = await axios.get(`http://localhost:5555/users/${postData.data.userID}`);
+        setPost(postData.data);
+        setUser(userData.data);
+        setDataLoaded(true);
+      } catch (error) {
         console.log(error);
-        setLoading(false);
-      });
-
-    axios
-      .get(`http://localhost:5555/users/${post.userID}`)
-      .then((res) => {
-        setUser(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-
-  }, []);
-
+      }
+    };
+    fetchData();
+  }, [id]);
+  
   function calculateDays(datePosted) {
     let current = new Date();
     let posted = new Date(datePosted);
@@ -52,6 +39,7 @@ export default function ExtendedPost(props) {
 
   return (
   <>
+  {dataLoaded && 
   <div className="w-full mx-5 my-10">
   <div className=" max-w-7xl mx-auto  my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     
@@ -69,7 +57,15 @@ export default function ExtendedPost(props) {
   {/* <h1>{post.tags[0]}</h1> */}
   {/* TODO: Fix the tags. */}
 
-  <PostContent userID={post.userID} title={post.title} day={calculateDays(post.datePosted)} tag1={" "} tag2={" "} tag3={" "} content={post.content} />
+  {console.log(post.tags[0], post.tags[1], post.tags[2])}
+
+  <PostContent  userID={post.userID} 
+                title={post.title} 
+                day={calculateDays(post.datePosted)} 
+                tag1={post.tags[0] ? post.tags[0] : null} 
+                tag2={post.tags[1] ? post.tags[1] : null} 
+                tag3={post.tags[2] ? post.tags[2] : null}
+                content={post.content} />
   
   <div className="flex items-center mb-1 mt-2">
     <button className="h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
@@ -83,8 +79,8 @@ export default function ExtendedPost(props) {
       </svg><p className="text-sm">{post.downvotes}</p>
     </button>
 
-    <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+    <svg className="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
     </svg>
     {/* post.commentIDs.length */}
     <p className="text-sm text-gray-600">{post.commentIDs} Comments</p>
@@ -93,6 +89,7 @@ export default function ExtendedPost(props) {
   </div>
   </div>
   
+  }
   </>
   )
 }

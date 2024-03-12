@@ -8,49 +8,32 @@ export default function PostContent(props) {
   const [tag1, setTag1] = useState([]);
   const [tag2, setTag2] = useState([]);
   const [tag3, setTag3] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-
-    // axios
-    // .get(`http://localhost:5555/topics/${props.tag1}`)
-    // .then((res) => {
-    //   setTag1(res.data);
-    //   setLoading(false);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   setLoading(false);
-    // });
-
-    // axios
-    // .get(`http://localhost:5555/topics/${props.tag2}`)
-    // .then((res) => {
-    //   setTag2(res.data);
-    //   setLoading(false);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   setLoading(false);
-    // });
-
-    // axios
-    // .get(`http://localhost:5555/topics/${props.tag3}`)
-    // .then((res) => {
-    //   setTag3(res.data);
-    //   setLoading(false);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   setLoading(false);
-    // });
-
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [tag1Data, tag2Data, tag3Data] = await Promise.all([
+          props.tag1 !== null ? axios.get(`http://localhost:5555/topics/${props.tag1}`) : Promise.resolve(null),
+          props.tag2 !== null ? axios.get(`http://localhost:5555/topics/${props.tag2}`) : Promise.resolve(null),
+          props.tag3 !== null ? axios.get(`http://localhost:5555/topics/${props.tag3}`) : Promise.resolve(null)
+        ]);
+        setTag1(tag1Data ? tag1Data.data : []);
+        setTag2(tag2Data ? tag2Data.data : []);
+        setTag3(tag3Data ? tag3Data.data : []);
+        setDataLoaded(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [props.tag1, props.tag2, props.tag3]);
 
   const imagePath = `../src/assets/${props.userID}.jpg`;
 
   return (
+  <>
+  {dataLoaded && 
   <>
 
   {/* Title */}
@@ -68,22 +51,22 @@ export default function PostContent(props) {
     {props.day} days ago
     </span>
 
-    {/* Badges */}
-    {/* { tag1.title != undefined ? (
-      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag1}</span>
-    ) : null }
+    {/* Tags */}
+    <div className="flex flex-wrap mb-2">
 
-    { props.tag2 != undefined ? (
-      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag2}</span>
-    ) : null }
+      { tag1.title != undefined ? (
+        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag1.title}</span>
+      ) : null }
 
-    { props.tag3 != undefined ? (
-      <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag3}</span>
-    ) : null } */}
+      { tag2.title != undefined ? (
+        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag2.title}</span>
+      ) : null }
 
-    {/* <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag1}</span>
-    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag2}</span>
-    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">{props.tag3}</span> */}
+      { tag3.title != undefined ? (
+        <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag3.title}</span>
+      ) : null }
+      
+    </div>
   
   </div>
   
@@ -92,6 +75,8 @@ export default function PostContent(props) {
   {props.content}
   </p>
     
+  </>
+  }
   </>
   )
 }

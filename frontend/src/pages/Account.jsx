@@ -9,9 +9,9 @@ import MiniPost from '../components/post/MiniPost.jsx'
 
 export default function Account() {
 
+  const { id } = useParams();
   const [user, setUser] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,7 @@ export default function Account() {
     <Searchbar />
 
     { dataLoaded && (
-      <Profile id={user._id} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
+      <Profile id={user._id} positionID={user.positionID} name={user.firstName + ` ` + user.lastName} bio={user.bio} org={user.organizationIDs} banner="water" 
       location={user.city + `, ` + user.country} facebook={`/` + user.facebook} linkedin={`/` + user.linkedin} />
     )}
     

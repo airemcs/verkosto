@@ -86,7 +86,6 @@ export default function MiniPost(props) {
       <Link to={`/posts/${props.id}`} className="text-base font-semibold text-gray-500 hover:underline">Read More</Link>
     </div>
 
-
     {/* Upvotes, Downvotes, Comments */}
     <div className="flex items-center mb-1">
 
