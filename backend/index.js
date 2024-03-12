@@ -190,11 +190,6 @@ app.post('/comments', async (req, res) => {
       return res.status(400).send({ message: "Missing required fields: content, userID, postID" });
     }
 
-    // Validate repliedCommentID
-    if (req.body.repliedCommentID && !isValidObjectId(req.body.repliedCommentID)) {
-      return res.status(400).send({ message: "Invalid format for repliedCommentID" });
-    }
-
     const newComment = {
       repliedCommentID: req.body.repliedCommentID,
       dateCommented: req.body.dateCommented || new Date(),
