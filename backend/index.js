@@ -8,12 +8,256 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  console.log(req);
-  return res.status(234).send('Hello World!');
+// CRUD Operations: User
+app.post('/users', async (req, res) => {
+  try {
+
+    if (!req.body.firstName || !req.body.lastName) {
+      return res.status(400).send({ message: "There are missing required fields: firstName, lastName." });
+    }
+
+    const newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      bio: req.body.bio,
+      country: req.body.country,
+      city: req.body.city,
+      facebook: req.body.facebook,
+      linkedin: req.body.linkedin,
+      postIDs: req.body.postIDs || [],
+      commentIDs: req.body.commentIDs || [],
+      organizationIDs: req.body.organizationIDs || null,
+      positionID: req.body.positionID || null,
+    };
+
+    const user = await User.create(newUser);
+    return res.status(201).send(user);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
 });
 
-// CRUD: Topics
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find({});
+    return res.status(200).json({
+      count: users.length,
+      data: users
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const requiredFields = ['firstName', 'lastName'];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        return res.status(400).send({ message: `${field} is required` });
+      }
+    }
+
+    const result = await User.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The user is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The user has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD Operations: Post
+app.post('/posts', async (req, res) => {
+  try {
+
+    if (!req.body.userID || !req.body.title || !req.body.content) {
+      return res.status(400).send({ message: "There are missing required fields: userID, title, content." });
+    }
+
+    const user = await User.findById(req.body.userID);
+    if (!user) {
+      return res.status(404).send({ message: "The user not found." });
+    }
+
+    const newPost = {
+      userID: req.body.userID,
+      title: req.body.title,
+      datePosted: req.body.datePosted || new Date(),
+      content: req.body.content,
+      upvotes: req.body.upvotes || 0,
+      downvotes: req.body.downvotes || 0,
+      tags: req.body.tags
+    };
+
+    const post = await Post.create(newPost);
+    await User.findByIdAndUpdate(req.body.userID, { $push: { postIDs: post._id } });
+
+    return res.status(201).send(post);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/posts', async (req, res) => {
+  try {
+    const posts = await Post.find({});
+    return res.status(200).json({
+      count: posts.length,
+      data: posts
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/posts/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    return res.status(200).json(post);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/posts/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Post.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.delete('/users/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await User.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).json({ message: 'The delete was successful.' });
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD Operations: Comment
+app.post('/comments', async (req, res) => {
+  try {
+
+    if (!req.body.content || !req.body.userID || !req.body.postID) {
+      return res.status(400).send({ message: "Missing required fields: content, userID, postID" });
+    }
+
+    // Validate repliedCommentID
+    if (req.body.repliedCommentID && !isValidObjectId(req.body.repliedCommentID)) {
+      return res.status(400).send({ message: "Invalid format for repliedCommentID" });
+    }
+
+    const newComment = {
+      repliedCommentID: req.body.repliedCommentID,
+      dateCommented: req.body.dateCommented || new Date(),
+      content: req.body.content,
+      userID: req.body.userID,
+      postID: req.body.postID
+    };
+
+    const comment = await Comment.create(newComment);
+    await Post.findByIdAndUpdate(req.body.postID, { $push: { commentIDs: comment._id } });
+    await User.findByIdAndUpdate(req.body.userID, { $push: { commentIDs: comment._id } });
+
+    return res.status(201).send(comment);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+
+app.get('/comments', async (req, res) => {
+  try {
+    const comments = await Comment.find({});
+    return res.status(200).json({
+      count: comments.length,
+      data: comments
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/comments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comment = await Comment.findById(id);
+    return res.status(200).json(comment);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/comments/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Comment.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD Operations: Topics
 app.post('/topics', async (req, res) => {
   try {
     
@@ -85,7 +329,6 @@ app.put('/topics/:id', async (req, res) => {
   }
 });
 
-// TODO: Kindly test this.
 app.delete('/topics/:id', async (req, res) => {
   try {
 
@@ -104,7 +347,7 @@ app.delete('/topics/:id', async (req, res) => {
   }
 });
 
-// CRUD: Communities
+// CRUD Operations: Communities
 app.post('/communities', async (req, res) => {
   try {
     
@@ -194,7 +437,7 @@ app.delete('/communities/:id', async (req, res) => {
   }
 });
 
-// CRUD: Population - Use this for data population.
+// CRUD Operations: Population
 app.post('/positions', async (req, res) => {
   try {
     
@@ -236,217 +479,6 @@ app.get('/positions/:id', async (req, res) => {
     const { id } = req.params;
     const position = await Position.findById(id);
     return res.status(200).json(position);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-// CRUD: Users
-app.post('/users', async (req, res) => {
-  try {
-
-    const newUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      bio: req.body.bio,
-      country: req.body.country,
-      city: req.body.city,
-      facebook: req.body.facebook,
-      linkedin: req.body.linkedin
-    };
-
-    const user = await User.create(newUser);
-    return res.status(201).send(user);
-
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/users', async (req, res) => {
-  try {
-    const users = await User.find({});
-    return res.status(200).json({
-      count: users.length,
-      data: users
-    });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/users/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    return res.status(200).json(user);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.put('/users/:id', async (req, res) => {
-  try {
-
-    const { id } = req.params;
-    const result = await User.findByIdAndUpdate(id, req.body);
-
-    if (!result) {
-      return res.status(404).json({ message: 'The tag is not found.' });
-    }
-
-    return res.status(200).send({ message: 'The tag has been updated.' });
-
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.delete('/users/:id', async (req, res) => {
-  try {
-
-    const { id } = req.params;
-    const result = await User.findByIdAndDelete(id);
-
-    if (!result) {
-      return res.status(404).json({ message: 'The tag is not found.' });
-    }
-
-    return res.status(200).json({ message: 'The delete was successful.' });
-    
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-// CRUD: Post
-app.post('/posts', async (req, res) => {
-  try {
-
-    const newPost = {
-      userID: req.body.userID,
-      title: req.body.title,
-      datePosted: req.body.datePosted,
-      content: req.body.content,
-      upvotes: req.body.upvotes,
-      downvotes: req.body.downvotes,
-      tags: req.body.tags
-    };
-
-    const post = await Post.create(newPost);
-    return res.status(201).send(post);
-
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/posts', async (req, res) => {
-  try {
-    const posts = await Post.find({});
-    return res.status(200).json({
-      count: posts.length,
-      data: posts
-    });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/posts/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const post = await Post.findById(id);
-    return res.status(200).json(post);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.put('/posts/:id', async (req, res) => {
-  try {
-
-    const { id } = req.params;
-    const result = await Post.findByIdAndUpdate(id, req.body);
-
-    if (!result) {
-      return res.status(404).json({ message: 'The tag is not found.' });
-    }
-
-    return res.status(200).send({ message: 'The tag has been updated.' });
-
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-// CRUD: Comment
-app.post('/comments', async (req, res) => {
-  try {
-
-    const newComment = {
-      repliedCommentID: req.body.repliedCommentID,
-      dateCommented: req.body.dateCommented,
-      content: req.body.content,
-      userID: req.body.userID,
-      postID: req.body.postID
-    };
-
-    const comment = await Comment.create(newComment);
-    return res.status(201).send(comment);
-
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/comments', async (req, res) => {
-  try {
-    const comments = await Comment.find({});
-    return res.status(200).json({
-      count: comments.length,
-      data: comments
-    });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/comments/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const comment = await Comment.findById(id);
-    return res.status(200).json(comment);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.put('/comments/:id', async (req, res) => {
-  try {
-
-    const { id } = req.params;
-    const result = await Comment.findByIdAndUpdate(id, req.body);
-
-    if (!result) {
-      return res.status(404).json({ message: 'The tag is not found.' });
-    }
-
-    return res.status(200).send({ message: 'The tag has been updated.' });
-
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });

@@ -52,8 +52,10 @@ export default function App() {
         <Route path="/user/airelle" element={<Airelle />} />
         <Route path="/edit" element={<EditProfile />} />
         <Route path="/create" element={<Create />} />
-        
+
+        {/*  */}
         <Route path="/topics" element={<Topics />} />
+
         <Route path="/topics/event" element={<Events />} />
         <Route path="/topics/excellence" element={<Excellence />} />
         <Route path="/topics/financial-independence" element={<FinancialIndependency />} />
@@ -61,6 +63,7 @@ export default function App() {
         <Route path="/topics/recruitment" element={<Recruitment />} />
 
         <Route path="/communities" element={<Communities />} />
+
         <Route path="/communities/msc" element={<MSC />} />
         <Route path="/communities/gdsc" element={<GDSC />} />
         <Route path="/communities/ccs" element={<CSG />} />

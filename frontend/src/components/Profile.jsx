@@ -9,27 +9,25 @@ export default function Profile(props) {
 
   const [position, setPosition] = useState([]);
   const [organization, setOrganization] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const organizationData = await axios.get(`http://localhost:5555/communities/${props.org}`);
 
-    axios
-      .get(`http://localhost:5555/communities/${props.org}`)
-      .then((res) => {
-        setOrganization(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        if (props.positionID !== null) {
+          const positionData = await axios.get(`http://localhost:5555/positions/${props.positionID}`);
+          setPosition(positionData.data);
+        }
 
-    axios
-      .get(`http://localhost:5555/positions/${props.positionID}`)
-      .then((res) => {
-        setPosition(res.data);
-      })
-      .catch((error) => {
+        setOrganization(organizationData.data);
+        setDataLoaded(true);
+      } catch (error) {
         console.log(error);
-      });
-      
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -51,7 +49,7 @@ export default function Profile(props) {
         
         <h2 className="text-3xl font-bold mt-2 mr-2">{props.name}</h2>
 
-        { props.positionID != undefined ? (
+        { props.positionID != null ? (
           <span className="text-lg mx-2 font-semibold text-purple-800 text-xs font-medium mt-2.5 px-2.5 py-0.5 rounded border border-purple-400">{position.title}</span>
         ) : null }
 

@@ -11,16 +11,18 @@ export default function PostHeader(props) {
   const [position, setPosition] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5555/positions/${props.positionID}`)
-      .then((res) => {
-        setPosition(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+    if (props.positionID !== null) {
+      axios
+        .get(`http://localhost:5555/positions/${props.positionID}`)
+        .then((res) => {
+          setPosition(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [props.positionID]);
+  
   return (
   <div className="flex">
 

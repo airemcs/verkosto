@@ -3,8 +3,8 @@ import { Schema } from 'mongoose';
 
 const userSchema = mongoose.Schema({
   // userID: Number,
-  firstName: String,
-  lastName: String,
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
   bio: String,
   country: String,
   city: String,
@@ -12,35 +12,35 @@ const userSchema = mongoose.Schema({
   linkedin: String,
   postIDs: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   commentIDs: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  organizationIDs: [{ type: Schema.Types.ObjectId, ref: 'Organization' }],
+  organizationIDs: { type: Schema.Types.ObjectId, ref: 'Organization' },
   positionID: { type: Schema.Types.ObjectId, ref: 'Position' },
 });
 
 const postSchema = mongoose.Schema({
   // postID: Number,
-  userID: { type: Schema.Types.ObjectId, ref: 'User' },
-  title: String,
+  userID: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  title: {type: String, required: true},
   datePosted: Date,
-  content: String,
+  content: {type: String, required: true},
   upvotes: Number,
   downvotes: Number,
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
   commentIDs: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
-const tagSchema = mongoose.Schema({
-  // tagID: Number,
-  title: String,
-  description: String
-});
-
 const commentSchema = mongoose.Schema({
   // commentID: Number,
   repliedCommentID: mongoose.SchemaTypes.ObjectId,
   dateCommented: Date,
-  content: String,
-  userID: { type: Schema.Types.ObjectId, ref: 'User' },
-  postID: { type: Schema.Types.ObjectId, ref: 'Post' },
+  content: { type: String, required: true },
+  userID: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  postID: { type: Schema.Types.ObjectId, ref: 'Post', required: true },
+});
+
+const tagSchema = mongoose.Schema({
+  // tagID: Number,
+  title: String,
+  description: String
 });
 
 const organizationSchema = mongoose.Schema({
