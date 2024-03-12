@@ -21,12 +21,6 @@ export default function Home() {
       });
   }, []);
 
-  function calculateDays(datePosted) {
-    let current = new Date();
-    let posted = new Date(datePosted);
-    return Math.floor((current - posted) / (1000 * 3600 * 24));
-  }
-
   return (
   <>
 
@@ -48,17 +42,7 @@ export default function Home() {
       {/* {console.log(post.tags[2] ? post.tags[2] : null)} */}
       {/* {console.log(post.commentIDs)} */}
       
-      <MiniPost id={post._id} 
-                userID={post.userID}
-                title={post.title} 
-                days={calculateDays(post.datePosted)} 
-                content={post.content}
-                tag1={post.tags[0] ? post.tags[0] : null} 
-                tag2={post.tags[1] ? post.tags[1] : null} 
-                tag3={post.tags[2] ? post.tags[2] : null} 
-                likes={post.upvotes} 
-                dislikes={post.downvotes} 
-                comments={post.commentIDs.length} />
+      <MiniPost id={post._id} />
 
     </div>
   ))}
