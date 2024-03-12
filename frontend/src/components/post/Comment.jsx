@@ -1,37 +1,71 @@
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
 
-// Parameters: Name, Date, Content
+// Parameters: ID
 export default function Comment(props) {
   
-  const firstName = (props.name.split(' ')[0]).toLowerCase();
-  const imagePath = `../src/assets/${firstName}.jpg`;
+  const [user, setUser] = useState({});
+  const [comment, setComment] = useState({});
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const commentData = await axios.get(`http://localhost:5555/comments/${props.commentID}`);
+        const userData = await axios.get(`http://localhost:5555/users/${commentData.data.userID}`);
+        setComment(commentData.data);
+        setUser(userData.data);
+        setDataLoaded(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  function calculateDays(dateCommented) {
+    let current = new Date();
+    let posted = new Date(dateCommented);
+    return Math.floor((current - posted) / (1000 * 3600 * 24));
+  }
+
+  let outerClassName;
+  const imagePath = `../src/assets/${user._id}.jpg`;
+
+  if (comment.repliedCommentID == undefined) {
+    outerClassName = "p-6 text-base bg-white rounded-lg"
+  } else {
+    outerClassName = "p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg"
+  }
 
   return (
-  <article class="p-6 text-base bg-white rounded-lg">
+  <>
+  { dataLoaded &&
 
-    <footer class="flex justify-between items-center">
+  <article className={outerClassName}>
 
-      <div class="flex items-center">
-        <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-          <Link to={`/user/${firstName}`}><img  class="mr-2 w-6 h-6 rounded-full" src={imagePath} /></Link>
-          <Link to={`/user/${firstName}`}>{props.name}</Link>
+    <footer className="flex justify-between items-center">
+
+      <div className="flex items-center">
+        <p className="inline-flex items-center mr-2 text-sm text-gray-900 font-semibold">
+          <Link to={`/users/${user._id}`}><img  className="mr-2 w-6 h-6 rounded-full" src={imagePath} /></Link>
+          <Link to={`/users/${user._id}`}>{user.firstName + ` ` + user.lastName}</Link>
         </p>
-        <p class="text-sm text-gray-600">
-          <time>{props.date}</time>
+        <p className="text-sm text-gray-600">
+          <time>{calculateDays(comment.dateCommented)} days ago</time>
         </p>
       </div>
 
     </footer>
 
-    <p class="text-gray-500">
-    {props.content}
-    </p>
+    <p className="text-gray-500">{comment.content}</p>
 
-    <div class="flex items-center mt-4 space-x-4">
+    <div className="flex items-center mt-4 space-x-4">
       <button type="button"
-      class="flex items-center text-sm text-gray-500 hover:underline font-medium">
-        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+      className="flex items-center text-sm text-gray-500 hover:underline font-medium">
+        <svg className="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
         </svg>
         Reply
       </button>
@@ -45,5 +79,8 @@ export default function Comment(props) {
     </div>
 
   </article>
+  
+  }
+  </>
   )
 }

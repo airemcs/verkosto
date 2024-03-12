@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag, Organization, Position, User, Post } from './models/Models.js';
+import { Tag, Organization, Position, User, Post, Comment } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -377,6 +377,69 @@ app.put('/posts/:id', async (req, res) => {
 
     const { id } = req.params;
     const result = await Post.findByIdAndUpdate(id, req.body);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).send({ message: 'The tag has been updated.' });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD: Comment
+app.post('/comments', async (req, res) => {
+  try {
+
+    const newComment = {
+      repliedCommentID: req.body.repliedCommentID,
+      dateCommented: req.body.dateCommented,
+      content: req.body.content,
+      userID: req.body.userID,
+      postID: req.body.postID
+    };
+
+    const comment = await Comment.create(newComment);
+    return res.status(201).send(comment);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/comments', async (req, res) => {
+  try {
+    const comments = await Comment.find({});
+    return res.status(200).json({
+      count: comments.length,
+      data: comments
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/comments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comment = await Comment.findById(id);
+    return res.status(200).json(comment);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.put('/comments/:id', async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Comment.findByIdAndUpdate(id, req.body);
 
     if (!result) {
       return res.status(404).json({ message: 'The tag is not found.' });

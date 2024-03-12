@@ -46,6 +46,7 @@ export default function Home() {
       {/* {console.log(post.tags[0] ? post.tags[0] : null)} */}
       {/* {console.log(post.tags[1] ? post.tags[1] : null)} */}
       {/* {console.log(post.tags[2] ? post.tags[2] : null)} */}
+      {/* {console.log(post.commentIDs)} */}
       
       <MiniPost id={post._id} 
                 userID={post.userID}
