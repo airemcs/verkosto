@@ -50,11 +50,11 @@ export default function PostContent(props) {
     <svg className="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
     </svg>
-    {props.day} days ago
+    {(props.day === 0 ? `Today` : (props.day > 1 ? props.day + ` days ago` : props.day + ` day ago`)) }
     </span>
 
     {/* Tags */}
-    <div className="flex flex-wrap mb-2">
+    <div className="flex flex-wrap mb-2 pt-3">
 
       { tag1.title != undefined ? (
         <span className="mr-2 mb-1 px-2 py-1 text-xs bg-green-400/30 text-slate rounded">{tag1.title}</span>

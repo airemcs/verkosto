@@ -2,12 +2,14 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios from 'axios';
-import { MyContext } from '../../MyContext.jsx';
+import { MyContext } from '../MyContext.jsx';
 
-import Comment from './Comment.jsx'
-import CommentNest from './CommentNest.jsx'
-import PostHeader from './PostHeader.jsx'
-import PostContent from './PostContent.jsx'
+import Comment from '../components/post/Comment.jsx'
+// import CommentNest from './CommentNest.jsx'
+import PostHeader from '../components/post/PostHeader.jsx'
+import PostContent from '../components/post/PostContent.jsx'
+import Sidebar from '../components/Sidebar.jsx'
+import Searchbar from '../components/Searchbar.jsx'
 
 // Parameters: Name, Position
 // Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
@@ -49,6 +51,9 @@ export default function ExtendedPost(props) {
 
   return (
   <>
+  <div className="sm:ml-64">
+    <Sidebar />
+    <Searchbar />
   {dataLoaded && 
 
   <div className="w-full mx-5 my-10">
@@ -65,13 +70,41 @@ export default function ExtendedPost(props) {
       : null}
     </div>
 
-    <PostContent  userID={post.userID} 
+    {/* <PostContent  userID={post.userID} 
                   title={post.title} 
                   day={calculateDays(post.datePosted)} 
                   tag1={post.tags[0] ? post.tags[0] : null} 
                   tag2={post.tags[1] ? post.tags[1] : null} 
                   tag3={post.tags[2] ? post.tags[2] : null}
-                  content={post.content} />
+                  content={post.content} /> */}
+
+    {/* Title */}
+  <Link to="">
+    <h5 className="py-2 text-4xl font-semibold text-gray-900">{post.title}</h5>
+  </Link>
+
+  {/* Date Posted */}
+  <div className="flex items-center">
+
+    <span className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
+    <svg className="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+    </svg>
+    {(calculateDays(post.datePosted) === 0 ? `Today` : (calculateDays(post.datePosted) > 1 ? calculateDays(post.datePosted) + ` days ago` : calculateDays(post.datePosted) + ` day ago`)) }
+    </span>
+
+    {/* Tags */}
+    <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full border border-green-400">
+      Event
+      <button type="button" class="inline-flex items-center p-1 ms-2 text-sm text-green-400 bg-transparent rounded-sm hover:bg-green-200 hover:text-green-900 dark:hover:bg-green-800 dark:hover:text-green-300" data-dismiss-target="#badge-dismiss-green" aria-label="Remove">
+      <svg class="w-2 h-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+      </svg>
+      <span class="sr-only">Remove badge</span>
+      </button>
+    </span>
+  
+  </div>
     
     <div className="flex items-center mb-1 mt-2">
       <button className="h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
@@ -90,6 +123,14 @@ export default function ExtendedPost(props) {
       </svg>
       <p className="text-sm text-gray-600">{post.commentIDs.length} Comments</p>
     </div>
+
+    <textarea className="rounded-lg mt-4 w-full text-sm text-gray-700 py-2 pl-4 border border-gray-300 shadow resize-none" rows="13" type="textarea" defaultValue={post.content} >
+    </textarea>
+
+    <Link type="submit" to={`/posts/${id}`}
+        className="inline-flex items-end py-2.5 mt-2 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+        Save
+    </Link>
 
   </div>
 
@@ -127,6 +168,7 @@ export default function ExtendedPost(props) {
   </div>
   
   }
+  </div>
   </>
   )
 }

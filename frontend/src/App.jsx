@@ -9,6 +9,7 @@ import EditProfile from './pages/EditProfile.jsx'
 import Create from './pages/Create.jsx'
 import Communities from './pages/Communities.jsx'
 import ExtendedPostPage from './pages/ExtendedPostPage.jsx'
+import ExtendedPostPageEdit from './pages/ExtendedPostPageEdit.jsx';
 
 // import ExtendedPostDSCEdit from './pages/data/ExtendedPostDSCEdit.jsx'
 // import ExtendedPostDSCEditComment from './pages/data/ExtendedPostDSCEditComment.jsx'
@@ -43,6 +44,7 @@ export default function App() {
 
         {/*  */}
         <Route path="/posts/:id" element={<ExtendedPostPage />} />
+        <Route path="/posts/:id/edit" element={<ExtendedPostPageEdit />} />
         <Route path="/edit/:id" element={<EditProfile />} />
 
         {/* <Route path="edit/006" element={<ExtendedPostDSCEdit />} /> */}

@@ -52,10 +52,10 @@ export default function PostHeader(props) {
 
   <div className="flex items-center">
 
-    <Link to={`/users/${props.userID}`}><h2 className="text-lg mx-2 font-semibold text-gray-900">{`${props.firstName}` + ` ` + `${props.lastName}`}</h2></Link>
+    <Link to={`/users/${props.userID}`}><h2 className="text-lg ml-2 font-semibold text-gray-900">{`${props.firstName}` + ` ` + `${props.lastName}`}</h2></Link>
 
     { position.title != undefined ? (
-      <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded border border-purple-400">{position.title}</span>
+      <span className="bg-purple-100 mx-2 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded border border-purple-400">{position.title}</span>
     ) : null }
 
   </div>
