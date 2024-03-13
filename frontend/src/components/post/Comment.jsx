@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
+import { MyContext } from '../../MyContext.jsx'
 
 // Parameters: ID
 export default function Comment(props) {
@@ -8,6 +9,10 @@ export default function Comment(props) {
   const [user, setUser] = useState({});
   const [comment, setComment] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  // const [editedContent, setEditedContent] = useState(''); 
+
+  const { globalVariable } = useContext(MyContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +64,11 @@ export default function Comment(props) {
     });
   }
 
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+    // setEditedContent(comment.content);
+  };
+
   return (
   <>
   { dataLoaded &&
@@ -79,24 +89,32 @@ export default function Comment(props) {
 
     </footer>
 
-    <p className="text-gray-500">{comment.content}</p>
+    {isEditing ? (
+            <>
+            <textarea value={comment.content} rows="1" className="text-gray-500 my-2 border border-gray-300 rounded p-2 w-full" />
+            <button onClick={handleEditToggle} type="submit"
+              className="inline-flex items-end py-2 mb-2 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+              Save
+            </button>
+            </>
+          ) : (
+            <p className="text-gray-500 my-2">{comment.content}</p>
+          )}
 
-    <div className="flex items-center mt-4 space-x-4">
-      <button type="button"
-      className="flex items-center text-sm text-gray-500 hover:underline font-medium">
-        <svg className="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-        </svg>
-        Reply
-      </button>
-      {props.isAccount == 1 ?
-      <Link to="/edit/006">
-        <svg className="w-6 h-6 text-gray-800 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
-        </svg>
-      </Link>
-      : null}
-    </div>
+          <div className="flex items-center space-x-4">
+            <button className="flex items-center text-sm text-gray-500 hover:underline font-medium">
+              <svg className="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+              </svg>
+            </button>
+            {user._id == globalVariable &&
+              <Link onClick={handleEditToggle} >
+                <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
+                </svg>
+              </Link>
+            }
+          </div>
 
   </article>
   

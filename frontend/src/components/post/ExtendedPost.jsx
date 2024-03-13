@@ -117,7 +117,7 @@ export default function ExtendedPost(props) {
 
     {comments.map((comment, index) => (
       <div key={comment}>
-        <Comment commentID={comment} />
+        <Comment postID={props.postID} commentID={comment} />
       </div>
     ))}
 
