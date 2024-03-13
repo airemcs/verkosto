@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "65ed92f6a5295e7c6d93e434"
+  },
+  "title": "Event",
+  "description": "These serve as venues for gatherings, offeringg spaces for various activities such as seminars, workshops, and more.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ed9304a5295e7c6d93e436"
+  },
+  "title": "Excellence",
+  "description": "These are where excellence is found and cultivated.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ed9312a5295e7c6d93e438"
+  },
+  "title": "Financial Independence",
+  "description": "These are where financial independence is achieved.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ed9320a5295e7c6d93e43a"
+  },
+  "title": "Limited Time",
+  "description": "These are where opportunities have expiration dates.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ed932ba5295e7c6d93e43c"
+  },
+  "title": "Recruitment",
+  "description": "These are where talent is sought and extracted.",
+  "__v": 0
+}]

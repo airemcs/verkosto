@@ -1,0 +1,121 @@
+[{
+  "_id": {
+    "$oid": "65f177e9ceecc2241d6ba52f"
+  },
+  "dateCommented": {
+    "$date": "2024-03-11T08:20:00.000Z"
+  },
+  "content": "The advancements in AI showcased here are truly impressive! It's inspiring to witness the impact of technology on different sectors.",
+  "userID": {
+    "$oid": "65f16542ceecc2241d6ba093"
+  },
+  "postID": {
+    "$oid": "65f16c77ceecc2241d6ba171"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f17824ceecc2241d6ba543"
+  },
+  "dateCommented": {
+    "$date": "2024-03-11T17:00:00.000Z"
+  },
+  "content": "AI's potential to transform industries is evident in this comprehensive overview. The future indeed looks promising!",
+  "userID": {
+    "$oid": "65f16547ceecc2241d6ba095"
+  },
+  "postID": {
+    "$oid": "65f16c77ceecc2241d6ba171"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f179daceecc2241d6ba74d"
+  },
+  "repliedCommentID": {
+    "$oid": "65f177e9ceecc2241d6ba52f"
+  },
+  "dateCommented": {
+    "$date": "2024-03-11T15:30:00.000Z"
+  },
+  "content": "We're glad you found the post intriguing! AI's advancements are reshaping the future of technology.",
+  "userID": {
+    "$oid": "65f16528ceecc2241d6ba08d"
+  },
+  "postID": {
+    "$oid": "65f16c77ceecc2241d6ba171"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f17a4cceecc2241d6ba77b"
+  },
+  "repliedCommentID": {
+    "$oid": "65f17824ceecc2241d6ba543"
+  },
+  "dateCommented": {
+    "$date": "2024-03-11T16:45:00.000Z"
+  },
+  "content": "Thank you for your continued engagement! AI's transformative potential is indeed reshaping the technological landscape.",
+  "userID": {
+    "$oid": "65f16547ceecc2241d6ba095"
+  },
+  "postID": {
+    "$oid": "65f16c77ceecc2241d6ba171"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f17be4ceecc2241d6ba92b"
+  },
+  "dateCommented": {
+    "$date": "2024-01-18T10:00:00.000Z"
+  },
+  "content": "Sure thing! Can't wait to join the AI Hackathon 2024 and explore the possibilities of AI with everyone!",
+  "userID": {
+    "$oid": "65f1653dceecc2241d6ba091"
+  },
+  "postID": {
+    "$oid": "65f17613ceecc2241d6ba3bc"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f17c1eceecc2241d6ba950"
+  },
+  "repliedCommentID": {
+    "$oid": "65f17be4ceecc2241d6ba92b"
+  },
+  "dateCommented": {
+    "$date": "2024-01-18T10:00:00.000Z"
+  },
+  "content": "Absolutely! Let's team up and tackle those challenges head-on! #Teamwork #AIHackathon",
+  "userID": {
+    "$oid": "65f16537ceecc2241d6ba08f"
+  },
+  "postID": {
+    "$oid": "65f17613ceecc2241d6ba3bc"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f1a0e41487af088221d875"
+  },
+  "dateCommented": {
+    "$date": "2024-03-13T08:20:00.000Z"
+  },
+  "content": "Nice!",
+  "userID": {
+    "$oid": "65f180fdceecc2241d6bad00"
+  },
+  "postID": {
+    "$oid": "65f17613ceecc2241d6ba3bc"
+  },
+  "__v": 0
+}]

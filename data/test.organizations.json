@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "title": "Microsoft Student Community",
+  "description": "We are Lasallian student leaders who turn technology into absolute passion.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edaf179960bb0dc99083a6"
+  },
+  "title": "Google Developer Student Clubs",
+  "description": "A community emerging technologies with Google to solve real-world problems for our communities and local businesses.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edaf259960bb0dc99083a8"
+  },
+  "title": "College of Computer Studies",
+  "description": "The official page of the De La Salle University Computer Studies Government (CSG).",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edaf369960bb0dc99083aa"
+  },
+  "title": "Investors' Society",
+  "description": "A special interest organization that aims to help introduce the many forms of investment to Lasallians.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edaf579960bb0dc99083ac"
+  },
+  "title": "La Salle Computer Society",
+  "description": "We live yesterday's vision, set today's trends, and inspire tomorrow's leaders.",
+  "__v": 0
+}]

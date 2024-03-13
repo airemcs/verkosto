@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "65edb58d0564bfdf703277e1"
+  },
+  "title": "President",
+  "description": "They provide overall leadership and direction to the organization, preside over meetings, and serve as the primary spokesperson.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb5de0564bfdf703277e3"
+  },
+  "title": "Executive Vice President",
+  "description": "They assist the President in their duties and assume leadership responsibilities in their absence.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb5ed0564bfdf703277e5"
+  },
+  "title": "Vice President",
+  "description": "They support the President and Executive team in various capacities, often overseeing specific areas of operation or initiatives.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb5f80564bfdf703277e7"
+  },
+  "title": "Associate Vice President",
+  "description": "They assist the Vice President or Executive team with specific tasks or projects as needed.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb6040564bfdf703277e9"
+  },
+  "title": "Executive",
+  "description": "They hold a leadership position within the organization's executive team, often with specific responsibilities or portfolios.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb60b0564bfdf703277eb"
+  },
+  "title": "Director",
+  "description": "They manage a specific department or aspect of the organization's operations, such as programming, marketing, or finance.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb6140564bfdf703277ed"
+  },
+  "title": "Secretary",
+  "description": "They handle administrative tasks, including meeting minutes, correspondence, and record-keeping.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65edb6200564bfdf703277ef"
+  },
+  "title": "Chief Operating Officer",
+  "description": "They oversee the day-to-day operations of the organization, ensuring efficiency and effectiveness in achieving goals and objectives.",
+  "__v": 0
+}]

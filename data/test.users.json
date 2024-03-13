@@ -1,0 +1,309 @@
+[{
+  "_id": {
+    "$oid": "65f16528ceecc2241d6ba08d"
+  },
+  "firstName": "Diego",
+  "lastName": "Manalang",
+  "bio": "I am passionate about technology and entrepreneurship. Building innovative solutions is my forte.",
+  "country": "Philippines",
+  "city": "Manila",
+  "facebook": "diegotech",
+  "linkedin": "diego.manalang",
+  "postIDs": [
+    {
+      "$oid": "65f16c77ceecc2241d6ba171"
+    },
+    {
+      "$oid": "65f1756aceecc2241d6ba37a"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f179daceecc2241d6ba74d"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "positionID": {
+    "$oid": "65edb58d0564bfdf703277e1"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f16537ceecc2241d6ba08f"
+  },
+  "firstName": "Sofia",
+  "lastName": "Magbanua",
+  "bio": "Traveling is my passion, and photography allows me to capture unforgettable moments along the way.",
+  "country": "Philippines",
+  "city": "Quezon City",
+  "facebook": "sofiasnaps",
+  "linkedin": "sofia.magbanua",
+  "postIDs": [
+    {
+      "$oid": "65f17613ceecc2241d6ba3bc"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f17c1eceecc2241d6ba950"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf179960bb0dc99083a6"
+  },
+  "positionID": {
+    "$oid": "65edb5de0564bfdf703277e3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f1653dceecc2241d6ba091"
+  },
+  "firstName": "Lorenzo",
+  "lastName": "Salcedo",
+  "bio": "I am a software engineer deeply committed to open-source projects. Coding is not just my job; it's my creative outlet.",
+  "country": "Philippines",
+  "city": "Cebu City",
+  "facebook": "lorenzocode",
+  "linkedin": "lorenzo.salcedo",
+  "postIDs": [
+    {
+      "$oid": "65f1738fceecc2241d6ba2ef"
+    },
+    {
+      "$oid": "65f17636ceecc2241d6ba41b"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f17be4ceecc2241d6ba92b"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf259960bb0dc99083a8"
+  },
+  "positionID": {
+    "$oid": "65edb5ed0564bfdf703277e5"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f16542ceecc2241d6ba093"
+  },
+  "firstName": "Amara",
+  "lastName": "Montemayor",
+  "bio": "Fashion designing allows me to express my love for vibrant colors and unique styles. Every creation tells a story.",
+  "country": "Philippines",
+  "city": "Davao City",
+  "facebook": "amarafashion",
+  "linkedin": "amara.montemayor",
+  "postIDs": [
+    {
+      "$oid": "65f1763cceecc2241d6ba41f"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f177e9ceecc2241d6ba52f"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf369960bb0dc99083aa"
+  },
+  "positionID": {
+    "$oid": "65edb5f80564bfdf703277e7"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f16547ceecc2241d6ba095"
+  },
+  "firstName": "Enrique",
+  "lastName": "Gatdula",
+  "bio": "Cooking is my passion, and I aspire to become a renowned chef. Through my food blog, I share my culinary journey with the world.",
+  "country": "Philippines",
+  "city": "Makati City",
+  "facebook": "chefenrique",
+  "linkedin": "enrique.gatdula",
+  "postIDs": [
+    {
+      "$oid": "65f17640ceecc2241d6ba423"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f17824ceecc2241d6ba543"
+    },
+    {
+      "$oid": "65f17a4cceecc2241d6ba77b"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf579960bb0dc99083ac"
+  },
+  "positionID": {
+    "$oid": "65edb6040564bfdf703277e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f1654dceecc2241d6ba097"
+  },
+  "firstName": "Zara",
+  "lastName": "Legaspi",
+  "bio": "Yoga is not just a form of exercise for me; it's a way of life. I believe in the power of mindfulness and inner peace.",
+  "country": "Philippines",
+  "city": "Pasig City",
+  "facebook": "zenergy",
+  "linkedin": "zara.legaspi",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "positionID": {
+    "$oid": "65edb60b0564bfdf703277eb"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f16551ceecc2241d6ba099"
+  },
+  "firstName": "Rafael",
+  "lastName": "Valdez",
+  "bio": "Books have always been my faithful companions. As a book club organizer, I bring together fellow bibliophiles to share our love for literature.",
+  "country": "Philippines",
+  "city": "Taguig City",
+  "facebook": "rafaelreads",
+  "linkedin": "rafael.valdez",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf179960bb0dc99083a6"
+  },
+  "positionID": {
+    "$oid": "65edb6140564bfdf703277ed"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f16556ceecc2241d6ba09b"
+  },
+  "firstName": "Elena",
+  "lastName": "Lacson",
+  "bio": "Environmental conservation is my calling. I am dedicated to protecting our planet and raising awareness about sustainability.",
+  "country": "Philippines",
+  "city": "Mandaluyong City",
+  "facebook": "ecoelena",
+  "linkedin": "elena.lacson",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf259960bb0dc99083a8"
+  },
+  "positionID": {
+    "$oid": "65edb6200564bfdf703277ef"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f1655aceecc2241d6ba09d"
+  },
+  "firstName": "Gabriel",
+  "lastName": "Cabrera",
+  "bio": "As a software developer, I am fascinated by the endless possibilities of AI. My goal is to contribute to groundbreaking advancements in the field.",
+  "country": "Philippines",
+  "city": "Caloocan City",
+  "facebook": "gabbyAI",
+  "linkedin": "gabriel.cabrera",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf369960bb0dc99083aa"
+  },
+  "positionID": {
+    "$oid": "65edb6040564bfdf703277e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f1655fceecc2241d6ba09f"
+  },
+  "firstName": "Cassandra",
+  "lastName": "Mendoza",
+  "bio": "Art has always been my passion, and as a gallery owner, I am committed to showcasing talented artists and fostering creativity in our community.",
+  "country": "Philippines",
+  "city": "Antipolo City",
+  "facebook": "artsycass",
+  "linkedin": "cassandra.mendoza",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "positionID": {
+    "$oid": "65edb6140564bfdf703277ed"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f180fdceecc2241d6bad00"
+  },
+  "firstName": "Airelle",
+  "lastName": "Maagma",
+  "bio": "IT Engineering Intern @ ING Hubs PH",
+  "country": "Philippines",
+  "city": "Las Pinas",
+  "facebook": "airelle.maagma",
+  "linkedin": "airellemaagma",
+  "postIDs": [
+    {
+      "$oid": "65f195c31487af088221d1f8"
+    }
+  ],
+  "commentIDs": [
+    {
+      "$oid": "65f1a0e41487af088221d875"
+    }
+  ],
+  "organizationIDs": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "positionID": {
+    "$oid": "65edb5de0564bfdf703277e3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65f18969ceecc2241d6bae8f"
+  },
+  "firstName": "Airelle",
+  "lastName": "Maagma",
+  "bio": "IT Engineering Intern @ ING Hubs PH",
+  "country": "Philippines",
+  "city": "Las Pinas",
+  "facebook": "airelle.maagma",
+  "linkedin": "airellemaagma",
+  "postIDs": [],
+  "commentIDs": [],
+  "organizationIDs": {
+    "$oid": "65edaf039960bb0dc99083a4"
+  },
+  "positionID": {
+    "$oid": "65edb5de0564bfdf703277e3"
+  },
+  "__v": 0
+}]
