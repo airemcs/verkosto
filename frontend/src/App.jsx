@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { MyProvider } from './MyContext.jsx';
 
 import Home from './pages/Home.jsx'
 import Recent from './pages/Recent.jsx'
@@ -21,6 +22,7 @@ import HomeOrganization from './pages/HomeOrganization.jsx'
 export default function App() {
   return (
     <>
+      <MyProvider>
       <Routes>
 
         <Route path="/" element={<Home />} />
@@ -50,6 +52,7 @@ export default function App() {
         <Route path="/users/:id" element={<Account />} />
 
       </Routes>
+      </MyProvider>
     </>
   )
 }

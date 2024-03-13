@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from 'react'
+import axios from 'axios'
+// import { MyContext } from '../MyContext.jsx'
 
 import { Link } from 'react-router-dom'
 import MiniPost from '../components/post/MiniPost.jsx'
@@ -9,6 +10,7 @@ import Sidebar from '../components/Sidebar.jsx'
 export default function Home() {
 
   const [posts, setPosts] = useState([]);
+  // const { globalVariable } = useContext(MyContext);
 
   useEffect(() => {
     axios
