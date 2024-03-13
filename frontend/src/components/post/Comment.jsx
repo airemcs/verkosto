@@ -31,12 +31,32 @@ export default function Comment(props) {
   }
 
   let outerClassName;
-  const imagePath = `../src/assets/${user._id}.jpg`;
 
   if (comment.repliedCommentID == undefined) {
     outerClassName = "p-6 text-base bg-white rounded-lg"
   } else {
     outerClassName = "p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg"
+  }
+
+  const [imagePath, setImagePath] = useState(`../src/assets/${user._id}.jpg`);
+
+  useEffect(() => {
+    loadImage(`../src/assets/${user._id}.jpg`)
+      .then((resolvedPath) => setImagePath(resolvedPath))
+      .catch((errorPath) => setImagePath(errorPath));
+  }, [user._id]);
+
+  function loadImage(path) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve(path);
+      };
+      img.onerror = () => {
+        reject("../src/assets/default.jpg");
+      };
+      img.src = path;
+    });
   }
 
   return (
@@ -53,7 +73,7 @@ export default function Comment(props) {
           <Link to={`/users/${user._id}`}>{user.firstName + ` ` + user.lastName}</Link>
         </p>
         <p className="text-sm text-gray-600">
-          <time>{calculateDays(comment.dateCommented)} days ago</time>
+          <time>{calculateDays(comment.dateCommented)} {calculateDays(comment.dateCommented) > 1 ? "days ago" : "day ago"}</time>
         </p>
       </div>
 

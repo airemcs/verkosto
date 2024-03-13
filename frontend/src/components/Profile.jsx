@@ -111,7 +111,7 @@ export default function Profile(props) {
 
       { organization.title != undefined ? (
       <div className="flex my-2">
-        <Link to={`/communities/${organization.title.match(/\b([A-Z])/g).join('').toLowerCase()}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
+        <Link to={`/communities/${organization._id}`} className="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-400 inline-flex items-center justify-center">
         {organization.title}</Link>
       </div>
       ) : null }

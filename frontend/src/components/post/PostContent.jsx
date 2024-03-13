@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import axios from 'axios';
+import ReactMarkdown from 'react-markdown'
+import axios from 'axios'
 
 // Parameters: Title, Day Age, Tag, Content
 export default function PostContent(props) {
@@ -30,6 +31,7 @@ export default function PostContent(props) {
   }, [props.tag1, props.tag2, props.tag3]);
 
   const imagePath = `../src/assets/${props.userID}.jpg`;
+  const formattedContent = props.content.replace(/\n\n/g, "\n\n ‎\n\n");
 
   return (
   <>
@@ -71,9 +73,7 @@ export default function PostContent(props) {
   </div>
   
   {/* Content */}
-  <p className="mt-3 text-gray-700 text-sm">
-  {props.content}
-  </p>
+  <ReactMarkdown className="mt-3 text-gray-700 text-sm" breaks={true}>{formattedContent}</ReactMarkdown>
     
   </>
   }
