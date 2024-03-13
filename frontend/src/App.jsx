@@ -41,6 +41,7 @@ export default function App() {
 
         {/*  */}
         <Route path="/posts/:id" element={<ExtendedPostPage />} />
+        <Route path="/edit/:id" element={<EditProfile />} />
 
         {/* <Route path="edit/006" element={<ExtendedPostDSCEdit />} /> */}
         {/* <Route path="comment/006" element={<ExtendedPostDSCEditComment />} /> */}

@@ -9,8 +9,8 @@ import MiniPost from '../components/post/MiniPost.jsx'
 
 export default function Account() {
 
+  let isMatch = 0;
   const { id } = useParams();
-  const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -26,6 +26,10 @@ export default function Account() {
     };
     fetchData();
   }, [id]);
+
+  if (id === "65f180fdceecc2241d6bad00") {
+    isMatch = true;
+  }
 
   return (
   <>
@@ -43,7 +47,8 @@ export default function Account() {
               banner="water"
               location={user.city + `, ` + user.country} 
               facebook={`/` + user.facebook} 
-              linkedin={`/` + user.linkedin} />
+              linkedin={`/` + user.linkedin} 
+              isAccount={isMatch} />
   )}
 
   {dataLoaded && user.postIDs.map((post, index) => (
