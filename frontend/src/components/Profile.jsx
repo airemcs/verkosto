@@ -4,12 +4,9 @@ import { Link } from 'react-router-dom'
 
 export default function Profile(props) {
 
-  const imagePath = `../src/assets/${props.id}.jpg`;
-  const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
-
   const [position, setPosition] = useState([]);
-  const [organization, setOrganization] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [organization, setOrganization] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +27,31 @@ export default function Profile(props) {
     fetchData();
   }, []);
 
+  const [imagePath, setImagePath] = useState(`../src/assets/${props.id}.jpg`);
+  const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
+
+  useEffect(() => {
+    loadImage(`../src/assets/${props.id}.jpg`)
+      .then((resolvedPath) => setImagePath(resolvedPath))
+      .catch((errorPath) => setImagePath(errorPath));
+  }, [props.id]);
+
+  function loadImage(path) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve(path);
+      };
+      img.onerror = () => {
+        reject("../src/assets/default.jpg");
+      };
+      img.src = path;
+    });
+  }
+
   return (
+  <>
+  { dataLoaded &&
   <>
 
   <div className="h-2/4 sm:h-64 overflow-hidden">
@@ -100,7 +121,9 @@ export default function Profile(props) {
   </div>
 
   <hr />
-
+  
+  </>
+  }
   </>
   )
 }

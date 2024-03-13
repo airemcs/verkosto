@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 // Parameters: Name, Position
 export default function PostHeader(props) {
 
-  const imagePath = `../src/assets/${props.userID}.jpg`;
-
   const [position, setPosition] = useState([]);
 
   useEffect(() => {
@@ -22,6 +20,28 @@ export default function PostHeader(props) {
         });
     }
   }, [props.positionID]);
+
+  const [imagePath, setImagePath] = useState(`../src/assets/${props.userID}.jpg`);
+  const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
+
+  useEffect(() => {
+    loadImage(`../src/assets/${props.userID}.jpg`)
+      .then((resolvedPath) => setImagePath(resolvedPath))
+      .catch((errorPath) => setImagePath(errorPath));
+  }, [props.userID]);
+
+  function loadImage(path) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve(path);
+      };
+      img.onerror = () => {
+        reject("../src/assets/default.jpg");
+      };
+      img.src = path;
+    });
+  }
   
   return (
   <div className="flex">

@@ -124,11 +124,7 @@ app.post('/posts', async (req, res) => {
 
 app.get('/posts', async (req, res) => {
   try {
-    let query = {};
-    if (req.query.tagID) {
-      query = { tags: req.query.tagID };
-    }
-    const posts = await Post.find(query);
+    const posts = await Post.find({});
     return res.status(200).json({
       count: posts.length,
       data: posts
@@ -138,7 +134,6 @@ app.get('/posts', async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
-
 
 app.get('/posts/:id', async (req, res) => {
   try {
