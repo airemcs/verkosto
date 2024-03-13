@@ -40,6 +40,7 @@ import Jeff from './pages/data/profiles/Jeff.jsx'
 import Maya from './pages/data/profiles/Maya.jsx'
 import Olivia from './pages/data/profiles/Olivia.jsx'
 import ExtendedPostDSCEditComment from './pages/data/ExtendedPostDSCEditComment.jsx'
+import HomeTopics from './pages/HomeTopics.jsx'
 
 export default function App() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
 
         {/*  */}
         <Route path="/topics" element={<Topics />} />
+        <Route path="/topics/:id" element={<HomeTopics />} />
 
         <Route path="/topics/event" element={<Events />} />
         <Route path="/topics/excellence" element={<Excellence />} />
