@@ -24,7 +24,10 @@ As a requirement for our CCAPDEV class, this web application was built using the
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
 ## Installation Pre-Requisite
-Before running this project, make sure you have Node.js installed on your system. You can download and install it from [here](https://nodejs.org/en/download/).
+Before running this project, make sure you have the following installed on your system:
+
+- [Node.js](https://nodejs.org/en/download/)
+- [MongoDB Compass](https://www.mongodb.com/try/download/compass)
 
 ## Installation / Getting Started
 In order to get started with this project, follow these steps:
@@ -54,6 +57,18 @@ npm run start
 
 4. **View the Application**:
 - Navigate to your web browser and go to [http://localhost:3000](http://localhost:3000).
+
+5. **MongoDB Compass Setup**:
+- Open MongoDB Compass and connect to your MongoDB server using the connection string:
+
+```shell
+mongodb+srv://root:admin@verkosto.zoo8pvy.mongodb.net/
+```
+
+6. **Import Data**:
+- Navigate to our database in MongoDB Compass.
+- Click on the `Add Data` button and select `Import JSON File`.
+- Choose the JSON files located in the "data" directory corresponding to the tables you want to import.
 
 ## Contributors
 - David, Joana
