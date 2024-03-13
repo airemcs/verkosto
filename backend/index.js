@@ -1,7 +1,7 @@
 import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
-import { Tag, Organization, Position, User, Post, Comment } from './models/Models.js';
+import { Tag, Organization, Position, User, Post, Comment, Credential } from './models/Models.js';
 import cors from "cors";
 
 const app = express();
@@ -474,6 +474,44 @@ app.get('/positions/:id', async (req, res) => {
     const { id } = req.params;
     const position = await Position.findById(id);
     return res.status(200).json(position);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// CRUD Operations: Credential
+app.post('/credentials', async (req, res) => {
+  try {
+
+    if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.userID) {
+      return res.status(400).send({ message: "There are missing required fields." });
+    }
+
+    const newCredential = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      userID: req.body.userID
+    };
+
+    const credential = await Credential.create(newCredential);
+    return res.status(201).send(credential);
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+app.get('/credentials', async (req, res) => {
+  try {
+    const credentials = await Credential.find({});
+    return res.status(200).json({
+      count: credentials.length,
+      data: credentials
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });

@@ -55,9 +55,18 @@ const positionSchema = mongoose.Schema({
   description: String,
 });
 
+const credentialSchema = mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  userID: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+});
+
 export const User = mongoose.model('User', userSchema);
 export const Post = mongoose.model('Post', postSchema);
 export const Tag = mongoose.model('Tag', tagSchema);
 export const Comment = mongoose.model('Comment', commentSchema);
 export const Organization = mongoose.model('Organization', organizationSchema);
 export const Position = mongoose.model('Position', positionSchema);
+export const Credential = mongoose.model('Credential', credentialSchema);
