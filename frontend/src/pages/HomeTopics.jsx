@@ -36,17 +36,6 @@ export default function HomeTopics() {
       { post.tags[0] == id || post.tags[1] == id || post.tags[2] == id ? (
         <MiniPost id={post._id} />
       ) : null }
-      
-      {/* CONFIRMED: There are no missing values. */}
-      {/* {console.log(post._id, post.userID)} */}
-      {/* {console.log(post.tags[0])} */}
-      {/* {console.log(post.tags[1])} */}
-      {/* {console.log(post.tags[2])} */}
-      {/* {console.log(post.title, calculateDays(post.datePosted), post.tags[0], post.tags[1], post.tags[2], post.upvotes, post.downvotes, post.commentIDs.length)} */}
-      {/* {console.log(post.tags[0] ? post.tags[0] : null)} */}
-      {/* {console.log(post.tags[1] ? post.tags[1] : null)} */}
-      {/* {console.log(post.tags[2] ? post.tags[2] : null)} */}
-      {/* {console.log(post.commentIDs)} */}
 
     </div>
   ))}

@@ -41,6 +41,7 @@ import Maya from './pages/data/profiles/Maya.jsx'
 import Olivia from './pages/data/profiles/Olivia.jsx'
 import ExtendedPostDSCEditComment from './pages/data/ExtendedPostDSCEditComment.jsx'
 import HomeTopics from './pages/HomeTopics.jsx'
+import HomeOrganization from './pages/HomeOrganization.jsx'
 
 export default function App() {
   return (
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="/topics/recruitment" element={<Recruitment />} />
 
         <Route path="/communities" element={<Communities />} />
+        <Route path="/communities/:id" element={<HomeOrganization />} />
 
         <Route path="/communities/msc" element={<MSC />} />
         <Route path="/communities/gdsc" element={<GDSC />} />
