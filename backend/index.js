@@ -518,6 +518,20 @@ app.get('/credentials', async (req, res) => {
   }
 });
 
+app.get('/credentials/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    const credential = await Credential.findOne({ email: email });
+    if (!credential) {
+      return res.status(404).json({ message: 'Credential not found' });
+    }
+    return res.status(200).json(credential);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
 mongoose
   .connect(mongoDBURL)
   .then(() => {
