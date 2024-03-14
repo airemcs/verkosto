@@ -7,10 +7,9 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { globalVariable, setGlobalVariable } = useContext(MyContext);
-  
-  const changeView = () => {
-    const newValue = "65f180fdceecc2241d6bad00";
-    setGlobalVariable(newValue);
+
+  function changeView(userID) {
+    setGlobalVariable(userID);
   };
 
   const validateCredentials = async (event) => {
@@ -22,7 +21,7 @@ export default function Login() {
         alert('You have entered an incorrect password.');
         return;
       }
-      changeView();
+      changeView(credential.userID);
     } catch (error) {
       console.log(error);
     }
