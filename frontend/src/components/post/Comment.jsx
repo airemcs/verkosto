@@ -83,7 +83,7 @@ export default function Comment(props) {
           <Link to={`/users/${user._id}`}>{user.firstName + ` ` + user.lastName}</Link>
         </p>
         <p className="text-sm text-gray-600">
-          <time>{calculateDays(comment.dateCommented)} {calculateDays(comment.dateCommented) > 1 ? "days ago" : "day ago"}</time>
+          <time>{calculateDays(comment.dateCommented) > 1 ? calculateDays(comment.dateCommented) + " days ago" : (calculateDays(comment.dateCommented) == 0 ? "Today" : calculateDays(comment.dateCommented) + " day ago")}</time>
         </p>
       </div>
 
