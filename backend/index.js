@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const { PORT, mongoDBURL } = require('./config.js');
 const commentRoutes = require('./routes/comment');
 const communityRoutes = require('./routes/community');
-const credentialRoutes = require('./routes/credential');
 const positionRoutes = require('./routes/position');
 const postRoutes = require('./routes/post');
 const tagRoutes = require('./routes/tag');
@@ -15,6 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
+})
 
 // routes
 app.use('/users', userRoutes);
@@ -23,7 +26,6 @@ app.use('/comments', commentRoutes);
 app.use('/topics', tagRoutes);
 app.use('/communities', communityRoutes);
 app.use('/positions', positionRoutes);
-app.use('/credentials', credentialRoutes);
 
 mongoose
   .connect(mongoDBURL)

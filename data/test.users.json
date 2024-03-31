@@ -4,6 +4,8 @@
   },
   "firstName": "Diego",
   "lastName": "Manalang",
+  "email": "diego_manalang@dlsu.edu.ph",
+  "password": "diegomanalang",
   "bio": "I am passionate about technology and entrepreneurship. Building innovative solutions is my forte.",
   "country": "Philippines",
   "city": "Manila",
@@ -36,6 +38,8 @@
   },
   "firstName": "Sofia",
   "lastName": "Magbanua",
+  "email": "sofia_magbanua@dlsu.edu.ph",
+  "password": "sofiamagbanua",
   "bio": "Traveling is my passion, and photography allows me to capture unforgettable moments along the way.",
   "country": "Philippines",
   "city": "Quezon City",
@@ -65,6 +69,8 @@
   },
   "firstName": "Lorenzo",
   "lastName": "Salcedo",
+  "email": "lorenzo_salcedo@dlsu.edu.ph",
+  "password": "lorenzosalcedo",
   "bio": "I am a software engineer deeply committed to open-source projects. Coding is not just my job; it's my creative outlet.",
   "country": "Philippines",
   "city": "Cebu City",
@@ -97,6 +103,8 @@
   },
   "firstName": "Amara",
   "lastName": "Montemayor",
+  "email": "amara_montemayor@dlsu.edu.ph",
+  "password": "amaramontemayor",
   "bio": "Fashion designing allows me to express my love for vibrant colors and unique styles. Every creation tells a story.",
   "country": "Philippines",
   "city": "Davao City",
@@ -126,6 +134,8 @@
   },
   "firstName": "Enrique",
   "lastName": "Gatdula",
+  "email": "enrique_gatdula@dlsu.edu.ph",
+  "password": "enriquegatdula",
   "bio": "Cooking is my passion, and I aspire to become a renowned chef. Through my food blog, I share my culinary journey with the world.",
   "country": "Philippines",
   "city": "Makati City",
@@ -158,6 +168,8 @@
   },
   "firstName": "Zara",
   "lastName": "Legaspi",
+  "email": "zara_legaspi@dlsu.edu.ph",
+  "password": "zaralegaspi",
   "bio": "Yoga is not just a form of exercise for me; it's a way of life. I believe in the power of mindfulness and inner peace.",
   "country": "Philippines",
   "city": "Pasig City",
@@ -179,6 +191,8 @@
   },
   "firstName": "Rafael",
   "lastName": "Valdez",
+  "email": "rafael_valdez@dlsu.edu.ph",
+  "password": "rafaelvaldez",
   "bio": "Books have always been my faithful companions. As a book club organizer, I bring together fellow bibliophiles to share our love for literature.",
   "country": "Philippines",
   "city": "Taguig City",
@@ -200,6 +214,8 @@
   },
   "firstName": "Elena",
   "lastName": "Lacson",
+  "email": "elena_lacson@dlsu.edu.ph",
+  "password": "elenalacson",
   "bio": "Environmental conservation is my calling. I am dedicated to protecting our planet and raising awareness about sustainability.",
   "country": "Philippines",
   "city": "Mandaluyong City",
@@ -221,6 +237,8 @@
   },
   "firstName": "Gabriel",
   "lastName": "Cabrera",
+  "email": "gabriel_cabrera@dlsu.edu.ph",
+  "password": "gabriel_cabrera",
   "bio": "As a software developer, I am fascinated by the endless possibilities of AI. My goal is to contribute to groundbreaking advancements in the field.",
   "country": "Philippines",
   "city": "Caloocan City",
@@ -242,6 +260,8 @@
   },
   "firstName": "Cassandra",
   "lastName": "Mendoza",
+  "email": "cassandra_mendoza@dlsu.edu.ph",
+  "password": "cassandramendoza",
   "bio": "Art has always been my passion, and as a gallery owner, I am committed to showcasing talented artists and fostering creativity in our community.",
   "country": "Philippines",
   "city": "Antipolo City",
@@ -259,39 +279,12 @@
 },
 {
   "_id": {
-    "$oid": "65f180fdceecc2241d6bad00"
-  },
-  "firstName": "Airelle",
-  "lastName": "Maagma",
-  "bio": "IT Engineering Intern @ ING Hubs PH",
-  "country": "Philippines",
-  "city": "Las Pinas",
-  "facebook": "airelle.maagma",
-  "linkedin": "airellemaagma",
-  "postIDs": [
-    {
-      "$oid": "65f195c31487af088221d1f8"
-    }
-  ],
-  "commentIDs": [
-    {
-      "$oid": "65f1a0e41487af088221d875"
-    }
-  ],
-  "organizationIDs": {
-    "$oid": "65edaf039960bb0dc99083a4"
-  },
-  "positionID": {
-    "$oid": "65edb5de0564bfdf703277e3"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "65f18969ceecc2241d6bae8f"
   },
   "firstName": "Airelle",
   "lastName": "Maagma",
+  "email": "airelle_maagma@dlsu.edu.ph",
+  "password": "ilovecs",
   "bio": "IT Engineering Intern @ ING Hubs PH",
   "country": "Philippines",
   "city": "Las Pinas",

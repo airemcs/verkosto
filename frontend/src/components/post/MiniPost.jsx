@@ -21,16 +21,17 @@ export default function MiniPost(props) {
     const fetchData = async () => {
       try {
         const postData = await axios.get(`http://localhost:5555/posts/${props.id}`);
-        setPost(postData.data);
 
-        const [userData, tag1Data, tag2Data, tag3Data] = await Promise.all([
-          axios.get(`http://localhost:5555/users/${postData.data.userID}`),
+        setPost(postData.data);
+        const userData = await axios.get(`http://localhost:5555/users/${postData.data.userID}`);
+        setUser(userData.data);
+
+        const [ tag1Data, tag2Data, tag3Data ] = await Promise.all([
           postData.data.tags[0] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[0]}`) : Promise.resolve(null),
           postData.data.tags[1] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[1]}`) : Promise.resolve(null),
           postData.data.tags[2] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[2]}`) : Promise.resolve(null)
         ]);
-
-        setUser(userData.data);
+        
         setTag1(tag1Data ? tag1Data.data : []);
         setTag2(tag2Data ? tag2Data.data : []);
         setTag3(tag3Data ? tag3Data.data : []);
@@ -41,7 +42,7 @@ export default function MiniPost(props) {
       }
     };
     fetchData();
-  }, []);
+  }, [props.id]);
 
   function calculateDays(datePosted) {
     let current = new Date();
@@ -51,7 +52,7 @@ export default function MiniPost(props) {
 
   return (
   <>
-  {dataLoaded && 
+  {dataLoaded && user &&
   <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
     {/* Header and Date */}

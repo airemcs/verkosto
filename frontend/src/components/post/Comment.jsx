@@ -10,6 +10,7 @@ export default function Comment(props) {
   const [comment, setComment] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [imagePath, setImagePath] = useState(`../src/assets/default.jpg`);
   // const [editedContent, setEditedContent] = useState(''); 
 
   const { globalVariable } = useContext(MyContext);
@@ -21,6 +22,9 @@ export default function Comment(props) {
         const userData = await axios.get(`http://localhost:5555/users/${commentData.data.userID}`);
         setComment(commentData.data);
         setUser(userData.data);
+        loadImage(`../src/assets/${userData.data._id}.jpg`)
+          .then((resolvedPath) => setImagePath(resolvedPath))
+          .catch((errorPath) => setImagePath(errorPath));
         setDataLoaded(true);
       } catch (error) {
         console.log(error);
@@ -43,13 +47,11 @@ export default function Comment(props) {
     outerClassName = "p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg"
   }
 
-  const [imagePath, setImagePath] = useState(`../src/assets/${user._id}.jpg`);
-
   useEffect(() => {
     loadImage(`../src/assets/${user._id}.jpg`)
       .then((resolvedPath) => setImagePath(resolvedPath))
       .catch((errorPath) => setImagePath(errorPath));
-  }, [user._id]);
+  }, []);
 
   function loadImage(path) {
     return new Promise((resolve, reject) => {
@@ -71,7 +73,7 @@ export default function Comment(props) {
 
   return (
   <>
-  { dataLoaded &&
+  { dataLoaded && user && 
 
   <article className={outerClassName}>
 

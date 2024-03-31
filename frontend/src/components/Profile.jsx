@@ -86,31 +86,39 @@ export default function Profile(props) {
         : null }
       </div>
 
-      <p className="text-gray-400 my-2">{props.bio}</p>
+      { props.bio && <p className="text-gray-400 my-2">{props.bio}</p> }
 
       <div className="flex flex-wrap sm:gap-4">
-        <Link className="flex items-center">
-          <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-          <path fillRule="evenodd" d="M5 9a7 7 0 1 1 8 7v5a1 1 0 1 1-2 0v-5a7 7 0 0 1-6-7Zm6-1c.2-.3.6-.5 1-.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.4.2-.8.4-1Z" clipRule="evenodd"/>
-          </svg>
-          <span>{props.location}</span>
-        </Link>
+        { props.location !== "null, null" && (
+          <Link className="flex items-center">
+            <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path fillRule="evenodd" d="M5 9a7 7 0 1 1 8 7v5a1 1 0 1 1-2 0v-5a7 7 0 0 1-6-7Zm6-1c.2-.3.6-.5 1-.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.4.2-.8.4-1Z" clipRule="evenodd"/>
+            </svg>
+            <span>{props.location}</span>
+          </Link>
+        )}
 
-        <Link className="flex items-center">
-          <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-          <path fillRule="evenodd" d="M13.1 6H15V3h-1.9A4.1 4.1 0 0 0 9 7.1V9H7v3h2v10h3V12h2l.6-3H12V6.6a.6.6 0 0 1 .6-.6h.5Z" clipRule="evenodd"/>
-          </svg>
-          <span >{props.facebook}</span>
-        </Link>
+      
+        { props.facebook && (
+          <Link className="flex items-center">
+            <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path fillRule="evenodd" d="M13.1 6H15V3h-1.9A4.1 4.1 0 0 0 9 7.1V9H7v3h2v10h3V12h2l.6-3H12V6.6a.6.6 0 0 1 .6-.6h.5Z" clipRule="evenodd"/>
+            </svg>
+            <span >{props.facebook}</span>
+          </Link>
+        )}
 
-        <Link className="flex items-center">
-          <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-          <path fillRule="evenodd" d="M12.5 8.8v1.7a3.7 3.7 0 0 1 3.3-1.7c3.5 0 4.2 2.2 4.2 5v5.7h-3.2v-5c0-1.3-.2-2.8-2.1-2.8-1.9 0-2.2 1.3-2.2 2.6v5.2H9.3V8.8h3.2ZM7.2 6.1a1.6 1.6 0 0 1-2 1.6 1.6 1.6 0 0 1-1-2.2A1.6 1.6 0 0 1 6.6 5c.3.3.5.7.5 1.1Z" clipRule="evenodd"/>
-          <path d="M7.2 8.8H4v10.7h3.2V8.8Z"/>
-          </svg>  
-          <span >{props.linkedin}</span>
-        </Link>
-      </div>
+
+        { props.linkedin && (
+          <Link className="flex items-center">
+            <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path fillRule="evenodd" d="M12.5 8.8v1.7a3.7 3.7 0 0 1 3.3-1.7c3.5 0 4.2 2.2 4.2 5v5.7h-3.2v-5c0-1.3-.2-2.8-2.1-2.8-1.9 0-2.2 1.3-2.2 2.6v5.2H9.3V8.8h3.2ZM7.2 6.1a1.6 1.6 0 0 1-2 1.6 1.6 1.6 0 0 1-1-2.2A1.6 1.6 0 0 1 6.6 5c.3.3.5.7.5 1.1Z" clipRule="evenodd"/>
+            <path d="M7.2 8.8H4v10.7h3.2V8.8Z"/>
+            </svg>  
+            <span >{props.linkedin}</span>
+          </Link>
+        )}
+        </div>
 
       { organization.title != undefined ? (
       <div className="flex my-2">

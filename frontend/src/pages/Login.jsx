@@ -14,14 +14,14 @@ export default function Login() {
 
   const validateCredentials = async (event) => {
     try {
-      const response = await fetch(`http://localhost:5555/credentials/${email}`);
-      const credential = await response.json();
+      const response = await fetch(`http://localhost:5555/users/email/${email}`);
+      const user = await response.json();
 
-      if (credential.password !== password) {
+      if (user.password !== password) {
         alert('You have entered an incorrect password.');
         return;
       }
-      changeView(credential.userID);
+      changeView(user._id);
     } catch (error) {
       console.log(error);
     }

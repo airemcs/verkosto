@@ -11,7 +11,9 @@ const createUser = async (req, res) => {
     const newUser = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      bio: req.body.bio,
+      email: req.body.email,
+      password: req.body.password,
+      bio: req.body.bio ,
       country: req.body.country,
       city: req.body.city,
       facebook: req.body.facebook,
@@ -44,7 +46,21 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: 'Credential not found' });
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -99,4 +115,4 @@ const deleteUser = async (req, res) => {
 }
 
 
-module.exports = { createUser, getAllUsers, getUser, updateUser, deleteUser };
+module.exports = { createUser, getAllUsers, getUserById, getUserByEmail, updateUser, deleteUser };

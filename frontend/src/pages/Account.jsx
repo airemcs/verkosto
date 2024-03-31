@@ -41,8 +41,8 @@ export default function Account() {
               org={user.organizationIDs} 
               banner="water"
               location={user.city + `, ` + user.country} 
-              facebook={`/` + user.facebook} 
-              linkedin={`/` + user.linkedin} />
+              facebook={user.facebook && `/` + user.facebook} 
+              linkedin={user.linkedin && `/` + user.linkedin} />
   )}
 
   {dataLoaded && user.postIDs.map((post, index) => (

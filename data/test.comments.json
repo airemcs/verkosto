@@ -102,20 +102,5 @@
     "$oid": "65f17613ceecc2241d6ba3bc"
   },
   "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65f1a0e41487af088221d875"
-  },
-  "dateCommented": {
-    "$date": "2024-03-13T08:20:00.000Z"
-  },
-  "content": "Nice!",
-  "userID": {
-    "$oid": "65f180fdceecc2241d6bad00"
-  },
-  "postID": {
-    "$oid": "65f17613ceecc2241d6ba3bc"
-  },
-  "__v": 0
-}]
+}
+]
