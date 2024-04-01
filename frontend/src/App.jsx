@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { AuthContextProvider } from './context/AuthContext';
 import { MyProvider } from './MyContext.jsx';
 
 import Home from './pages/Home.jsx'
@@ -19,11 +20,15 @@ import Topics from './pages/Topics.jsx'
 import Account from './pages/Account.jsx'
 import HomeTopics from './pages/HomeTopics.jsx'
 import HomeOrganization from './pages/HomeOrganization.jsx'
+import { useAuthContext } from './hooks/useAuthContext.jsx';
 
 export default function App() {
+
+  const { user } = useAuthContext();
+
   return (
     <>
-      <MyProvider>
+
       <Routes>
 
         <Route path="/" element={<Home />} />
@@ -35,8 +40,8 @@ export default function App() {
         <Route path="/communities" element={<Communities />} />
         <Route path="/communities/:id" element={<HomeOrganization />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+        <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
         <Route path="/edit" element={<EditProfile />} />
         <Route path="/create" element={<Create />} />
 
@@ -54,7 +59,7 @@ export default function App() {
         <Route path="/users/:id" element={<Account />} />
 
       </Routes>
-      </MyProvider>
+      
     </>
   )
 }
