@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 const createToken = (_id) => {
-  return jwt.sign({_id}, SIGNATURE, { expiresIn: '15d' })
+  return jwt.sign({_id}, SIGNATURE, { expiresIn: '21d' })
 }
 
 const signupUser = async (req, res) => {
@@ -16,8 +16,14 @@ const signupUser = async (req, res) => {
 
     const token = createToken(user._id);
     const id = user._id;
+    const bio = user.bio;
+    const country = user.country;
+    const city = user.city;
+    const facebook = user.facebook;
+    const linkedin = user.linkedin;
+    const image = user.image;
 
-    res.status(200).json({ email, token, id });
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image});
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -31,23 +37,42 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
     const id = user._id;
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+    const bio = user.bio;
+    const country = user.country;
+    const city = user.city;
+    const facebook = user.facebook;
+    const linkedin = user.linkedin;
+    const image = user.image;
 
-    res.status(200).json({ email, token, id });
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 }
 
 const editUser = async (req, res) => {
-  const { email, firstName, lastName, bio, country, city, facebook, linkedin, password } = req.body;
+
+  const { email, firstName, lastName, bio, country, city, facebook, linkedin, image} = req.body;
 
   try {
-    const user = await User.edit(email, firstName, lastName, bio, country, city, facebook, linkedin, password);
+    const user = await User.edit(email, firstName, lastName, bio, country, city, facebook, linkedin, image);
 
     const token = createToken(user._id);
     const id = user._id;
+    const editfirstName = user.firstName;
+    const editlastName = user.lastName;
+    const editbio = user.bio;
+    const editcountry = user.country;
+    const editcity = user.city;
+    const editfacebook = user.facebook;
+    const editlinkedin = user.linkedin;
+    const editimage = user.image;
 
-    res.status(200).json({ email, token, id });
+
+    console.log("NICE EIDTED")
+    res.status(200).json({ email, token, id, firstName: editfirstName, lastName: editlastName, bio: editbio, country: editcountry, city: editcity, facebook: editfacebook, linkedin: editlinkedin, image: editimage });
   } catch (error) {
     res.status(400).json({error: error.message });
   }

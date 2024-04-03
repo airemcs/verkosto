@@ -9,6 +9,7 @@ export default function PostHeader(props) {
   const [position, setPosition] = useState([]);
 
   useEffect(() => {
+    console.log(props.image);
     if (props.positionID !== null) {
       axios
         .get(`http://localhost:5555/positions/${props.positionID}`)
@@ -21,33 +22,11 @@ export default function PostHeader(props) {
     }
   }, [props.positionID]);
 
-  const [imagePath, setImagePath] = useState(`../src/assets/${props.userID}.jpg`);
-  const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
-
-  useEffect(() => {
-    loadImage(`../src/assets/${props.userID}.jpg`)
-      .then((resolvedPath) => setImagePath(resolvedPath))
-      .catch((errorPath) => setImagePath(errorPath));
-  }, [props.userID]);
-
-  function loadImage(path) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve(path);
-      };
-      img.onerror = () => {
-        reject("../src/assets/default.jpg");
-      };
-      img.src = path;
-    });
-  }
-  
   return (
   <div className="flex">
 
   <div>
-    <Link to={`/users/${props.userID}`}><img className="object-contain w-10 h-10 rounded-full shadow" src={imagePath} /></Link>
+    <Link to={`/users/${props.userID}`}><img className="object-contain w-10 h-10 rounded-full shadow" src={props.image.url} /></Link>
   </div>
 
   <div className="flex items-center">

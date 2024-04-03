@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { useLogin } from "../hooks/useLogin"
-import { MyContext } from '../MyContext.jsx';
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -11,7 +10,6 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await console.log(email, password);
     await login(email, password);
   }
 
@@ -67,6 +65,7 @@ export default function Login() {
         {/* Login */}
         <div className="w-full mt-5 mb-5">
           <button type="submit" disabled={isLoading} className="block w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Login</button>
+          { error && <div className="pt-4 text-red-600 w-full">*{error}</div>}
         </div>
 
         <p className="text-sm font-light text-gray-500 dark:text-gray-400">

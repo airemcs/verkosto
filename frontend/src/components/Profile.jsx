@@ -33,28 +33,9 @@ export default function Profile(props) {
     fetchData();
   }, []);
 
-  const [imagePath, setImagePath] = useState(`../src/assets/${props.id}.jpg`);
   const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
 
-  useEffect(() => {
-    loadImage(`../src/assets/${props.id}.jpg`)
-      .then((resolvedPath) => setImagePath(resolvedPath))
-      .catch((errorPath) => setImagePath(errorPath));
-  }, [props.id]);
-
-  function loadImage(path) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve(path);
-      };
-      img.onerror = () => {
-        reject("../src/assets/default.jpg");
-      };
-      img.src = path;
-    });
-  }
-
+ 
   return (
   <>
   { dataLoaded &&
@@ -67,7 +48,7 @@ export default function Profile(props) {
   <div className="flex justify-start pb-1 px-5 -mt-14 bg-stone-100">
 
     <span clspanss="block relative h-32 w-32">
-    <img className="mx-auto object-cover rounded-full h-56 w-56 bg-white p-1" src={imagePath} />
+    <img className="mx-auto object-cover rounded-full h-56 w-56 bg-white p-1" src={props.image} />
     </span>
 
     <div className="mt-16 px-8 mb-8">
@@ -81,7 +62,7 @@ export default function Profile(props) {
         ) : null }
 
         { user && user.id  === props.id ?
-        <Link to={`/edit/${props.id}`} id={props.id}>
+        <Link to={`/edit`} id={props.id}>
           <svg className="mt-2 w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>
           </svg>
@@ -92,12 +73,12 @@ export default function Profile(props) {
       { props.bio && <p className="text-gray-400 my-2">{props.bio}</p> }
 
       <div className="flex flex-wrap sm:gap-4">
-        { props.location !== "null, null" && (
+        { props.city !== null && props.country !== null && (
           <Link className="flex items-center">
             <svg className="w-6 h-6 text-gray-800 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
             <path fillRule="evenodd" d="M5 9a7 7 0 1 1 8 7v5a1 1 0 1 1-2 0v-5a7 7 0 0 1-6-7Zm6-1c.2-.3.6-.5 1-.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.4.2-.8.4-1Z" clipRule="evenodd"/>
             </svg>
-            <span>{props.location}</span>
+            <span>{props.city + ', ' + props.country}</span>
           </Link>
         )}
 

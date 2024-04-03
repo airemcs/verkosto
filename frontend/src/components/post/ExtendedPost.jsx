@@ -2,24 +2,24 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios from 'axios';
-import { MyContext } from '../../MyContext.jsx';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 import Comment from './Comment.jsx'
 import CommentNest from './CommentNest.jsx'
 import PostHeader from './PostHeader.jsx'
 import PostContent from './PostContent.jsx'
-
 // Parameters: Name, Position
 // Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
 export default function ExtendedPost(props) {
 
+  const { loggedUser } = useAuthContext();
+  const [loggedUserId, setLoggedUserId] = useState(loggedUser && loggedUser.id);
   const { id } = useParams();
-  const { globalVariable } = useContext(MyContext);
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
+  const [image, setImage] = useState({ url: "../src/assets/default.jpg" });
   const [dataLoaded, setDataLoaded] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,6 +28,10 @@ export default function ExtendedPost(props) {
         setPost(postData.data);
         setUser(userData.data);
         
+        if (userData.data.image.url !== "../src/assets/default.jpg") {
+          setImage({ url: userData.data.image.url });
+        } 
+          
         if (postData.data.commentIDs && postData.data.commentIDs.length > 0) {
           setComments(postData.data.commentIDs);
         } else {
@@ -55,8 +59,8 @@ export default function ExtendedPost(props) {
   <div className=" max-w-7xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     
     <div className="flex items-center">
-      <PostHeader userID={user._id} positionID={user.positionID} firstName={user.firstName} lastName={user.lastName} />
-      {globalVariable === user._id ?
+      <PostHeader userID={user._id} positionID={user.positionID} firstName={user.firstName} lastName={user.lastName} image={image} />
+      {loggedUserId === user._id ?
       <Link to={`/posts/${id}/edit`}>
         <svg className="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>

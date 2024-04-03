@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
-import { MyContext } from '../../MyContext.jsx'
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 // Parameters: ID
 export default function Comment(props) {
@@ -10,10 +10,12 @@ export default function Comment(props) {
   const [comment, setComment] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [imagePath, setImagePath] = useState(`../src/assets/default.jpg`);
+  const [image, setImage] = useState(`../src/assets/default.jpg`);
   // const [editedContent, setEditedContent] = useState(''); 
 
-  const { globalVariable } = useContext(MyContext);
+  const { loggedUser } = useAuthContext();
+
+  const [loggedUserId, setLoggedUserId] = useState(loggedUser && loggedUser.id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +24,9 @@ export default function Comment(props) {
         const userData = await axios.get(`http://localhost:5555/users/${commentData.data.userID}`);
         setComment(commentData.data);
         setUser(userData.data);
-        loadImage(`../src/assets/${userData.data._id}.jpg`)
-          .then((resolvedPath) => setImagePath(resolvedPath))
-          .catch((errorPath) => setImagePath(errorPath));
+        if (userData.data.image.url !== "../src/assets/default.jpg") {
+          setImage(userData.data.image.url);
+        } 
         setDataLoaded(true);
       } catch (error) {
         console.log(error);
@@ -47,25 +49,6 @@ export default function Comment(props) {
     outerClassName = "p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg"
   }
 
-  useEffect(() => {
-    loadImage(`../src/assets/${user._id}.jpg`)
-      .then((resolvedPath) => setImagePath(resolvedPath))
-      .catch((errorPath) => setImagePath(errorPath));
-  }, []);
-
-  function loadImage(path) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve(path);
-      };
-      img.onerror = () => {
-        reject("../src/assets/default.jpg");
-      };
-      img.src = path;
-    });
-  }
-
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     // setEditedContent(comment.content);
@@ -81,7 +64,7 @@ export default function Comment(props) {
 
       <div className="flex items-center">
         <p className="inline-flex items-center mr-2 text-sm text-gray-900 font-semibold">
-          <Link to={`/users/${user._id}`}><img  className="mr-2 w-6 h-6 rounded-full" src={imagePath} /></Link>
+          <Link to={`/users/${user._id}`}><img  className="mr-2 w-6 h-6 rounded-full" src={image} /></Link>
           <Link to={`/users/${user._id}`}>{user.firstName + ` ` + user.lastName}</Link>
         </p>
         <p className="text-sm text-gray-600">
@@ -109,7 +92,7 @@ export default function Comment(props) {
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
               </svg>
             </button>
-            {user._id == globalVariable &&
+            {user._id === loggedUserId &&
               <Link onClick={handleEditToggle} >
                 <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"/>

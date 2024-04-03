@@ -42,7 +42,7 @@ export default function App() {
 
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
-        <Route path="/edit" element={<EditProfile />} />
+        <Route path="/edit" element={user ? <EditProfile /> : <Navigate to="/" />} />
         <Route path="/create" element={<Create />} />
 
         {/* <Route path="/user/airelle" element={<Airelle />} /> */}
@@ -50,7 +50,7 @@ export default function App() {
         {/*  */}
         <Route path="/posts/:id" element={<ExtendedPostPage />} />
         <Route path="/posts/:id/edit" element={<ExtendedPostPageEdit />} />
-        <Route path="/edit/:id" element={<EditProfile />} />
+        {/* <Route path="/edit/:id" element={<EditProfile />} /> */}
 
         {/* <Route path="edit/006" element={<ExtendedPostDSCEdit />} /> */}
         {/* <Route path="comment/006" element={<ExtendedPostDSCEditComment />} /> */}

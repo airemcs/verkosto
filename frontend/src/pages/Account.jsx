@@ -40,9 +40,12 @@ export default function Account() {
               bio={user.bio} 
               org={user.organizationIDs} 
               banner="water"
-              location={user.city + `, ` + user.country} 
+              city={user.city}
+              country={user.country} 
               facebook={user.facebook && `/` + user.facebook} 
-              linkedin={user.linkedin && `/` + user.linkedin} />
+              linkedin={user.linkedin && `/` + user.linkedin} 
+              image={user.image.url}
+              />
   )}
 
   {dataLoaded && user.postIDs.map((post, index) => (
