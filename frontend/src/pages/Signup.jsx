@@ -5,7 +5,7 @@ import { useSignup } from "../hooks/useSignup"
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const {signup, error, isLoading} = useSignup();
@@ -13,7 +13,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(email, password, firstName, lastName);
+    await signup(email, password, confirmPassword, firstName, lastName);
   }
 
 
@@ -70,7 +70,10 @@ export default function Signup() {
 
         {/* Confirm Password */}
         <div className="relative z-0 w-full mb-5 group">
-            <input type="password" name="confirmation" id="confirmation" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
+            <input type="password" name="confirmation" id="confirmation"
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              value={confirmPassword}
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " required />
             <label htmlFor="confirmation" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
         </div>
 

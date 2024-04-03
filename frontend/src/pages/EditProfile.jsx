@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useEditProfile } from '../hooks/useEditProfile';
+import axios from 'axios'
 
 import Sidebar from '../components/Sidebar.jsx';
 import Searchbar from '../components/Searchbar.jsx';
@@ -18,10 +19,14 @@ export default function EditProfile() {
   const [city, setCity] = useState(user && user.city);
   const [facebook, setFacebook] = useState(user && user.facebook);
   const [linkedin, setLinkedin] = useState(user && user.linkedin);
+  const [organizationId, setOrganizationId] = useState(user && user.organizationId);
 
   const {edit, error, isLoading} = useEditProfile()
 
   const [image, setImage] = useState(user && user.image && user.image.url);
+
+  const [communities, setCommunities] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //handle and convert it in base 64
   const handleImage = (e) =>{
@@ -38,20 +43,34 @@ export default function EditProfile() {
 
   }
 
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get('http://localhost:5555/communities')
+      .then((res) => {
+        setCommunities(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+
+  }, []);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await console.log(user.email, firstName, lastName, bio, country, city, facebook, linkedin, image);
-    await edit(user.email, firstName, lastName, bio, country, city, facebook, linkedin, image);
+    await edit(user.email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId);
 
     navigate(-1);
-
-
   }
 
   return (
   <>
-  { user && 
+  { user && !isLoading && 
 
   <div className="sm:ml-64">
 
@@ -154,8 +173,18 @@ export default function EditProfile() {
       </div>
     </div>
 
+    {/* select community */}
+    <div className="w-full mb-5">
+      <label className="block text-lg" htmlFor="bio">Select Community</label>
+      <select onChange={(e) => setOrganizationId(e.target.value)}
+        className="rounded-lg w-full text-xl pt-2 pb-3 pl-4 border border-gray-300 shadow" name="communityId" placeholder="Put Something interesting..." ><option value="nothing">Not part of an org</option>
+          {communities.map((community, index) => 
+            <option key={index} value={community._id} selected={community._id === organizationId}>{community.title}</option>
+          )}</select>
+    </div>
+
     {/* Buttons */}
-    <div className="flex justify-center">
+    <div className="flex justify-center py-32">
       <Link to={`/users/${user.id}`} className="border-2 text-semibold border-green-600 text-green-600 text-2xl bg-white py-2 px-8 rounded-lg shadow mr-10 duration-200 hover:text-white hover:bg-green-600" type="button">Cancel</Link>
       <button to={`/users/${user.id}`} className="border-2 text-semibold border-green-600 text-white text-2xl bg-green-600 py-2 px-4 rounded-lg shadow duration-200 hover:text-green-600 hover:bg-white" type="submit">Save Profile</button>
     </div>

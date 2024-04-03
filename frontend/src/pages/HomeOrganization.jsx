@@ -50,7 +50,7 @@ export default function HomeOrganization() {
   {dataLoaded && postsData.map((post, index) => (
     <div key={post._id}>
 
-    { post.organizationID == id ? (
+    { post.organizationID === id ? (
       <MiniPost id={post._id} />
     ) : null }
 

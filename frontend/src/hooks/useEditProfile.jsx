@@ -6,14 +6,14 @@ export const useEditProfile = () => {
   const [isLoading, setIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
-  const edit = async (email, firstName, lastName, bio, country, city, facebook, linkedin, image) => {
+  const edit = async (email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId) => {
     setIsLoading(true)
     setError(null)
 
     const response = await fetch('http://localhost:5555/users/edit', {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, firstName, lastName, bio, country, city, facebook, linkedin, image })
+      body: JSON.stringify({ email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId })
     })
     const json = await response.json()
     console.log("edited");

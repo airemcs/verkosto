@@ -51,6 +51,11 @@ export default function ExtendedPost(props) {
     return (Math.floor((current - posted) / (1000 * 3600 * 24)) + 1);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  }
+  
+
   return (
   <>
   {dataLoaded && 

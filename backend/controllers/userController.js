@@ -9,10 +9,10 @@ const createToken = (_id) => {
 }
 
 const signupUser = async (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   try {
-    const user = await User.signup(email, password, firstName, lastName);
+    const user = await User.signup(email, password, confirmPassword, firstName, lastName);
 
     const token = createToken(user._id);
     const id = user._id;
@@ -22,8 +22,9 @@ const signupUser = async (req, res) => {
     const facebook = user.facebook;
     const linkedin = user.linkedin;
     const image = user.image;
+    const organizationId = user.organizationIDs
 
-    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image});
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId});
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -45,8 +46,9 @@ const loginUser = async (req, res) => {
     const facebook = user.facebook;
     const linkedin = user.linkedin;
     const image = user.image;
+    const organizationId = user.organizationIDs
 
-    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image });
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -54,10 +56,11 @@ const loginUser = async (req, res) => {
 
 const editUser = async (req, res) => {
 
-  const { email, firstName, lastName, bio, country, city, facebook, linkedin, image} = req.body;
+  const { email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId} = req.body;
+  console.log(organizationId);
 
   try {
-    const user = await User.edit(email, firstName, lastName, bio, country, city, facebook, linkedin, image);
+    const user = await User.edit(email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId);
 
     const token = createToken(user._id);
     const id = user._id;
@@ -69,10 +72,10 @@ const editUser = async (req, res) => {
     const editfacebook = user.facebook;
     const editlinkedin = user.linkedin;
     const editimage = user.image;
+    const editorganizationId = user.organizationIDs
 
 
-    console.log("NICE EIDTED")
-    res.status(200).json({ email, token, id, firstName: editfirstName, lastName: editlastName, bio: editbio, country: editcountry, city: editcity, facebook: editfacebook, linkedin: editlinkedin, image: editimage });
+    res.status(200).json({ email, token, id, firstName: editfirstName, lastName: editlastName, bio: editbio, country: editcountry, city: editcity, facebook: editfacebook, linkedin: editlinkedin, image: editimage, organizationId: editorganizationId});
   } catch (error) {
     res.status(400).json({error: error.message });
   }

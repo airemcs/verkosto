@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt');
 const cloudinary = require('../utils/cloudinary');
+const validator = require('validator');
 
 // TO BE MERGED 
 
@@ -55,14 +56,30 @@ const userSchema = mongoose.Schema({
   },
   postIDs: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   commentIDs: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  organizationIDs: { type: Schema.Types.ObjectId, ref: 'Organization' },
+  organizationIDs: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Community', 
+  },
   positionID: { type: Schema.Types.ObjectId, ref: 'Position' },
 });
 
-userSchema.statics.signup = async function(email, password, firstName, lastName) {
+userSchema.statics.signup = async function(email, password, confirmPassword, firstName, lastName) {
 
-  if (!email || !password || !firstName || !lastName) {
+  if (!email || !password  || !confirmPassword || !firstName || !lastName) {
     throw Error('All fields must be filled');
+  }
+
+  if (!validator.isEmail(email)) {
+    throw Error('Email not valid');
+  }
+
+  if (!validator.isAlpha(firstName) || !validator.isAlpha(lastName)) {
+  throw Error(
+    "Names can only contain letter, please re-enter the name");
+  }
+
+  if (confirmPassword !== password) {
+    throw Error("Put the same password twice")
   }
 
   const exists = await this.findOne({ email });
@@ -101,10 +118,9 @@ userSchema.statics.login = async function(email, password) {
   return user
 }
 
-userSchema.statics.edit = async function(email, firstName, lastName, bio, country, city, facebook, linkedin, image) {
+userSchema.statics.edit = async function(email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId) {
 
   const user = await this.findOne({ email });
-
   if (user) {
     user.firstName = (firstName !== "undefined" && firstName !== "null") ? firstName : user.firstName;
     user.lastName = (lastName !== "undefined" && lastName !== "null") ? lastName : user.lastName;
@@ -113,6 +129,13 @@ userSchema.statics.edit = async function(email, firstName, lastName, bio, countr
     user.city = (city !== "undefined" && city !== "null") ? city : user.city;
     user.facebook = (facebook !== "undefined" && facebook !== "null") ? facebook : user.facebook;
     user.linkedin = (linkedin !== "undefined" && linkedin !== "null") ? linkedin : user.linkedin;
+
+    if (organizationId === "nothing") {
+      user.organizationIDs = null;
+    } else {
+      user.organizationIDs = organizationId;
+
+    }
 
     if (image !== "default" && image !== "null" && image !== "undefined" && image !== "" && image !== user.image.url) {
       const ImgId = user.image.public_id;
@@ -129,7 +152,6 @@ userSchema.statics.edit = async function(email, firstName, lastName, bio, countr
         url: result.secure_url
       }
     }
-    console.log(user);
   }
 
   const updatedUser = await user.save();
