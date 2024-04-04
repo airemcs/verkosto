@@ -51,7 +51,7 @@ const userSchema = mongoose.Schema({
     },
     url: {
       type: String,
-      default: "../src/assets/default.jpg"
+      default: "/assets/default.jpg"
     },
   },
   postIDs: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
