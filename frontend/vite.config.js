@@ -8,7 +8,7 @@ export default defineConfig({
 {
   root: './',
   build: {
-    ourDir: 'dist',
+    outDir: 'dist',
   },
   publicDir: 'src/assets'
 }
