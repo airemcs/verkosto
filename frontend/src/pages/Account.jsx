@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import Profile from '../components/Profile.jsx'
 import Sidebar from '../components/Sidebar.jsx'
@@ -16,7 +17,7 @@ export default function Account() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await axios.get(`http://localhost:5555/users/${id}`);
+        const userData = await axios.get(apiURL + `users/${id}`);
         setUser(userData.data);
         setDataLoaded(true);
       } catch (error) {

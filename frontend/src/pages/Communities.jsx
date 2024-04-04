@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import { Link } from 'react-router-dom'
 import Searchbar from '../components/Searchbar.jsx'
@@ -13,7 +14,7 @@ export default function Communities() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/communities')
+      .get(apiURL + 'communities')
       .then((res) => {
         setCommunities(res.data.data);
         setLoading(false);

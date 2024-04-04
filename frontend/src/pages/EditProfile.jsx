@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useEditProfile } from '../hooks/useEditProfile';
 import axios from 'axios'
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import Sidebar from '../components/Sidebar.jsx';
 import Searchbar from '../components/Searchbar.jsx';
@@ -46,7 +47,7 @@ export default function EditProfile() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/communities')
+      .get(apiURL + 'communities')
       .then((res) => {
         setCommunities(res.data.data);
         setLoading(false);
@@ -177,7 +178,7 @@ export default function EditProfile() {
     <div className="w-full mb-5">
       <label className="block text-lg" htmlFor="bio">Select Community</label>
       <select onChange={(e) => setOrganizationId(e.target.value)}
-        className="rounded-lg w-full text-xl pt-2 pb-3 pl-4 border border-gray-300 shadow" name="communityId" placeholder="Put Something interesting..." ><option value="nothing">Not part of an org</option>
+        className="rounded-lg w-full text-xl pt-2 pb-3 pl-4 border border-gray-300 shadow" name="communityId" placeholder="Put Something interesting..." ><option selected={!organizationId} value="nothing">Not part of an org</option>
           {communities.map((community, index) => 
             <option key={index} value={community._id} selected={community._id === organizationId}>{community.title}</option>
           )}</select>

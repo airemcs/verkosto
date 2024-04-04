@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import Comment from './Comment.jsx'
 import CommentNest from './CommentNest.jsx'
@@ -23,8 +24,8 @@ export default function ExtendedPost(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postData = await axios.get(`http://localhost:5555/posts/${id}`);
-        const userData = await axios.get(`http://localhost:5555/users/${postData.data.userID}`);
+        const postData = await axios.get(apiURL + `posts/${id}`);
+        const userData = await axios.get(apiURL + `users/${postData.data.userID}`);
         setPost(postData.data);
         setUser(userData.data);
         

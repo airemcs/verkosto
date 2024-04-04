@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '../hooks/useAuthContext';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 export default function Profile(props) {
 
@@ -16,12 +17,12 @@ export default function Profile(props) {
       try {
 
         if (props.org !== null && props.org !== undefined) {
-          const organizationData = await axios.get(`http://localhost:5555/communities/${props.org}`);
+          const organizationData = await axios.get(apiURL + `communities/${props.org}`);
           setOrganization(organizationData.data);
         }
 
         if (props.positionID !== null && props.positionID !== undefined) {
-          const positionData = await axios.get(`http://localhost:5555/positions/${props.positionID}`);
+          const positionData = await axios.get(apiURL +  `/positions/${props.positionID}`);
           setPosition(positionData.data);
         }
 

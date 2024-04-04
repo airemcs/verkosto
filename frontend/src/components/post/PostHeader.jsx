@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import { Link } from 'react-router-dom'
 
@@ -9,10 +10,9 @@ export default function PostHeader(props) {
   const [position, setPosition] = useState([]);
 
   useEffect(() => {
-    console.log(props.image);
     if (props.positionID !== null) {
       axios
-        .get(`http://localhost:5555/positions/${props.positionID}`)
+        .get(apiURL + `positions/${props.positionID}`)
         .then((res) => {
           setPosition(res.data);
         })

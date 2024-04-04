@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import { Link } from 'react-router-dom';
 import PostHeader from './PostHeader.jsx'
@@ -20,16 +21,16 @@ export default function MiniPost(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postData = await axios.get(`http://localhost:5555/posts/${props.id}`);
+        const postData = await axios.get(apiURL + `posts/${props.id}`);
 
         setPost(postData.data);
-        const userData = await axios.get(`http://localhost:5555/users/${postData.data.userID}`);
+        const userData = await axios.get(apiURL + `users/${postData.data.userID}`);
         setUser(userData.data);
 
         const [ tag1Data, tag2Data, tag3Data ] = await Promise.all([
-          postData.data.tags[0] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[0]}`) : Promise.resolve(null),
-          postData.data.tags[1] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[1]}`) : Promise.resolve(null),
-          postData.data.tags[2] !== undefined ? axios.get(`http://localhost:5555/topics/${postData.data.tags[2]}`) : Promise.resolve(null)
+          postData.data.tags[0] !== undefined ? axios.get(apiURL + `topics/${postData.data.tags[0]}`) : Promise.resolve(null),
+          postData.data.tags[1] !== undefined ? axios.get(apiURL + `topics/${postData.data.tags[1]}`) : Promise.resolve(null),
+          postData.data.tags[2] !== undefined ? axios.get(apiURL + `topics/${postData.data.tags[2]}`) : Promise.resolve(null)
         ]);
         
         setTag1(tag1Data ? tag1Data.data : []);

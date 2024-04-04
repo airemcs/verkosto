@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
@@ -10,7 +11,7 @@ export const useLogin = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('http://localhost:5555/users/login', {
+    const response = await fetch(apiURL + 'users/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })

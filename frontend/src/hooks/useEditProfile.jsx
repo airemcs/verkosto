@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 export const useEditProfile = () => {
   const [error, setError] = useState(null)
@@ -10,7 +11,7 @@ export const useEditProfile = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('http://localhost:5555/users/edit', {
+    const response = await fetch(apiURL + 'users/edit', {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId })

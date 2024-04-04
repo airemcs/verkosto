@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import MiniPost from '../components/post/MiniPost.jsx'
 import Searchbar from '../components/Searchbar.jsx'
@@ -13,7 +14,7 @@ export default function HomeTopics() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5555/posts/')
+      .get(apiURL + 'posts/')
       .then((res) => {
         const sortedPosts = res.data.data.sort((a, b) => b.upvotes - a.upvotes);
         setPosts(sortedPosts);

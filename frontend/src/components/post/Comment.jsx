@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 // Parameters: ID
 export default function Comment(props) {
@@ -20,8 +21,8 @@ export default function Comment(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const commentData = await axios.get(`http://localhost:5555/comments/${props.commentID}`);
-        const userData = await axios.get(`http://localhost:5555/users/${commentData.data.userID}`);
+        const commentData = await axios.get(apiURL + `comments/${props.commentID}`);
+        const userData = await axios.get(apiURL + `users/${commentData.data.userID}`);
         setComment(commentData.data);
         setUser(userData.data);
         if (userData.data.image.url !== "../src/assets/default.jpg") {
