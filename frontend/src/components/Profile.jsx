@@ -34,7 +34,7 @@ export default function Profile(props) {
     fetchData();
   }, []);
 
-  const bannerPath = `../src/assets/banners/${props.banner}.jpg`;
+  const bannerPath = `/assets/banners/${props.banner}.jpg`;
 
  
   return (

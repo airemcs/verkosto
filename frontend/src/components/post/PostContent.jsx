@@ -31,7 +31,7 @@ export default function PostContent(props) {
     fetchData();
   }, [props.tag1, props.tag2, props.tag3]);
 
-  const imagePath = `../src/assets/${props.userID}.jpg`;
+  const imagePath = `/assets/${props.userID}.jpg`;
   const formattedContent = props.content.replace(/\n\n/g, "\n\n ‎\n\n");
 
   return (

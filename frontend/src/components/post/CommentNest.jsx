@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function CommentNest(props) {
 
   const firstName = (props.name.split(' ')[0]).toLowerCase();
-  const imagePath = `../src/assets/${firstName}.jpg`;
+  const imagePath = `/assets/${firstName}.jpg`;
 
   return (
   <article class="p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg">

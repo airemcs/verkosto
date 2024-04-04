@@ -11,7 +11,7 @@ export default function Comment(props) {
   const [comment, setComment] = useState({});
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [image, setImage] = useState(`../src/assets/default.jpg`);
+  const [image, setImage] = useState(`/assets/default.jpg`);
   // const [editedContent, setEditedContent] = useState(''); 
 
   const { loggedUser } = useAuthContext();
@@ -25,7 +25,7 @@ export default function Comment(props) {
         const userData = await axios.get(apiURL + `users/${commentData.data.userID}`);
         setComment(commentData.data);
         setUser(userData.data);
-        if (userData.data.image.url !== "../src/assets/default.jpg") {
+        if (userData.data.image.url !== "/assets/default.jpg") {
           setImage(userData.data.image.url);
         } 
         setDataLoaded(true);

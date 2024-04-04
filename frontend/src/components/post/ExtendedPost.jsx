@@ -19,7 +19,7 @@ export default function ExtendedPost(props) {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
-  const [image, setImage] = useState({ url: "../src/assets/default.jpg" });
+  const [image, setImage] = useState({ url: "/assets/default.jpg" });
   const [dataLoaded, setDataLoaded] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ export default function ExtendedPost(props) {
         setPost(postData.data);
         setUser(userData.data);
         
-        if (userData.data.image.url !== "../src/assets/default.jpg") {
+        if (userData.data.image.url !== "/assets/default.jpg") {
           setImage({ url: userData.data.image.url });
         } 
           

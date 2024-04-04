@@ -5,7 +5,7 @@ export default function ProfileHeader() {
   <div className="flex">
 
     <div>
-      <Link to="#"><img className="w-10 h-10 rounded-full shadow" src="src/assets/profile.jpg" /></Link>
+      <Link to="#"><img className="w-10 h-10 rounded-full shadow" src="/assets/profile.jpg" /></Link>
     </div>
 
     <div className="flex items-center">
