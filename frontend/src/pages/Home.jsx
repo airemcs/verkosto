@@ -14,7 +14,6 @@ export default function Home() {
   // const { globalVariable } = useContext(MyContext);
 
   useEffect(() => {
-    console.log(apiURL + 'posts/');
     axios
       .get(apiURL + 'posts/')
       .then((res) => {

@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useCreateComment } from '../../hooks/useCreateComment';
+
 const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import Comment from './Comment.jsx'
@@ -13,7 +15,9 @@ import PostContent from './PostContent.jsx'
 // Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
 export default function ExtendedPost(props) {
 
-  const { loggedUser } = useAuthContext();
+  const { user: loggedUser } = useAuthContext();
+  const { createComment, error, isLoading } = useCreateComment();
+
   const [loggedUserId, setLoggedUserId] = useState(loggedUser && loggedUser.id);
   const { id } = useParams();
   const [post, setPost] = useState({});
@@ -21,6 +25,9 @@ export default function ExtendedPost(props) {
   const [comments, setComments] = useState([]);
   const [image, setImage] = useState({ url: "/assets/default.jpg" });
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [commentText, setCommentText] = useState("");
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,6 +61,19 @@ export default function ExtendedPost(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    await console.log(commentText, loggedUserId, id);
+    await createComment(commentText, loggedUserId, id);
+
+    const postData = await axios.get(apiURL + `posts/${id}`);
+    setPost(postData.data);
+    if (postData.data.commentIDs && postData.data.commentIDs.length > 0) {
+      setComments(postData.data.commentIDs);
+    } else {
+      setComments([]);
+    }
+
+    setCommentText("");
   }
   
 
@@ -111,12 +131,15 @@ export default function ExtendedPost(props) {
     <div className="flex justify-between items-center mb-5">
       <h2 className="text-lg lg:text-2xl font-bold text-gray-900">Discussion ({post.commentIDs.length})</h2>
     </div>
-
-    <form>
+    
+   { loggedUser && 
+    <form onSubmit={handleSubmit}>
       <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-gray-200">
         <label htmlFor="comment" className="sr-only">Your Comment</label>
         <textarea className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
         id="comment" rows="2"
+          onChange={(e) => setCommentText(e.target.value)}
+          value={commentText}
         placeholder="What's on your mind..?" required></textarea>
       </div>
       <button type="submit"
@@ -124,6 +147,7 @@ export default function ExtendedPost(props) {
         Post Comment
       </button>
     </form>
+    }
 
     {comments.map((comment, index) => (
       <div key={comment}>

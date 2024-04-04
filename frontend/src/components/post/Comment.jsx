@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useEditComment } from '../../hooks/useEditComment';
 const apiURL = import.meta.env.VITE_BACKEND_URL
 
 // Parameters: ID
@@ -12,9 +13,12 @@ export default function Comment(props) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [image, setImage] = useState(`/assets/default.jpg`);
+  const [commentContent, setCommentContent] = useState('');
+
+  const {editComment, error, isLoading} = useEditComment();
   // const [editedContent, setEditedContent] = useState(''); 
 
-  const { loggedUser } = useAuthContext();
+  const { user: loggedUser } = useAuthContext();
 
   const [loggedUserId, setLoggedUserId] = useState(loggedUser && loggedUser.id);
 
@@ -28,6 +32,8 @@ export default function Comment(props) {
         if (userData.data.image.url !== "/assets/default.jpg") {
           setImage(userData.data.image.url);
         } 
+
+        setCommentContent(commentData.data.content);
         setDataLoaded(true);
       } catch (error) {
         console.log(error);
@@ -55,6 +61,15 @@ export default function Comment(props) {
     // setEditedContent(comment.content);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await console.log(props.commentID, commentContent);
+    await editComment(props.commentID, commentContent);
+
+    handleEditToggle();
+  }
+
   return (
   <>
   { dataLoaded && user && 
@@ -75,16 +90,20 @@ export default function Comment(props) {
 
     </footer>
 
-    {isEditing ? (
-            <>
-            <textarea value={comment.content} rows="1" className="text-gray-500 my-2 border border-gray-300 rounded p-2 w-full" />
-            <button onClick={handleEditToggle} type="submit"
+      {isEditing ? (
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="comment" className="sr-only">Your Comment</label>
+        <textarea
+          onChange={(e) => setCommentContent(e.target.value)}
+          value={commentContent} 
+          rows="1" className="text-gray-500 my-2 border border-gray-300 rounded p-2 w-full" id="comment"></textarea>
+            <button  type="submit"
               className="inline-flex items-end py-2 mb-2 px-4 text-xs font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
               Save
             </button>
-            </>
+          </form>
           ) : (
-            <p className="text-gray-500 my-2">{comment.content}</p>
+            <p className="text-gray-500 my-2">{commentContent}</p>
           )}
 
           <div className="flex items-center space-x-4">

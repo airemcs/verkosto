@@ -15,6 +15,7 @@ export default function Profile(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(user);
 
         if (props.org !== null && props.org !== undefined) {
           const organizationData = await axios.get(apiURL + `communities/${props.org}`);
