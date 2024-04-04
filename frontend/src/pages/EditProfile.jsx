@@ -70,7 +70,7 @@ export default function EditProfile() {
 
   return (
   <>
-  { user && !isLoading && 
+  { user &&  
 
   <div className="sm:ml-64">
 
@@ -186,7 +186,7 @@ export default function EditProfile() {
     {/* Buttons */}
     <div className="flex justify-center py-32">
       <Link to={`/users/${user.id}`} className="border-2 text-semibold border-green-600 text-green-600 text-2xl bg-white py-2 px-8 rounded-lg shadow mr-10 duration-200 hover:text-white hover:bg-green-600" type="button">Cancel</Link>
-      <button to={`/users/${user.id}`} className="border-2 text-semibold border-green-600 text-white text-2xl bg-green-600 py-2 px-4 rounded-lg shadow duration-200 hover:text-green-600 hover:bg-white" type="submit">Save Profile</button>
+      <button disabled={isLoading} to={`/users/${user.id}`} className="border-2 text-semibold border-green-600 text-white text-2xl bg-green-600 py-2 px-4 rounded-lg shadow duration-200 hover:text-green-600 hover:bg-white" type="submit">Save Profile</button>
     </div>
       { error && <div className="pt-4 text-red-600 w-full">*{error}</div>}
 
