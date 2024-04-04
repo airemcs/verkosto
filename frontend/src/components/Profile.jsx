@@ -22,7 +22,7 @@ export default function Profile(props) {
         }
 
         if (props.positionID !== null && props.positionID !== undefined) {
-          const positionData = await axios.get(apiURL +  `/positions/${props.positionID}`);
+          const positionData = await axios.get(apiURL +  `positions/${props.positionID}`);
           setPosition(positionData.data);
         }
 
