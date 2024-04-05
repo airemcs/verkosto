@@ -227,7 +227,7 @@ export default function ExtendedPost(props) {
     setIsEditing(!isEditing);
   };
 
-  // console.log(isEditing);
+  console.log(postUser);
 
   return (
   <>
@@ -237,7 +237,7 @@ export default function ExtendedPost(props) {
   <div className=" max-w-7xl mx-auto my-2 p-4 border border-gray-400 rounded-lg shadow-md">
     
     <div className="flex items-center">
-      <PostHeader userID={postUser._id} positionID={postUser.positionID} firstName={postUser.firstName} lastName={postUser.lastName} image={image} />
+      <PostHeader userID={postUser._id} orgID={postUser.organizationIDs} firstName={postUser.firstName} lastName={postUser.lastName} image={image} />
       
       {loggedUserId === postUser._id && !isEditing ?
       <Link onClick={handleEditToggle}>

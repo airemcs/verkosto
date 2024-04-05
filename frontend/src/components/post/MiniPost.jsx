@@ -205,7 +205,7 @@ export default function MiniPost(props) {
     <div className="flex justify-between items-center mb-2">
 
       <div className="w-10/12">
-        <PostHeader userID={post.userID} positionID={postUser.positionID} firstName={postUser.firstName} lastName={postUser.lastName} image={postUser.image} />
+        <PostHeader userID={post.userID} orgID={postUser.organizationIDs} firstName={postUser.firstName} lastName={postUser.lastName} image={postUser.image} />
       </div>
 
       <span className="h-8 bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
