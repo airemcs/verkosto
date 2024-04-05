@@ -8,7 +8,7 @@ export default function Create() {
   <>
 
   <Sidebar />
-  <Searchbar />
+  {/* <Searchbar /> */}
   <CreatePost />
   
   </>
