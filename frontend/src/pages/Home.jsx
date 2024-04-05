@@ -11,11 +11,12 @@ import Sidebar from '../components/Sidebar.jsx'
 export default function Home() {
 
   const [posts, setPosts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   // const { globalVariable } = useContext(MyContext);
 
   useEffect(() => {
     axios
-      .get(apiURL + 'posts/')
+      .get(apiURL + 'posts/', {params: { search: searchQuery}})
       .then((res) => {
         const sortedPosts = res.data.data.sort((a, b) => b.upvotes - a.upvotes);
         setPosts(sortedPosts);
@@ -23,13 +24,15 @@ export default function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [searchQuery]);
+
+
 
   return (
   <>
 
   <Sidebar />
-  <Searchbar />
+  <Searchbar setSearchQuery={setSearchQuery}/>
   <div className="sm:ml-64">
 
   {posts.map((post, index) => (

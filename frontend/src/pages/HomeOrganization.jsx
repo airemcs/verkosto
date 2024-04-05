@@ -12,11 +12,12 @@ export default function HomeOrganization() {
   const { id } = useParams();
   const [postsData, setPostsData] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(apiURL + 'posts/');
+        const response = await axios.get(apiURL + 'posts/', {params: { search: searchQuery}});
         const posts = response.data.data;
 
         const postsWithOrgID = await Promise.all(
@@ -38,14 +39,14 @@ export default function HomeOrganization() {
       }
     };
     fetchData();
-  }, []);
+  }, [searchQuery]);
 
 
   return (
   <>
 
   <Sidebar />
-  <Searchbar />
+  <Searchbar setSearchQuery={setSearchQuery} />
   <div className="sm:ml-64">
 
   {dataLoaded && postsData.map((post, index) => (

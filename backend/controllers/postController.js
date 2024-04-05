@@ -39,7 +39,10 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find({});
+    const search = req.query.search || "";
+    console.log(search + "nice");
+
+    const posts = await Post.find({title: { $regex: search, $options: "i"}});
     return res.status(200).json({
       count: posts.length,
       data: posts
