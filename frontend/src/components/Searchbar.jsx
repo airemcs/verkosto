@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react'
 
-export default function Searchbar() {
+export default function Searchbar({ setSearchQuery }) {
+
+  const [input, setInput] = useState("");
+
+
+  const handleChange = (value) => {
+    setInput(value);
+    setSearchQuery(value)
+  }
+
   return (
   <nav className="sticky top-0 bg-white border-b border-gray-200">
     <div className="flex items-center justify-center py-2 px-4">
@@ -13,7 +23,7 @@ export default function Searchbar() {
           </svg>
         </div>
 
-        <input type="text" id="search" className="block w-full py-2 pl-10 pr-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="Search..." />
+        <input type="text" value={input} onChange={(e) => handleChange(e.target.value)} id="search" className="block w-full py-2 pl-10 pr-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="Search..." />
       
       </div>
     </div>

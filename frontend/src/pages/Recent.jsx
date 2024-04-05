@@ -10,10 +10,11 @@ import Sidebar from '../components/Sidebar.jsx'
 export default function Recent() {
 
   const [posts, setPosts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios
-      .get(apiURL + 'posts/')
+      .get(apiURL + 'posts/', {params: { search: searchQuery}})
       .then((res) => {
         const sortedPosts = res.data.data.sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted));
         setPosts(sortedPosts);
@@ -21,13 +22,13 @@ export default function Recent() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [searchQuery]);
 
   return (
   <>
 
   <Sidebar />
-  <Searchbar />
+  <Searchbar setSearchQuery={setSearchQuery}/>
   <div className="sm:ml-64">
 
   {posts.map((post, index) => (

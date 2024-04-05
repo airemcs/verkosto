@@ -11,10 +11,11 @@ export default function HomeTopics() {
 
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios
-      .get(apiURL + 'posts/')
+      .get(apiURL + 'posts/', {params: { search: searchQuery}})
       .then((res) => {
         const sortedPosts = res.data.data.sort((a, b) => b.upvotes - a.upvotes);
         setPosts(sortedPosts);
@@ -22,13 +23,13 @@ export default function HomeTopics() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [searchQuery]);
 
   return (
   <>
 
   <Sidebar />
-  <Searchbar />
+  <Searchbar setSearchQuery={setSearchQuery}/>
   <div className="sm:ml-64">
 
   {posts.map((post, index) => (
