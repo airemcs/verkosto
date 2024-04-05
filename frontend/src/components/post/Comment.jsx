@@ -32,7 +32,6 @@ export default function Comment(props) {
         if (userData.data.image.url !== "/assets/default.jpg") {
           setImage(userData.data.image.url);
         } 
-
         setCommentContent(commentData.data.content);
         setDataLoaded(true);
       } catch (error) {
@@ -40,7 +39,7 @@ export default function Comment(props) {
       }
     };
     fetchData();
-  }, []);
+  },[]); // Add triggerRerender as a dependency here
 
   function calculateDays(dateCommented) {
     let current = new Date();
@@ -59,7 +58,9 @@ export default function Comment(props) {
   const handleDeleteComment = async () => {
     try {
       await axios.delete(apiURL + `comments/${props.commentID}`);
-      // Handle deletion in UI as needed, maybe remove the deleted comment from the parent's nestedComments array
+      const postResponse = await axios.get(apiURL + `posts/${comment.postID}`);
+      props.setPost(postResponse.data);
+      setDataLoaded(false);
     } catch (error) {
       console.error('Error deleting comment:', error);
     }
