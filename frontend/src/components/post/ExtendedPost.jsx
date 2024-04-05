@@ -93,7 +93,7 @@ export default function ExtendedPost(props) {
   }
 
   const handleUpvote = async () => {
-    if (currentUser.likedPostIDs.includes(post._id)) {
+    if (await currentUser.likedPostIDs.includes(post._id)) {
       removeLikedPost(post._id);
       setPost(prevPost => ({ ...prevPost, upvotes: prevPost.upvotes - 1 }));
     } else {
@@ -103,7 +103,7 @@ export default function ExtendedPost(props) {
   };
   
   const handleDownvote = async () => {
-    if (currentUser.dislikedPostIDs.includes(post._id)) {
+    if (await currentUser.dislikedPostIDs.includes(post._id)) {
       removeDislikedPost(post._id);
       setPost(prevPost => ({ ...prevPost, downvotes: prevPost.downvotes - 1 }));
     } else {
@@ -115,13 +115,29 @@ export default function ExtendedPost(props) {
   const addLikedPost = async (postId) => {
     try {
 
-      const updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId] };
-      await axios.put(apiURL + `users/${user.id}`, updatedUser);
-      setCurrentUser(updatedUser);
+      let updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId] };
 
-      const updatedPost = { ...post, upvotes: post.upvotes + 1 };
-      await axios.put(apiURL + `posts/${postId}`, updatedPost);
-      setPost(updatedPost);
+      if (!updatedUser.dislikedPostIDs.includes(post._id)) {
+
+        updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId] };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        await setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, upvotes: post.upvotes + 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        await setPost(updatedPost);
+
+      } else {
+
+        updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId], dislikedPostIDs: currentUser.dislikedPostIDs.filter(id => id !== postId) };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        await setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, upvotes: post.upvotes + 1, downvotes: post.downvotes - 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        await setPost(updatedPost);
+
+      }
 
     } catch (error) {
       console.error('Error adding liked post:', error);
@@ -130,13 +146,30 @@ export default function ExtendedPost(props) {
 
   const addDislikedPost = async (postId) => {
     try {
-      const updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId] };
-      await axios.put(apiURL + `users/${user.id}`, updatedUser);
-      setCurrentUser(updatedUser);
 
-      const updatedPost = { ...post, downvotes: post.downvotes + 1 };
-      await axios.put(apiURL + `posts/${postId}`, updatedPost);
-      setPost(updatedPost);
+      let updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId] };
+
+      if (!updatedUser.likedPostIDs.includes(post._id)) {
+
+        updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId] };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, downvotes: post.downvotes + 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        setPost(updatedPost);
+
+      } else {
+
+        updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId], likedPostIDs: currentUser.likedPostIDs.filter(id => id !== postId) };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, downvotes: post.downvotes + 1, upvotes: post.upvotes - 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        setPost(updatedPost);
+
+      }
 
     } catch (error) {
       console.error('Error adding disliked post:', error);
