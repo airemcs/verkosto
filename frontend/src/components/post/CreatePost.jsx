@@ -9,6 +9,8 @@ const apiURL = import.meta.env.VITE_BACKEND_URL;
 export default function CreatePost() {
 
   const { user } = useAuthContext();
+  const navigate = useNavigate();
+
   const [topics, setTopics] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -40,16 +42,12 @@ export default function CreatePost() {
 
   function handleSubmit(e) {
 
-    e.preventDefault();
-
     const newPostData = {
       userID: user.id,
       title: postData.titleArea,
       content: postData.postArea,
       tags: [postData.selectedTopic], 
     };
-
-    console.log(newPostData);
 
     axios.post(apiURL + 'posts', newPostData)
       .then((response) => {
@@ -58,6 +56,9 @@ export default function CreatePost() {
       .catch((error) => {
         console.error(error);
       });
+
+    navigate(-1);
+
   }
 
   return (
@@ -109,8 +110,8 @@ export default function CreatePost() {
 
       <div className="w-full mt-5 mb-5">
       <div className="buttons flex">
-        <button className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</button>
-        <button type="submit" className="btn border border-green-900 p-1 px-4 font-semibold cursor-pointer text-gray-100 ml-2 bg-green-600">Post</button>
+        <Link to={`/users/${user.id}`} className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</Link>
+        <button to={`/users/${user.id}`} type="submit" className="btn border border-green-900 p-1 px-4 font-semibold cursor-pointer text-gray-100 ml-2 bg-green-600">Post</button>
       </div>
       </div>
 
