@@ -56,6 +56,15 @@ export default function Comment(props) {
     outerClassName = "p-6 mb-3 mx-12 lg:ml-12 text-base rounded-lg"
   }
 
+  const handleDeleteComment = async () => {
+    try {
+      await axios.delete(apiURL + `comments/${props.commentID}`);
+      // Handle deletion in UI as needed, maybe remove the deleted comment from the parent's nestedComments array
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
+  };
+
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     // setEditedContent(comment.content);
@@ -112,6 +121,17 @@ export default function Comment(props) {
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
               </svg>
             </button>
+            
+            {user._id === loggedUserId &&
+            <button  onClick={handleDeleteComment}>
+            <svg
+              className="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 16 16">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth=".5" d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth=".5" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+            </svg>
+          </button>
+            }
+
             {user._id === loggedUserId &&
               <Link onClick={handleEditToggle} >
                 <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -119,6 +139,7 @@ export default function Comment(props) {
                 </svg>
               </Link>
             }
+            
           </div>
 
   </article>
