@@ -104,6 +104,8 @@ export default function PostContent(props) {
       await axios.put(apiURL + `posts/${id}`, post);
       console.log("Post updated successfully!");
 
+      navigate(-1);
+
     } catch (error) {
       console.error(error);
     }
