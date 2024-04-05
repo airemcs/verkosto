@@ -22,7 +22,7 @@ export default function Recent() {
       .catch((error) => {
         console.log(error);
       });
-  }, [searchQuery]);
+  }, [searchQuery, posts]);
 
   return (
   <>

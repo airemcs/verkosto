@@ -39,7 +39,7 @@ export default function HomeOrganization() {
       }
     };
     fetchData();
-  }, [searchQuery]);
+  }, [searchQuery, postsData]);
 
 
   return (
