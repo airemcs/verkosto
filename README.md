@@ -44,7 +44,7 @@ cd verkosto
 ```shell
 cd backend
 npm i
-npm run start
+npm run dev
 ```
 
 3. **Open another Terminal, Set Up, then Run the Frontend**: 
@@ -52,26 +52,14 @@ npm run start
 ```shell
 cd frontend
 npm i
-npm run start
+npm run dev
 ```
 
 4. **View the Application**:
 - Navigate to your web browser and go to [http://localhost:3000](http://localhost:3000).
 
-5. **MongoDB Compass Setup**:
-- Open MongoDB Compass and connect to your MongoDB server using the connection string:
-
-```shell
-mongodb+srv://root:admin@verkosto.zoo8pvy.mongodb.net/
-```
-
-6. **Import Data**:
-- Navigate to our database in MongoDB Compass.
-- Click on the `Add Data` button and select `Import JSON File`.
-- Choose the JSON files located in the "data" directory corresponding to the tables you want to import.
-
 ## Contributors
-- David, Joana
+- David, Joanna
 - Maagma, Airelle
 - Parente, Gabriel
 - Yap, Rafael
