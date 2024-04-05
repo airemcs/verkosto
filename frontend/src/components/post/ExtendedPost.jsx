@@ -15,7 +15,6 @@ import PostContent from './PostContent.jsx'
 // Parameters: Title, Day Age, Tag1, Tag2, Tag3, Content
 export default function ExtendedPost(props) {
 
-  const { user } = useAuthContext();
   const [currentUser, setCurrentUser] = useState(null);
 
   const { user: loggedUser } = useAuthContext();
@@ -78,6 +77,7 @@ export default function ExtendedPost(props) {
     e.preventDefault();
 
     await console.log(commentText, loggedUserId, id);
+    alert(commentText, loggedUserId, id);
     await createComment(commentText, loggedUserId, id);
 
     const postData = await axios.get(apiURL + `posts/${id}`);
@@ -295,7 +295,7 @@ export default function ExtendedPost(props) {
         <textarea className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
         id="comment" rows="2"
           onChange={(e) => setCommentText(e.target.value)}
-          defaultValue={commentText}
+          value={commentText}
         placeholder="What's on your mind..?" required></textarea>
       </div>
       <button type="submit"
