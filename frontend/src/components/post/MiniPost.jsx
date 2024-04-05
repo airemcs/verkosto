@@ -51,7 +51,7 @@ export default function MiniPost(props) {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5555/users/${user.id}`);
+      const response = await axios.get(apiURL + `users/${user.id}`);
       setCurrentUser(response.data);
     } catch (error) {
       console.error('Error fetching user data:', error);

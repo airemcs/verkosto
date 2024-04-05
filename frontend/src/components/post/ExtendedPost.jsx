@@ -17,6 +17,7 @@ export default function ExtendedPost(props) {
 
   const [currentUser, setCurrentUser] = useState(null);
 
+  const { user } = useAuthContext();
   const { user: loggedUser } = useAuthContext();
   const { createComment, error, isLoading } = useCreateComment();
 
@@ -77,7 +78,6 @@ export default function ExtendedPost(props) {
     e.preventDefault();
 
     await console.log(commentText, loggedUserId, id);
-    alert(commentText, loggedUserId, id);
     await createComment(commentText, loggedUserId, id);
 
     const postData = await axios.get(apiURL + `posts/${id}`);
