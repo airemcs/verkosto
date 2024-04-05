@@ -59,7 +59,9 @@ export default function MiniPost(props) {
   };
 
   useEffect(() => {
-    fetchUserData();
+    if (user) {
+      fetchUserData();
+    }
   }, []);
 
   function calculateDays(datePosted) {

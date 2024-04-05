@@ -61,7 +61,6 @@ const loginUser = async (req, res) => {
 const editUser = async (req, res) => {
 
   const { email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId} = req.body;
-  console.log(organizationId);
 
   try {
     const user = await User.edit(email, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId);

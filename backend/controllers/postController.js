@@ -40,7 +40,6 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   try {
     const search = req.query.search || "";
-    console.log(search + "nice");
 
     const posts = await Post.find({title: { $regex: search, $options: "i"}});
     return res.status(200).json({
@@ -48,7 +47,6 @@ const getAllPosts = async (req, res) => {
       data: posts
     });
   } catch (error) {
-    console.log("OML");
     console.log(error.message);
     res.status(500).send({ message: error.message });
   }

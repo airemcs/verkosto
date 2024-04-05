@@ -23,7 +23,7 @@ export default function HomeTopics() {
       .catch((error) => {
         console.log(error);
       });
-  }, [searchQuery]);
+  }, [searchQuery, posts]);
 
   return (
   <>
