@@ -57,6 +57,7 @@ npm run dev
 
 4. **View the Application**:
 - Navigate to your web browser and go to [http://localhost:3000](http://localhost:3000).
+- Alternatively, you can visit [https://verkosto.onrender.com/](https://verkosto.onrender.com/) to view it online.
 
 ## Contributors
 - David, Joanna
