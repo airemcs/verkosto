@@ -186,12 +186,12 @@ export default function MiniPost(props) {
 
   let upButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium";
   if (currentUser && currentUser.likedPostIDs.includes(post._id)) {
-    upButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 text-emerald-500 border-emerald-500 border-2 bg-gray-200 font-medium"
+    upButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center border text-emerald-500 border-emerald-500 border-2 bg-gray-200 font-medium rounded-l-full duration-75"
   }
 
-  let downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 hover:text-blue-400 hover:border-blue-300 hover:border-2 hover:bg-gray-200 hover:font-medium";
+  let downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 hover:text-red-400 hover:border-red-300 hover:border-2 hover:bg-gray-200 hover:font-medium";
   if (currentUser && currentUser.dislikedPostIDs.includes(post._id)) {
-    downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 text-blue-400 border-blue-300 border-2 bg-gray-200 font-medium"
+    downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-red-500 border-red-300 border-2 bg-gray-200 font-medium rounded-r-full mr-3 duration-75"
   }
 
   return (
