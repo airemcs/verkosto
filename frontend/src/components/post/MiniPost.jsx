@@ -196,7 +196,7 @@ export default function MiniPost(props) {
 
   return (
   <>
-  {dataLoaded && postUser && currentUser &&
+  {dataLoaded && postUser &&
   <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
     {/* Header and Date */}
