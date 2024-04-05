@@ -29,7 +29,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div>
         <Link to="/" replace className="flex items-center ps-2.5 mb-5">
-        <img src="../src/assets/logo.png" className="h-8 mr-2" />
+        <img src="/assets/logo.png" className="h-8 mr-2" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap"> Verkosto</span>
         </Link>
       </div>

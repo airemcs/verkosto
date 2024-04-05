@@ -1,4 +1,5 @@
 import { useAuthContext } from './useAuthContext'
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext()

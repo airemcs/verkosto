@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import { Link } from 'react-router-dom'
 import MiniPost from '../components/post/MiniPost.jsx'
@@ -12,7 +13,7 @@ export default function Recent() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5555/posts/')
+      .get(apiURL + 'posts/')
       .then((res) => {
         const sortedPosts = res.data.data.sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted));
         setPosts(sortedPosts);

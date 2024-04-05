@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 import MiniPost from '../components/post/MiniPost.jsx'
 import Searchbar from '../components/Searchbar.jsx'
@@ -15,12 +16,12 @@ export default function HomeOrganization() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/posts/');
+        const response = await axios.get(apiURL + 'posts/');
         const posts = response.data.data;
 
         const postsWithOrgID = await Promise.all(
           posts.map(async post => {
-            const userResponse = await axios.get(`http://localhost:5555/users/${post.userID}`);
+            const userResponse = await axios.get(apiURL + `users/${post.userID}`);
             const user = userResponse.data;
             return {
               _id: post._id,

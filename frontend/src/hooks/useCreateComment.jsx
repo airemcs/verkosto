@@ -1,20 +1,20 @@
 import { useState } from 'react'
-import { useAuthContext } from './useAuthContext'
 const apiURL = import.meta.env.VITE_BACKEND_URL
 
-export const useLogin = () => {
+export const useCreateComment = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
-  const { dispatch } = useAuthContext()
 
-  const login = async (email, password) => {
+  const createComment = async (content, userID, postID) => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch(apiURL + 'users/login', {
+    console.log(content)
+
+    const response = await fetch(apiURL + 'comments/', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ content, userID, postID })
     })
     const json = await response.json()
 
@@ -23,16 +23,10 @@ export const useLogin = () => {
       setError(json.error)
     }
     if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
-
-      // update the auth context
-      dispatch({type: 'LOGIN', payload: json})
-
       // update loading state
       setIsLoading(false)
     }
   }
 
-  return { login, isLoading, error }
+  return { createComment, isLoading, error }
 }

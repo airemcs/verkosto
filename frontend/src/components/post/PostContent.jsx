@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios from 'axios'
+const apiURL = import.meta.env.VITE_BACKEND_URL
 
 // Parameters: Title, Day Age, Tag, Content
 export default function PostContent(props) {
@@ -15,9 +16,9 @@ export default function PostContent(props) {
     const fetchData = async () => {
       try {
         const [tag1Data, tag2Data, tag3Data] = await Promise.all([
-          props.tag1 !== null ? axios.get(`http://localhost:5555/topics/${props.tag1}`) : Promise.resolve(null),
-          props.tag2 !== null ? axios.get(`http://localhost:5555/topics/${props.tag2}`) : Promise.resolve(null),
-          props.tag3 !== null ? axios.get(`http://localhost:5555/topics/${props.tag3}`) : Promise.resolve(null)
+          props.tag1 !== null ? axios.get(apiURL + `topics/${props.tag1}`) : Promise.resolve(null),
+          props.tag2 !== null ? axios.get(apiURL + `topics/${props.tag2}`) : Promise.resolve(null),
+          props.tag3 !== null ? axios.get(apiURL + `topics/${props.tag3}`) : Promise.resolve(null)
         ]);
         setTag1(tag1Data ? tag1Data.data : []);
         setTag2(tag2Data ? tag2Data.data : []);
@@ -30,7 +31,7 @@ export default function PostContent(props) {
     fetchData();
   }, [props.tag1, props.tag2, props.tag3]);
 
-  const imagePath = `../src/assets/${props.userID}.jpg`;
+  const imagePath = `/assets/${props.userID}.jpg`;
   const formattedContent = props.content.replace(/\n\n/g, "\n\n ‎\n\n");
 
   return (

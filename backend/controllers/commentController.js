@@ -1,4 +1,6 @@
 const Comment = require('../models/commentModel');
+const User = require('../models/userModel');
+const Post = require('../models/postModel');
 const mongoose = require('mongoose');
 
 // CRUD Operations: Comment
@@ -53,14 +55,18 @@ const getComment = async (req, res) => {
 }
 
 const updateComment = async (req, res) => {
+  const { id: commentId } = req.params;
+  const { content } = req.body;
+
+
   try {
+    const comment = await Comment.findOne({ _id: commentId});
 
-    const { id } = req.params;
-    const result = await Comment.findByIdAndUpdate(id, req.body);
-
-    if (!result) {
-      return res.status(404).json({ message: 'The tag is not found.' });
+    if (comment) {
+      comment.content = content;
     }
+
+    await comment.save();
 
     return res.status(200).send({ message: 'The tag has been updated.' });
 
