@@ -55,7 +55,6 @@ const getComment = async (req, res) => {
 }
 
 const updateComment = async (req, res) => {
-  console.log("jskahdkasjhdksjah")
   const { id: commentId } = req.params;
   const { content } = req.body;
 
@@ -78,14 +77,11 @@ const updateComment = async (req, res) => {
 }
 
 const deleteComment = async (req, res) => {
-  console.log("anything")
   const { id: commentId } = req.params;
-  console.log(commentId)
   try {
     const comment = await Comment.findById(commentId);
     const deleteUserComment = await User.findByIdAndUpdate(comment.userID, { $pull: { commentIDs: commentId } });
     const deletePostComment = await Post.findByIdAndUpdate(comment.postID, { $pull: { commentIDs: commentId } });
-    console.log(deletePostComment);
     await Comment.findByIdAndDelete(commentId);
     return res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {

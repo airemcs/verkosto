@@ -14,10 +14,6 @@ const app = express();
 app.use(express.json({limit: 52428800}));
 app.use(cors());
 
-app.use((req, res, next) => {
-  console.log(req.path, req.method)
-  next()
-})
 
 // routes
 app.use('/users', userRoutes);
