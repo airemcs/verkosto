@@ -60,6 +60,8 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId, 
     ref: 'Community', 
   },
+  likedPostIDs: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  dislikedPostIDs: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   positionID: { type: Schema.Types.ObjectId, ref: 'Position' },
 });
 

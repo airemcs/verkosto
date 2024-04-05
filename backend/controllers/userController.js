@@ -22,9 +22,11 @@ const signupUser = async (req, res) => {
     const facebook = user.facebook;
     const linkedin = user.linkedin;
     const image = user.image;
-    const organizationId = user.organizationIDs
+    const organizationId = user.organizationIDs;
+    const likedPostIDs = user.likedPostIDs;
+    const dislikedPostIDs = user.dislikedPostIDs;
 
-    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId});
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId, likedPostIDs, dislikedPostIDs});
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -47,8 +49,10 @@ const loginUser = async (req, res) => {
     const linkedin = user.linkedin;
     const image = user.image;
     const organizationId = user.organizationIDs
+    const likedPostIDs = user.likedPostIDs;
+    const dislikedPostIDs = user.dislikedPostIDs;
 
-    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId});
+    res.status(200).json({ email, token, id, firstName, lastName, bio, country, city, facebook, linkedin, image, organizationId, likedPostIDs, dislikedPostIDs});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -72,10 +76,12 @@ const editUser = async (req, res) => {
     const editfacebook = user.facebook;
     const editlinkedin = user.linkedin;
     const editimage = user.image;
-    const editorganizationId = user.organizationIDs
+    const editorganizationId = user.organizationIDs;
+    const editlikedPostIDs = user.likedPostIDs;
+    const editdislikedPostIDs = user.dislikedPostIDs;
 
 
-    res.status(200).json({ email, token, id, firstName: editfirstName, lastName: editlastName, bio: editbio, country: editcountry, city: editcity, facebook: editfacebook, linkedin: editlinkedin, image: editimage, organizationId: editorganizationId});
+    res.status(200).json({ email, token, id, firstName: editfirstName, lastName: editlastName, bio: editbio, country: editcountry, city: editcity, facebook: editfacebook, linkedin: editlinkedin, image: editimage, organizationId: editorganizationId, likedPostIDs: editlikedPostIDs, dislikedPostIDs: editdislikedPostIDs});
   } catch (error) {
     res.status(400).json({error: error.message });
   }
@@ -151,6 +157,7 @@ const getUserById = async (req, res) => {
   }
 };
 
+// 
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;

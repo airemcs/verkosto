@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 const apiURL = import.meta.env.VITE_BACKEND_URL
 
@@ -11,8 +12,11 @@ import PostHeader from './PostHeader.jsx'
 
 export default function MiniPost(props) {
 
+  const { user } = useAuthContext();
+  const [currentUser, setCurrentUser] = useState(null);
+
   const [post, setPost] = useState([]);
-  const [user, setUser] = useState([]);
+  const [postUser, setUser] = useState([]);
   const [tag1, setTag1] = useState([]);
   const [tag2, setTag2] = useState([]);
   const [tag3, setTag3] = useState([]);
@@ -45,22 +49,161 @@ export default function MiniPost(props) {
     fetchData();
   }, [props.id]);
 
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5555/users/${user.id}`);
+      setCurrentUser(response.data);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   function calculateDays(datePosted) {
     let current = new Date();
     let posted = new Date(datePosted);
     return Math.floor((current - posted) / (1000 * 3600 * 24) + 1);
   }
 
+  const handleUpvote = async () => {
+    if (await currentUser.likedPostIDs.includes(post._id)) {
+      removeLikedPost(post._id);
+      setPost(prevPost => ({ ...prevPost, upvotes: prevPost.upvotes - 1 }));
+    } else {
+      addLikedPost(post._id);
+      setPost(prevPost => ({ ...prevPost, upvotes: prevPost.upvotes + 1 }));
+    }
+  };
+  
+  const handleDownvote = async () => {
+    if (await currentUser.dislikedPostIDs.includes(post._id)) {
+      removeDislikedPost(post._id);
+      setPost(prevPost => ({ ...prevPost, downvotes: prevPost.downvotes - 1 }));
+    } else {
+      addDislikedPost(post._id);
+      setPost(prevPost => ({ ...prevPost, downvotes: prevPost.downvotes + 1 }));
+    }
+  };
+
+  const addLikedPost = async (postId) => {
+    try {
+
+      let updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId] };
+
+      if (!updatedUser.dislikedPostIDs.includes(post._id)) {
+
+        updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId] };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        await setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, upvotes: post.upvotes + 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        await setPost(updatedPost);
+
+      } else {
+
+        updatedUser = { ...currentUser, likedPostIDs: [...currentUser.likedPostIDs, postId], dislikedPostIDs: currentUser.dislikedPostIDs.filter(id => id !== postId) };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        await setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, upvotes: post.upvotes + 1, downvotes: post.downvotes - 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        await setPost(updatedPost);
+
+      }
+
+    } catch (error) {
+      console.error('Error adding liked post:', error);
+    }
+  };
+
+  const addDislikedPost = async (postId) => {
+    try {
+
+      let updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId] };
+
+      if (!updatedUser.likedPostIDs.includes(post._id)) {
+
+        updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId] };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, downvotes: post.downvotes + 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        setPost(updatedPost);
+
+      } else {
+
+        updatedUser = { ...currentUser, dislikedPostIDs: [...currentUser.dislikedPostIDs, postId], likedPostIDs: currentUser.likedPostIDs.filter(id => id !== postId) };
+        await axios.put(apiURL + `users/${user.id}`, updatedUser);
+        setCurrentUser(updatedUser);
+
+        const updatedPost = { ...post, downvotes: post.downvotes + 1, upvotes: post.upvotes - 1 };
+        await axios.put(apiURL + `posts/${postId}`, updatedPost);
+        setPost(updatedPost);
+
+      }
+
+    } catch (error) {
+      console.error('Error adding disliked post:', error);
+    }
+  };
+
+  const removeLikedPost = async (postId) => {
+  try {
+
+    const updatedUser = { ...currentUser, likedPostIDs: currentUser.likedPostIDs.filter(id => id !== postId) };
+    await axios.put(apiURL + `users/${user.id}`, updatedUser);
+    setCurrentUser(updatedUser);
+
+    const updatedPost = { ...post, upvotes: post.upvotes - 1 };
+    await axios.put(apiURL + `posts/${postId}`, updatedPost);
+    setPost(updatedPost);
+
+  } catch (error) {
+    console.error('Error removing liked post:', error);
+  }
+  };
+
+  const removeDislikedPost = async (postId) => {
+    try {
+
+      const updatedUser = { ...currentUser, dislikedPostIDs: currentUser.dislikedPostIDs.filter(id => id !== postId) };
+      await axios.put(apiURL + `users/${user.id}`, updatedUser);
+      setCurrentUser(updatedUser);
+
+      const updatedPost = { ...post, downvotes: post.downvotes - 1 };
+      await axios.put(apiURL + `posts/${postId}`, updatedPost);
+      setPost(updatedPost);
+
+    } catch (error) {
+      console.error('Error removing disliked post:', error);
+    }
+  };
+
+  let upButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium";
+  if (currentUser && currentUser.likedPostIDs.includes(post._id)) {
+    upButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 text-emerald-500 border-emerald-500 border-2 bg-gray-200 font-medium"
+  }
+
+  let downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 hover:text-blue-400 hover:border-blue-300 hover:border-2 hover:bg-gray-200 hover:font-medium";
+  if (currentUser && currentUser.dislikedPostIDs.includes(post._id)) {
+    downButtonStyle = "h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 text-blue-400 border-blue-300 border-2 bg-gray-200 font-medium"
+  }
+
   return (
   <>
-  {dataLoaded && user &&
+  {dataLoaded && postUser && currentUser &&
   <div className="max-w-4xl mx-auto my-4 p-4 border border-gray-400 rounded-lg shadow-md">
 
     {/* Header and Date */}
     <div className="flex justify-between items-center mb-2">
 
       <div className="w-10/12">
-        <PostHeader userID={post.userID} positionID={user.positionID} firstName={user.firstName} lastName={user.lastName} image={user.image} />
+        <PostHeader userID={post.userID} positionID={postUser.positionID} firstName={postUser.firstName} lastName={postUser.lastName} image={postUser.image} />
       </div>
 
       <span className="h-8 bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
@@ -103,13 +246,17 @@ export default function MiniPost(props) {
     {/* Upvotes, Downvotes, Comments */}
     <div className="flex items-center mb-1">
 
-      <button className="h-7 flex pl-1 pr-3 justify-between items-center border text-gray-600 bg-gray-200/50 border-gray-400 rounded-l-full duration-75 hover:text-emerald-500 hover:border-emerald-500 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
+      {/* {console.log(currentUser.likedPostIDs)} */}
+
+        
+
+      <button onClick={handleUpvote} type="button" className={upButtonStyle}>
         <svg className="w-6 h-4 mr-0.5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path fill="currentColor" d="M12.781 2.375c-.381-.475-1.181-.475-1.562 0l-8 10A1.001 1.001 0 0 0 4 14h4v7a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7h4a1.001 1.001 0 0 0 .781-1.625zM15 12h-1v8h-4v-8H6.081L12 4.601L17.919 12z"/>
         </svg><p className="text-sm">{post.upvotes}</p>
       </button>
 
-      <button className="h-7 flex pl-1 pr-3 justify-between items-center bg-gray-200/50 text-gray-600 border-r border-t border-b border-gray-400 rounded-r-full mr-3 duration-75 hover:text-blue-400 hover:border-blue-300 hover:border-2 hover:bg-gray-200 hover:font-medium" type="button">
+      <button onClick={handleDownvote} type="button" className={downButtonStyle}>
         <svg className="w-6 h-4 mr-0.5" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path fill="currentColor" d="M20.901 10.566A1.001 1.001 0 0 0 20 10h-4V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H4a1.001 1.001 0 0 0-.781 1.625l8 10a1 1 0 0 0 1.562 0l8-10c.24-.301.286-.712.12-1.059M12 19.399L6.081 12H10V4h4v8h3.919z"/>
         </svg><p className="text-sm">{post.downvotes}</p>
