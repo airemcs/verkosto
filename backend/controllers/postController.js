@@ -80,4 +80,22 @@ const updatePost = async (req, res) => {
   }
 }
 
-module.exports = { createPost, getAllPosts, getPost, updatePost }; 
+const deletePost = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const result = await Post.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: 'The tag is not found.' });
+    }
+
+    return res.status(200).json({ message: 'The delete was successful.' });
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+}
+
+module.exports = { createPost, getAllPosts, getPost, updatePost, deletePost }; 
