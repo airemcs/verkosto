@@ -57,7 +57,7 @@ export default function CreatePost() {
         console.error(error);
       });
 
-    navigate(-1);
+    navigate(`/recent`);
 
   }
 
